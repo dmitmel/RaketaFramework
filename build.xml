@@ -6,7 +6,7 @@
     <property name="dir.main.src" value="./src/main/java" />
     <property name="dir.main.bin" value="${dir.build.root}/main/classes" />
     <property name="dir.main.jar" value="${dir.build.root}/jar" />
-    <property name="dir.main.resources" value="./src/main/resources" />
+    <property name="dir.main.resources" value="Test-Server/resources" />
 
     <property name="dir.test.src" value="./src/test/java" />
     <property name="dir.test.bin" value="${dir.build.root}/test/classes" />
@@ -20,7 +20,7 @@
     </tstamp>
 
     <target name="build" depends="clear, compile, jars, sources">
-        <copydir src="${dir.main.resources}" dest="${dir.build.root}/main/resources" />
+        <copydir src="Test-Server/resources" dest="${dir.build.root}/main/resources" />
         <copydir src="${dir.test.resources}" dest="${dir.build.root}/test/resources" />
     </target>
 

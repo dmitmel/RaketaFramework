@@ -12,12 +12,12 @@ public class TestServer {
     private static HashMap<String, String> files = new HashMap<>();
     
     public static void main(String[] args) {
-        for (String file : new String[] {"../resources/greet-form.html",
-                "../resources/goodies/css/glowing-style.css",
-                "../resources/index-js.js",
-                "../resources/goodies/js-libs/jquery.min.js",
-                "../resources/index.html"}) {
-            files.put(file.substring(13, file.length()), MoreFiles.load(MoreFiles.realPath(file)));
+        for (String file : new String[] {"./greet-form.html",
+                "./goodies/css/glowing-style.css",
+                "./index-js.js",
+                "./goodies/js-libs/jquery.min.js",
+                "./index.html"}) {
+            files.put(file.substring(2, file.length()), MoreFiles.load(MoreFiles.realPath(file)));
         }
         
         URLMapping urls = new URLMapping(new Main(), new Hello(), new LoadFile(), new GreetForm(),

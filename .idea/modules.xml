@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/RaketaFramework.iml" filepath="$PROJECT_DIR$/RaketaFramework.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Test-Server/Test-Server.iml" filepath="$PROJECT_DIR$/Test-Server/Test-Server.iml" />
     </modules>
   </component>
 </project>

@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Raketa-Framework-1.0">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/build/jar/Raketa-Framework-1.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/build/jar/Raketa-Framework-1.0-sources.zip!/" />
+    </SOURCES>
+  </library>
+</component>
