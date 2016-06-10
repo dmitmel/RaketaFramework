@@ -1,6 +1,6 @@
 package github.dmitmel.raketaframework.web.handle;
 
-import github.dmitmel.raketaframework.web.MimeTypes;
+import github.dmitmel.raketaframework.web.MIMETypes;
 
 /**
  * Class for documents that are being built by request handlers.
@@ -11,7 +11,7 @@ public class Document {
         return data.toString();
     }
 
-    private String mimeType = MimeTypes.PLAIN_TEXT;
+    private String mimeType = MIMETypes.PLAIN_TEXT;
     public String getMimeType() {
         return mimeType;
     }

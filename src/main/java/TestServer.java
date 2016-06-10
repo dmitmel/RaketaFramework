@@ -1,5 +1,5 @@
 import github.dmitmel.raketaframework.util.MoreFiles;
-import github.dmitmel.raketaframework.web.MimeTypes;
+import github.dmitmel.raketaframework.web.MIMETypes;
 import github.dmitmel.raketaframework.web.errors.Error404;
 import github.dmitmel.raketaframework.web.handle.*;
 import github.dmitmel.raketaframework.web.handle.RedirectingThrowable;
@@ -31,7 +31,7 @@ public class TestServer {
     private static class Main implements RequestHandler {
         @RequestMethod("GET")
         public void GET(RequestData requestData, Document document) {
-            document.setMimeType(MimeTypes.HTML_DOCUMENT);
+            document.setMimeType(MIMETypes.HTML_DOCUMENT);
             document.writeln(files.get("index.html"));
         }
     }
@@ -40,7 +40,7 @@ public class TestServer {
     private static class Hello implements RequestHandler {
         @RequestMethod("GET")
         public void GET(RequestData requestData, Document document) {
-            document.setMimeType(MimeTypes.HTML_DOCUMENT);
+            document.setMimeType(MIMETypes.HTML_DOCUMENT);
             
             String name = requestData.getUrlParamOrElse("name", "World");
             
@@ -67,7 +67,7 @@ public class TestServer {
             String lines;
             try {
                 lines = MoreFiles.load(MoreFiles.realPath("../resources/" + requestData.getMatcherGroup(0)));
-                document.setMimeType(MimeTypes.getApproximateTypeFor(requestData.getMatcherGroup(0)));
+                document.setMimeType(MIMETypes.getApproximateTypeFor(requestData.getMatcherGroup(0)));
                 
             } catch (NullPointerException e) {
                 throw new Error404();
@@ -81,7 +81,7 @@ public class TestServer {
     private static class GreetForm implements RequestHandler {
         @RequestMethod("GET")
         public void GET(RequestData requestData, Document document) {
-            document.setMimeType(MimeTypes.HTML_DOCUMENT);
+            document.setMimeType(MIMETypes.HTML_DOCUMENT);
             document.writeln(files.get("greet-form.html"));
         }
 
@@ -100,7 +100,7 @@ public class TestServer {
         public void GET(RequestData requestData, Document document) {
             if (!files.containsKey(requestData.getMatcherGroup(0))) throw new Error404();
             
-            document.setMimeType(MimeTypes.getApproximateTypeFor(requestData.getMatcherGroup(0)));
+            document.setMimeType(MIMETypes.getApproximateTypeFor(requestData.getMatcherGroup(0)));
             
             document.writeln(files.get(requestData.getMatcherGroup(0)));
         }

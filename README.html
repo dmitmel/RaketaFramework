@@ -1,0 +1,92 @@
+<link rel="stylesheet" href="file:///home/dmitriy/Libraries/highlight.js/github-markdown-view-style.css">
+<link rel="stylesheet" href="file:///home/dmitriy/Libraries/highlight.js/styles/github-gist.css">
+<script src="file:///home/dmitriy/Libraries/highlight.js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>.hljs {
+    background-color: #f8f8f8;
+}
+.markdown-body {
+    padding: 10px 30px;
+}</style>
+
+<article class="markdown-body">
+<h1>RaketaFramework</h1>
+<p>RaketaFramework is a framework for creating JVM-based web apps. Here's an example:</p>
+<pre><code class="hljs-java">import github.dmitmel.raketaframework.util.MoreFiles;
+import github.dmitmel.raketaframework.web.MimeTypes;
+import github.dmitmel.raketaframework.web.errors.Error404;
+import github.dmitmel.raketaframework.web.handle.*;
+import github.dmitmel.raketaframework.web.server.*;
+
+public class TestServer {
+    public static void main(String[] args) {
+        URLMapping urls = new URLMapping(new Main(), new Hello(), new GreetForm(), new RedirectPage());
+
+        Server app = new Server(urls, &quot;localhost&quot;, 8015, &quot;RaketaServer1&quot;);
+        app.startServer();
+    }
+
+    // &quot;Hello World!&quot; example
+    @RequestURLPattern(&quot;/main&quot;)
+    private static class Main implements RequestHandler {
+        @RequestMethod(&quot;GET&quot;)
+        public void GET(RequestData requestData, Document document) {
+            document.writeln(&quot;Hello World!&quot;);
+        }
+    }
+
+    // Handling requests with parameters example
+    @RequestURLPattern(&quot;/hello&quot;)
+    private static class Hello implements RequestHandler {
+        @RequestMethod(&quot;GET&quot;)
+        public void GET(RequestData requestData, Document document) {
+            document.setMimeType(MimeTypes.HTML_DOCUMENT);
+            
+            String name = requestData.getUrlParamOrElse(&quot;name&quot;, &quot;World&quot;);
+            
+            String howManyStr = requestData.getUrlParam(&quot;how-many&quot;);
+            int howMany = 1;
+            if (howManyStr != null) {
+                howMany = Integer.parseInt(howManyStr);
+            }
+            
+            document.writeln(&quot;&lt;html&gt;\r\n\t&lt;body&gt;\r\n\t\t&lt;tt&gt;\r\n\r\n\t\t\t&lt;!-- Just repeat same thing many times! &quot; +
+                    &quot;(Generated HTML) --&gt;\r\n&quot;);
+            for (int i = 0; i &lt; howMany; i++) {
+                document.writeln(String.format(&quot;\t\t\tHello %s!&lt;br&gt;&quot;, name));
+            }
+            
+            document.write(&quot;\r\n\t\t&lt;/tt&gt;\r\n\t&lt;/body&gt;\r\n&lt;/html&gt;&quot;);
+        }
+    }
+    
+    // Form example
+    @RequestURLPattern(&quot;/greet&quot;)
+    private static class GreetForm implements RequestHandler {
+        @RequestMethod(&quot;GET&quot;)
+        public void GET(RequestData requestData, Document document) {
+            document.setMimeType(MimeTypes.HTML_DOCUMENT);
+            document.writeln(MoreFiles.load(MoreFiles.realPath(&quot;../resources/greet-form.html&quot;)));
+        }
+
+        @RequestMethod(&quot;POST&quot;)
+        public void POST(WebFormData form, Document document) {
+            if (form.getFormParam(&quot;name&quot;) == null) throw new Error404();
+            if (form.getFormParam(&quot;greet&quot;) == null) throw new Error404();
+            
+            document.writeF(&quot;%s %s!&quot;, form.getFormParam(&quot;greet&quot;), form.getFormParam(&quot;name&quot;));
+        }
+    }
+    
+    // Redirect example
+    @RequestURLPattern(&quot;/redirect&quot;)
+    private static class RedirectPage implements RequestHandler {
+        @RequestMethod(&quot;GET&quot;)
+        public void GET(RequestData requestData, Document document) {
+            throw new RedirectingThrowable(&quot;/main&quot;);
+        }
+    }
+}
+
+</code></pre>
+</article>

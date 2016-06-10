@@ -59,12 +59,9 @@ public class Server {
                 acceptClient(clientSocket);
             }
         } catch (java.io.IOException e) {
-            // Can be caught only on request
+            // Can be caught only on accepting socket
             // Just ignore this request. If someone stopped request - he/she/it can retry or don't do anything
         } catch (Exception e) {
-            StringWriter stackTrace = new StringWriter();
-            e.printStackTrace(new PrintWriter(stackTrace));
-
             logger.fatal("Server stopped because of uncaught exception.");
             logger.exception(e);
         }
