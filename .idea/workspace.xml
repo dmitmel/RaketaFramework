@@ -449,7 +449,7 @@
       <recent name="github.dmitmel.jonnect.framework.web.server" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.TestServer">
+  <component name="RunManager" selected="JUnit.Run all tests">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
@@ -1199,14 +1199,11 @@
       <option name="presentableId" value="Default" />
       <updated>1464403523190</updated>
       <workItem from="1465543584361" duration="1475000" />
-      <workItem from="1465588652328" duration="844000" />
+      <workItem from="1465588652328" duration="1016000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Run_all_tests - 2016.06.06 at 11h 35m 30s.xml">
-      <configuration name="Run all tests" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="Run_all_tests - 2016.06.06 at 13h 03m 45s.xml">
       <configuration name="Run all tests" configurationId="JUnit" />
     </history-entry>
@@ -1234,9 +1231,12 @@
     <history-entry file="Run_all_tests - 2016.06.10 at 23h 00m 10s.xml">
       <configuration name="Run all tests" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="Run_all_tests - 2016.06.10 at 23h 13m 34s.xml">
+      <configuration name="Run all tests" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2319000" />
+    <option name="totallyTimeSpent" value="2491000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="1023" extended-state="6" />
