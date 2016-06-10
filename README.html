@@ -66,6 +66,20 @@ public class TestServer {
         @RequestMethod(&quot;GET&quot;)
         public void GET(RequestData requestData, Document document) {
             document.setMimeType(MimeTypes.HTML_DOCUMENT);
+            // File ../resources/greet-form.html contains such HTML:
+            /*
+            &lt;h2&gt;Hello, User!&lt;br&gt;&lt;/h2&gt;
+            &lt;h3&gt;After you'll use this thing,&lt;br&gt;please, tell me some data about you!&lt;/h3&gt;
+            &lt;blockquote style=&quot;border: 3px dashed #777; padding: 20px; width: 20%; margin-top: 70px;&quot;&gt;
+                &lt;form action=&quot;/greet&quot; method=&quot;POST&quot;&gt;
+                    &lt;p&gt;What's your name?&lt;/p&gt;
+                    &lt;p&gt;&lt;input type=&quot;text&quot; name=&quot;name&quot; value=&quot;World&quot; autocomplete=&quot;off&quot;&gt;&lt;/p&gt;
+                    &lt;p style=&quot;margin-top: 40px;&quot;&gt;What greeting would you like&lt;br&gt;to have? (e.g. &quot;Hi&quot;, &quot;Hello&quot;)&lt;/p&gt;
+                    &lt;p&gt;&lt;input type=&quot;text&quot; name=&quot;greet&quot; value=&quot;Hello&quot; autocomplete=&quot;off&quot;&gt;&lt;/p&gt;
+                    &lt;p&gt;&lt;input type=&quot;submit&quot; value=&quot;Submit&quot;&gt;&lt;/p&gt;
+                &lt;/form&gt;
+            &lt;/blockquote&gt;
+            */
             document.writeln(MoreFiles.load(MoreFiles.realPath(&quot;../resources/greet-form.html&quot;)));
         }
 

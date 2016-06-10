@@ -57,6 +57,20 @@ public class TestServer {
         @RequestMethod("GET")
         public void GET(RequestData requestData, Document document) {
             document.setMimeType(MimeTypes.HTML_DOCUMENT);
+            // File ../resources/greet-form.html contains such HTML:
+            /*
+            <h2>Hello, User!<br></h2>
+            <h3>After you'll use this thing,<br>please, tell me some data about you!</h3>
+            <blockquote style="border: 3px dashed #777; padding: 20px; width: 20%; margin-top: 70px;">
+                <form action="/greet" method="POST">
+                    <p>What's your name?</p>
+                    <p><input type="text" name="name" value="World" autocomplete="off"></p>
+                    <p style="margin-top: 40px;">What greeting would you like<br>to have? (e.g. "Hi", "Hello")</p>
+                    <p><input type="text" name="greet" value="Hello" autocomplete="off"></p>
+                    <p><input type="submit" value="Submit"></p>
+                </form>
+            </blockquote>
+            */
             document.writeln(MoreFiles.load(MoreFiles.realPath("../resources/greet-form.html")));
         }
 
