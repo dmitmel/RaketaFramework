@@ -10,8 +10,11 @@ import java.util.Map;
 import java.util.function.Predicate;
 
 public class Server {
+    public static final String DEFAULT_IP = "localhost";
     public static final int DEFAULT_PORT = 8080;
-    public static final String DEFAULT_HOST_NAME = "jonnect-server";
+    public static final String DEFAULT_HOST_NAME = String.format("RaketaFramework/1.0.0 on %s %s",
+            System.getProperty("os.name"), System.getProperty("os.version"));
+    public static final int DEFAULT_MAX_ACTIVE_THREADS_COUNT = 10;
 
     public final URLMapping urls;
 
@@ -20,7 +23,7 @@ public class Server {
     public final int port;
 
     /** Value, that will be used in HTTP-header "Server". Default value is {@link #DEFAULT_HOST_NAME}. */
-    public final String serverName;
+    public String serverName = DEFAULT_HOST_NAME;
 
     public Map<Integer, ErrorResponder> errorResponders = new HashMap<>(0);
 
@@ -29,17 +32,16 @@ public class Server {
         logger.logLevelFilterer = filterer;
     }
 
+    public int maxActiveThreads = DEFAULT_MAX_ACTIVE_THREADS_COUNT;
+    private int activeThreads;
+
     public Server(URLMapping urls) {
-        this(urls, "localhost", DEFAULT_PORT, DEFAULT_HOST_NAME);
+        this(urls, DEFAULT_IP, DEFAULT_PORT);
     }
     public Server(URLMapping urls, String ip, int port) {
-        this(urls, ip, port, DEFAULT_HOST_NAME);
-    }
-    public Server(URLMapping urls, String ip, int port, String serverName) {
         this.urls = urls;
         this.port = port;
         this.ip = ip;
-        this.serverName = serverName;
         this.errorResponders.put(404, DefaultErrorResponderFactory.makeResponder()); // 404 Not Found
         this.errorResponders.put(405, DefaultErrorResponderFactory.makeResponder()); // 405 Method Not Allowed
         this.errorResponders.put(500, DefaultErrorResponderFactory.makeResponder()); // 500 Internal Server Error
@@ -90,19 +92,29 @@ public class Server {
     }
     
     private void acceptClient(Socket clientSocket) {
+        waitUntilOpportunityToStartThread();
+        activeThreads++;
+
         InetSocketAddress inetSocketAddress = (InetSocketAddress) clientSocket.getRemoteSocketAddress();
         logger.log(LoggingLevel.CLIENT_ACCEPTING_START, String.format("Starting processing request from %s",
                 NetUtils.inetSocketAddressToString(inetSocketAddress)));
 
-        Thread acceptorThread = new Thread(new ClientHandler(this, clientSocket));
+        Thread acceptorThread = new Thread(() -> {
+            new ClientHandler(this, clientSocket).run();
+            activeThreads--;
+        });
         acceptorThread.setPriority(Thread.NORM_PRIORITY);
         acceptorThread.setDaemon(true);
 
-        int acceptorIndex = Thread.activeCount() - 1;
+        int acceptorIndex = activeThreads - 1;
         String threadName = String.format("%s-%d", ClientHandler.class.getTypeName(), acceptorIndex);
         acceptorThread.setName(threadName);
 
         acceptorThread.start();
+    }
+
+    private void waitUntilOpportunityToStartThread() {
+        while (activeThreads >= maxActiveThreads);
     }
 
 }
