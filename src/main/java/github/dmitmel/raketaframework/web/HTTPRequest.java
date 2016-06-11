@@ -1,10 +1,8 @@
 package github.dmitmel.raketaframework.web;
 
-import github.dmitmel.raketaframework.util.Pair;
-
 import java.util.*;
 
-public class HTTPRequest {
+public class HTTPRequest extends HTTPMessage {
     public static final String LINE_SEPARATOR = "\r\n";
     public static final String EMPTY_BODY = "";
     public static final Map<String, String> EMPTY_HEADERS = Collections.emptyMap();
@@ -28,14 +26,13 @@ public class HTTPRequest {
     }
 
     public HTTPRequest(String method, URL url, String protocolVersion, Map<String, String> headers, String body) {
+        super(protocolVersion, headers, body);
+
         if (method.trim().isEmpty())
             throw new IllegalArgumentException(method);
-        Objects.requireNonNull(url);
-        Objects.requireNonNull(protocolVersion);
-        Objects.requireNonNull(headers);
 
         this.method = method;
-        this.url = url;
+        this.url = Objects.requireNonNull(url);;
         this.protocolVersion = protocolVersion;
         this.headers = headers;
         this.body = body;
@@ -69,30 +66,9 @@ public class HTTPRequest {
         Map<String, String> headers = new HashMap<>(0);
         StringBuilder body = new StringBuilder(0);
 
-        boolean readingHeaders = true;
-        for (Iterator<String> iterator = headersAndBodyLines.iterator(); iterator.hasNext(); ) {
-            String line = iterator.next();
-
-            if (line.isEmpty()) {
-                readingHeaders = false;
-            } else {
-                if (readingHeaders) {
-                    Pair<String, String> header = parseHeaderFromLine(line);
-                    headers.putAll(header.asOneElementMap());
-                } else {
-                    body.append(line);
-                    if (iterator.hasNext())
-                        body.append(LINE_SEPARATOR);
-                }
-            }
-        }
+        HTTPMessage.parseHeadersAndBodyFromLines(headersAndBodyLines, body, headers);
 
         return new HTTPRequest(method, url, protocolVersion, headers, body.toString());
-    }
-
-    private static Pair<String, String> parseHeaderFromLine(String line) {
-        String[] parts = line.split(": ");
-        return new Pair<>(parts[0], parts[1]);
     }
 
     @Override

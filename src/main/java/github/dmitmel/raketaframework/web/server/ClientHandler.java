@@ -77,7 +77,7 @@ class ClientHandler implements Runnable {
      	    Date/Time Formats)"
 
      	    So, now message is being generated, and date must be specified NOW. Also, if handle method took many time
-     	    to execute - date added before execution would be not valid.
+     	    to execute - date added before execution wouldn't be valid.
              */
             DateFormat df = DateFormat.getTimeInstance();
             df.setTimeZone(TimeZone.getTimeZone("GMT"));

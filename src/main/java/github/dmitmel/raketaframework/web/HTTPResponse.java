@@ -1,20 +1,10 @@
 package github.dmitmel.raketaframework.web;
 
-import github.dmitmel.raketaframework.util.Pair;
-import github.dmitmel.raketaframework.util.StringUtils;
-
 import java.util.*;
 
-public class HTTPResponse {
-    public static final String LINE_SEPARATOR = "\r\n";
-    public static final String EMPTY_BODY = StringUtils.EMPTY_STRING;
-    public static final Map<String, String> EMPTY_HEADERS = Collections.emptyMap();
-
-    public final String protocolVersion;
+public class HTTPResponse extends HTTPMessage {
     public final int statusCode;
     public final String statusDescription;
-    public final Map<String, String> headers;
-    public final String body;
 
     public HTTPResponse(String protocolVersion, int statusCode, String statusDescription) {
         this(protocolVersion, statusCode, statusDescription, EMPTY_HEADERS);
@@ -31,16 +21,13 @@ public class HTTPResponse {
 
     public HTTPResponse(String protocolVersion, int statusCode, String statusDescription, Map<String, String> headers,
                         String body) {
+        super(protocolVersion, headers, body);
+
         if (protocolVersion.trim().isEmpty())
             throw new IllegalArgumentException(protocolVersion);
-        Objects.requireNonNull(statusDescription);
-        Objects.requireNonNull(headers);
 
-        this.protocolVersion = protocolVersion;
         this.statusCode = statusCode;
-        this.statusDescription = statusDescription;
-        this.headers = headers;
-        this.body = body;
+        this.statusDescription = Objects.requireNonNull(statusDescription);
     }
 
 
@@ -71,30 +58,9 @@ public class HTTPResponse {
         Map<String, String> headers = new HashMap<>(0);
         StringBuilder body = new StringBuilder(0);
 
-        boolean readingHeaders = true;
-        for (Iterator<String> iterator = headersAndBodyLines.iterator(); iterator.hasNext(); ) {
-            String line = iterator.next();
-
-            if (line.isEmpty()) {
-                readingHeaders = false;
-            } else {
-                if (readingHeaders) {
-                    Pair<String, String> header = parseHeaderFromLine(line);
-                    headers.putAll(header.asOneElementMap());
-                } else {
-                    body.append(line);
-                    if (iterator.hasNext())
-                        body.append(LINE_SEPARATOR);
-                }
-            }
-        }
+        HTTPMessage.parseHeadersAndBodyFromLines(headersAndBodyLines, body, headers);
 
         return new HTTPResponse(protocolVersion, statusCode, statusDescription, headers, body.toString());
-    }
-
-    private static Pair<String, String> parseHeaderFromLine(String line) {
-        String[] parts = line.split(": ");
-        return new Pair<>(parts[0], parts[1]);
     }
 
     @Override
