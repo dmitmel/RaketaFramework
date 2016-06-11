@@ -3,14 +3,16 @@ import github.dmitmel.raketaframework.web.MIMETypes;
 import github.dmitmel.raketaframework.web.errors.Error404;
 import github.dmitmel.raketaframework.web.handle.*;
 import github.dmitmel.raketaframework.web.handle.RedirectingThrowable;
+import github.dmitmel.raketaframework.web.server.LoggingLevel;
 import github.dmitmel.raketaframework.web.server.URLMapping;
 import github.dmitmel.raketaframework.web.server.Server;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class TestServer {
     private static HashMap<String, String> files = new HashMap<>();
-    
+
     public static void main(String[] args) {
         for (String file : new String[] {"./greet-form.html",
                 "./goodies/css/glowing-style.css",
@@ -19,12 +21,14 @@ public class TestServer {
                 "./index.html"}) {
             files.put(file.substring(2, file.length()), MoreFiles.load(MoreFiles.realPath(file)));
         }
-        
+
         URLMapping urls = new URLMapping(new Main(), new Hello(), new LoadFile(), new GreetForm(),
                 new GetLoadedFile(), new LongTask(), new RedirectPage());
 
         Server app = new Server(urls, "localhost", 8015, "RaketaServer1");
-        app.startServer();
+        app.setLogLevelFilterer(level -> !Arrays.asList(LoggingLevel.CLIENT_ACCEPTING_START,
+                LoggingLevel.CLIENT_ACCEPTING_END, LoggingLevel.START_CONFIG).contains(level));
+        app.start();
     }
 
     @RequestURLPattern("/main")
@@ -41,21 +45,21 @@ public class TestServer {
         @RequestMethod("GET")
         public void GET(RequestData requestData, Document document) {
             document.setMimeType(MIMETypes.HTML_DOCUMENT);
-            
+
             String name = requestData.getUrlParamOrElse("name", "World");
-            
+
             String howManyStr = requestData.getUrlParam("how-many");
             int howMany = 1;
             if (howManyStr != null) {
                 howMany = Integer.parseInt(howManyStr);
             }
-            
+
             document.writeln("<html>\r\n\t<body>\r\n\t\t<tt>\r\n\r\n\t\t\t<!-- Just repeat same thing many times! " +
                     "(Generated HTML) -->\r\n");
             for (int i = 0; i < howMany; i++) {
                 document.writeln(String.format("\t\t\tHello %s!<br>", name));
             }
-            
+
             document.write("\r\n\t\t</tt>\r\n\t</body>\r\n</html>");
         }
     }
@@ -68,11 +72,11 @@ public class TestServer {
             try {
                 lines = MoreFiles.load(MoreFiles.realPath("../resources/" + requestData.getMatcherGroup(0)));
                 document.setMimeType(MIMETypes.getApproximateTypeFor(requestData.getMatcherGroup(0)));
-                
+
             } catch (NullPointerException e) {
                 throw new Error404();
             }
-            
+
             document.writeln(lines);
         }
     }
@@ -89,7 +93,7 @@ public class TestServer {
         public void POST(WebFormData form, Document document) {
             if (form.getFormParam("name") == null) throw new Error404();
             if (form.getFormParam("greet") == null) throw new Error404();
-            
+
             document.writeF("%s %s!", form.getFormParam("greet"), form.getFormParam("name"));
         }
     }
@@ -99,9 +103,9 @@ public class TestServer {
         @RequestMethod("GET")
         public void GET(RequestData requestData, Document document) {
             if (!files.containsKey(requestData.getMatcherGroup(0))) throw new Error404();
-            
+
             document.setMimeType(MIMETypes.getApproximateTypeFor(requestData.getMatcherGroup(0)));
-            
+
             document.writeln(files.get(requestData.getMatcherGroup(0)));
         }
     }

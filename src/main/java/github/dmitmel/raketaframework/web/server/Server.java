@@ -1,15 +1,13 @@
 package github.dmitmel.raketaframework.web.server;
 
-import github.dmitmel.raketaframework.pinelog.Logger;
 import github.dmitmel.raketaframework.util.NetUtils;
 import github.dmitmel.raketaframework.web.errors.DefaultErrorResponderFactory;
 import github.dmitmel.raketaframework.web.errors.ErrorResponder;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.net.*;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Predicate;
 
 public class Server {
     public static final int DEFAULT_PORT = 8080;
@@ -26,7 +24,10 @@ public class Server {
 
     public Map<Integer, ErrorResponder> errorResponders = new HashMap<>(0);
 
-    final Logger logger = new Logger(Server.class.getTypeName());
+    final ServerLogger logger = new ServerLogger();
+    public void setLogLevelFilterer(Predicate<LoggingLevel> filterer) {
+        logger.logLevelFilterer = filterer;
+    }
 
     public Server(URLMapping urls) {
         this(urls, "localhost", DEFAULT_PORT, DEFAULT_HOST_NAME);
@@ -45,15 +46,14 @@ public class Server {
         this.errorResponders.put(501, DefaultErrorResponderFactory.makeResponder()); // 501 Not Implemented
     }
 
-    public void startServer() {
+    public void start() {
         try {
-            logger.info("Starting server...");
+            logger.log(LoggingLevel.START_CONFIG, "Starting server...");
 
-            logger.debug("Initializing server socket...");
+            logger.log(LoggingLevel.START_CONFIG, "Initializing server socket...");
             ServerSocket serverSocket = initServerSocket();
 
-            logger.info(String.format("Server started on address http://%s:%d/", ip, port));
-            logger.debug(String.format("Listening on port %d...", port));
+            logger.log(LoggingLevel.INFO, String.format("Server started on address http://%s:%d/", ip, port));
             while (true) {
                 Socket clientSocket = serverSocket.accept();
                 acceptClient(clientSocket);
@@ -62,7 +62,7 @@ public class Server {
             // Can be caught only on accepting socket
             // Just ignore this request. If someone stopped request - he/she/it can retry or don't do anything
         } catch (Exception e) {
-            logger.fatal("Server stopped because of uncaught exception.");
+            logger.log(LoggingLevel.FATAL_ERROR, "Server stopped because of uncaught exception.");
             logger.exception(e);
         }
     }
@@ -91,7 +91,7 @@ public class Server {
     
     private void acceptClient(Socket clientSocket) {
         InetSocketAddress inetSocketAddress = (InetSocketAddress) clientSocket.getRemoteSocketAddress();
-        logger.debug(String.format("Starting processing request from %s",
+        logger.log(LoggingLevel.CLIENT_ACCEPTING_START, String.format("Starting processing request from %s",
                 NetUtils.inetSocketAddressToString(inetSocketAddress)));
 
         Thread acceptorThread = new Thread(new ClientHandler(this, clientSocket));

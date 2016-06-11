@@ -13,8 +13,8 @@ public class TestServer {
     public static void main(String[] args) {
         URLMapping urls = new URLMapping(new Main(), new Hello(), new GreetForm(), new RedirectPage());
 
-        Server app = new Server(urls, "localhost", 8015, "RaketaServer1");
-        app.startServer();
+        Server server = new Server(urls, "localhost", 8015, "RaketaServer");
+        server.start();
     }
 
     // "Hello World!" example
@@ -56,7 +56,7 @@ public class TestServer {
     private static class GreetForm implements RequestHandler {
         @RequestMethod("GET")
         public void GET(RequestData requestData, Document document) {
-            document.setMimeType(MimeTypes.HTML_DOCUMENT);
+            document.setMimeType(MIMETypes.HTML_DOCUMENT);
             // File ../resources/greet-form.html contains such HTML:
             /*
             <h2>Hello, User!<br></h2>

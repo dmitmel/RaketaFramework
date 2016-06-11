@@ -10,6 +10,10 @@ public class NetUtils {
         return String.format("%s:%d", inetSocketAddress.getHostString(), inetSocketAddress.getPort());
     }
 
+    public static String inetAddressToString(InetAddress inetAddress) {
+        return inetAddress.getHostAddress();
+    }
+
     public static InetAddress getCurrentSiteLocalIP() {
         try {
             Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();

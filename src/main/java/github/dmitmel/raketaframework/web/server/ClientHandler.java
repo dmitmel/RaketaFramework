@@ -98,7 +98,7 @@ class ClientHandler implements Runnable {
 
             printRequest();
             InetSocketAddress inetSocketAddress = (InetSocketAddress) socket.getRemoteSocketAddress();
-            server.logger.debug(String.format("Finished processing request from %s",
+            server.logger.log(LoggingLevel.CLIENT_ACCEPTING_END, String.format("Finished processing request from %s",
                     NetUtils.inetSocketAddressToString(inetSocketAddress)));
         }
     }
@@ -210,6 +210,6 @@ class ClientHandler implements Runnable {
                 NetUtils.inetSocketAddressToString(inetSocketAddress), incomingMessage.url.path,
                 incomingMessage.method, incomingMessage.url, incomingMessage.protocolVersion,
                 responseStatusCode, responseStatusDescription);
-        server.logger.info(message);
+        server.logger.log(LoggingLevel.REQUEST_SUMMARY, message);
     }
 }
