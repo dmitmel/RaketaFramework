@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 class ServerLoggingFormatter {
-    public static final String MESSAGE_FORMAT = "[%s]: %-10s %s";
+    public static final String MESSAGE_FORMAT = "[%s]: %-23s %s";
     public static final String DATE_FORMAT = "dd/MMM/yyyy hh:mm:ss";
 
     public String format(LoggingLevel level, String message) {

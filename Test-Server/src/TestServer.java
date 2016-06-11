@@ -1,4 +1,5 @@
 import github.dmitmel.raketaframework.util.MoreFiles;
+import github.dmitmel.raketaframework.util.NetUtils;
 import github.dmitmel.raketaframework.web.MIMETypes;
 import github.dmitmel.raketaframework.web.errors.Error404;
 import github.dmitmel.raketaframework.web.handle.*;
@@ -25,7 +26,7 @@ public class TestServer {
         URLMapping urls = new URLMapping(new Main(), new Hello(), new LoadFile(), new GreetForm(),
                 new GetLoadedFile(), new LongTask(), new RedirectPage());
 
-        Server app = new Server(urls, "localhost", 8015, "RaketaServer1");
+        Server app = new Server(urls, NetUtils.inetAddressToString(NetUtils.getCurrentSiteLocalIP()), 8015);
         app.setLogLevelFilterer(level -> !Arrays.asList(LoggingLevel.CLIENT_ACCEPTING_START,
                 LoggingLevel.CLIENT_ACCEPTING_END, LoggingLevel.START_CONFIG).contains(level));
         app.start();
