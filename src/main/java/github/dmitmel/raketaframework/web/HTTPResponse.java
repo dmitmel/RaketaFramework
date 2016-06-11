@@ -1,8 +1,19 @@
 package github.dmitmel.raketaframework.web;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class HTTPResponse extends HTTPMessage {
+    public static final Pattern IMAGE_CONTENT_TYPE_PATTERN =
+            Pattern.compile("image/(gif|jpeg|pjpeg|png|svf\\+xml|tiff|vnd\\.microsoft\\.icon|vnd\\.wap\\.wbmp)");
+
     public final int statusCode;
     public final String statusDescription;
 
@@ -71,7 +82,33 @@ public class HTTPResponse extends HTTPMessage {
                 .append(LINE_SEPARATOR);
         for (Map.Entry<String, String> entry : headers.entrySet())
             builder.append(entry.getKey()).append(": ").append(entry.getValue()).append(LINE_SEPARATOR);
-        builder.append(LINE_SEPARATOR).append(body);
+        builder.append(LINE_SEPARATOR);
+
+        if (headers.containsKey("Content-Type")) {
+            String contentType = headers.get("Content-Type");
+            Matcher contentTypeMatcher = IMAGE_CONTENT_TYPE_PATTERN.matcher(contentType);
+            if (contentTypeMatcher.matches()) {
+                try {
+                    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                    BufferedImage image = ImageIO.read(new ByteArrayInputStream(body.getBytes()));
+
+                    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                    ImageIO.write(image, contentTypeMatcher.group(1), byteArrayOutputStream);
+
+                    byte[] size = ByteBuffer.allocate(4).putInt(byteArrayOutputStream.size()).array();
+                    outputStream.write(size);
+                    outputStream.write(byteArrayOutputStream.toByteArray());
+                    outputStream.flush();
+                    builder.append(outputStream);
+                } catch (java.io.IOException e) {
+                    throw github.dmitmel.raketaframework.util.exceptions.IOException.extractFrom(e);
+                }
+            } else {
+                builder.append(body);
+            }
+        } else {
+            builder.append(body);
+        }
 
         return builder.toString();
     }
