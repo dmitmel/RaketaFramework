@@ -20,7 +20,6 @@
     </tstamp>
 
     <target name="build" depends="clear, compile, jars, sources">
-        <copydir src="Test-Server/resources" dest="${dir.build.root}/main/resources" />
         <copydir src="${dir.test.resources}" dest="${dir.build.root}/test/resources" />
     </target>
 

@@ -9,31 +9,31 @@ public class HTTPRequest extends HTTPMessage {
 
     public final String method;
     public final URL url;
-    public final String protocolVersion;
+    public final String protocol;
     public final Map<String, String> headers;
     public final String body;
 
-    public HTTPRequest(String method, URL url, String protocolVersion) {
-        this(method, url, protocolVersion, EMPTY_HEADERS);
+    public HTTPRequest(String method, URL url, String protocol) {
+        this(method, url, protocol, EMPTY_HEADERS);
     }
 
-    public HTTPRequest(String method, URL url, String protocolVersion, Map<String, String> headers) {
-        this(method, url, protocolVersion, headers, EMPTY_BODY);
+    public HTTPRequest(String method, URL url, String protocol, Map<String, String> headers) {
+        this(method, url, protocol, headers, EMPTY_BODY);
     }
 
-    public HTTPRequest(String method, URL url, String protocolVersion, String body) {
-        this(method, url, protocolVersion, EMPTY_HEADERS, body);
+    public HTTPRequest(String method, URL url, String protocol, String body) {
+        this(method, url, protocol, EMPTY_HEADERS, body);
     }
 
-    public HTTPRequest(String method, URL url, String protocolVersion, Map<String, String> headers, String body) {
-        super(protocolVersion, headers, body);
+    public HTTPRequest(String method, URL url, String protocol, Map<String, String> headers, String body) {
+        super(protocol, headers, body);
 
         if (method.trim().isEmpty())
             throw new IllegalArgumentException(method);
 
         this.method = method;
-        this.url = Objects.requireNonNull(url);;
-        this.protocolVersion = protocolVersion;
+        this.url = Objects.requireNonNull(url);
+        this.protocol = protocol;
         this.headers = headers;
         this.body = body;
     }
@@ -60,7 +60,7 @@ public class HTTPRequest extends HTTPMessage {
 
         String method = mainLineParts[0];
         URL url = URL.fromString(mainLineParts[1]);
-        String protocolVersion = mainLineParts[2];
+        String protocol = mainLineParts[2];
 
         List<String> headersAndBodyLines = lines.subList(1, lines.size());
         Map<String, String> headers = new HashMap<>(0);
@@ -68,14 +68,14 @@ public class HTTPRequest extends HTTPMessage {
 
         HTTPMessage.parseHeadersAndBodyFromLines(headersAndBodyLines, body, headers);
 
-        return new HTTPRequest(method, url, protocolVersion, headers, body.toString());
+        return new HTTPRequest(method, url, protocol, headers, body.toString());
     }
 
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder(0);
 
-        builder.append(method).append(' ').append(url.toString()).append(' ').append(protocolVersion)
+        builder.append(method).append(' ').append(url.toString()).append(' ').append(protocol)
                 .append(LINE_SEPARATOR);
         for (Map.Entry<String, String> entry : headers.entrySet())
             builder.append(entry.getKey()).append(": ").append(entry.getValue()).append(LINE_SEPARATOR);

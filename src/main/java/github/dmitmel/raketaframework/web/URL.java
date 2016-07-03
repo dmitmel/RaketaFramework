@@ -1,9 +1,13 @@
 package github.dmitmel.raketaframework.web;
 
-import github.dmitmel.raketaframework.util.*;
+import github.dmitmel.raketaframework.util.ArrayUtils;
+import github.dmitmel.raketaframework.util.StringUtils;
 
 import java.net.URLDecoder;
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class URL {
     public static final String DEFAULT_PATH = "/";

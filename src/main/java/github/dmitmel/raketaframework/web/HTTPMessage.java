@@ -10,15 +10,15 @@ public abstract class HTTPMessage {
     public static final Map<String, String> EMPTY_HEADERS = Collections.emptyMap();
     public static final String LINE_SEPARATOR = "\r\n";
 
-    public final String protocolVersion;
+    public final String protocol;
     public final Map<String, String> headers;
     public final String body;
 
-    public HTTPMessage(String protocolVersion, Map<String, String> headers, String body) {
-        if (protocolVersion.trim().isEmpty())
-            throw new IllegalArgumentException(protocolVersion);
+    public HTTPMessage(String protocol, Map<String, String> headers, String body) {
+        if (protocol.trim().isEmpty())
+            throw new IllegalArgumentException(protocol);
 
-        this.protocolVersion = protocolVersion;
+        this.protocol = protocol;
         this.headers = Objects.requireNonNull(headers);;
         this.body = Objects.requireNonNull(body);;
     }

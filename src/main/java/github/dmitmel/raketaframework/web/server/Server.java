@@ -1,5 +1,6 @@
 package github.dmitmel.raketaframework.web.server;
 
+import github.dmitmel.raketaframework.Version;
 import github.dmitmel.raketaframework.util.NetUtils;
 import github.dmitmel.raketaframework.web.errors.DefaultErrorResponderFactory;
 import github.dmitmel.raketaframework.web.errors.ErrorResponder;
@@ -10,16 +11,15 @@ import java.util.Map;
 import java.util.function.Predicate;
 
 public class Server {
-    public static final String DEFAULT_IP = "localhost";
+    public static final String DEFAULT_HOST = "localhost";
     public static final int DEFAULT_PORT = 8080;
-    public static final String DEFAULT_HOST_NAME = String.format("RaketaFramework/1.0.0 on %s %s",
-            System.getProperty("os.name"), System.getProperty("os.version"));
+    public static final String DEFAULT_HOST_NAME = String.format("RaketaFramework/%s on %s %s",
+            Version.id(), System.getProperty("os.name"), System.getProperty("os.version"));
     public static final int DEFAULT_MAX_ACTIVE_THREADS_COUNT = 10;
 
     public final URLMapping urls;
 
-    /** First part of web address (before semicolon). */
-    public final String ip;
+    public final String host;
     public final int port;
 
     /** Value, that will be used in HTTP-header "Server". Default value is {@link #DEFAULT_HOST_NAME}. */
@@ -36,12 +36,12 @@ public class Server {
     private int activeThreads;
 
     public Server(URLMapping urls) {
-        this(urls, DEFAULT_IP, DEFAULT_PORT);
+        this(urls, DEFAULT_HOST, DEFAULT_PORT);
     }
-    public Server(URLMapping urls, String ip, int port) {
+    public Server(URLMapping urls, String host, int port) {
         this.urls = urls;
         this.port = port;
-        this.ip = ip;
+        this.host = host;
         this.errorResponders.put(404, DefaultErrorResponderFactory.makeResponder()); // 404 Not Found
         this.errorResponders.put(405, DefaultErrorResponderFactory.makeResponder()); // 405 Method Not Allowed
         this.errorResponders.put(500, DefaultErrorResponderFactory.makeResponder()); // 500 Internal Server Error
@@ -50,12 +50,12 @@ public class Server {
 
     public void start() {
         try {
-            logger.log(LoggingLevel.START_CONFIG, "Starting server...");
+            logger.log(LoggingLevel.INFO, "Starting server...");
 
-            logger.log(LoggingLevel.START_CONFIG, "Initializing server socket...");
+            logger.log(LoggingLevel.STARTING_CONFIG, "Initializing server socket...");
             ServerSocket serverSocket = initServerSocket();
 
-            logger.log(LoggingLevel.INFO, String.format("Server started on address http://%s:%d/", ip, port));
+            logger.log(LoggingLevel.INFO, String.format("Server started on address http://%s:%d/", host, port));
             while (true) {
                 Socket clientSocket = serverSocket.accept();
                 acceptClient(clientSocket);
@@ -71,11 +71,11 @@ public class Server {
 
     private ServerSocket initServerSocket() {
         try {
-            return new ServerSocket(port, 0, InetAddress.getByName(ip));
+            return new ServerSocket(port, 0, InetAddress.getByName(host));
 
         } catch (BindException e) {
             if (e.getMessage().startsWith("Cannot assign requested address"))
-                throw new UnAssignableAddressException(ip, e);
+                throw new UnAssignableAddressException(host, e);
 
             else if (e.getMessage().startsWith("Address already in use"))
                 throw new PortAlreadyInUseException(port, e);
@@ -99,18 +99,20 @@ public class Server {
         logger.log(LoggingLevel.CLIENT_ACCEPTING_START, String.format("Starting processing request from %s",
                 NetUtils.inetSocketAddressToString(inetSocketAddress)));
 
-        Thread acceptorThread = new Thread(() -> {
+        Thread handlerThread = new Thread(() -> {
             new ClientHandler(this, clientSocket).run();
             activeThreads--;
+            logger.log(LoggingLevel.CLIENT_ACCEPTING_END, String.format("Finished processing request from %s",
+                    NetUtils.inetSocketAddressToString(inetSocketAddress)));
         });
-        acceptorThread.setPriority(Thread.NORM_PRIORITY);
-        acceptorThread.setDaemon(true);
+        handlerThread.setPriority(Thread.NORM_PRIORITY);
+        handlerThread.setDaemon(true);
 
         int acceptorIndex = activeThreads - 1;
         String threadName = String.format("%s-%d", ClientHandler.class.getTypeName(), acceptorIndex);
-        acceptorThread.setName(threadName);
+        handlerThread.setName(threadName);
 
-        acceptorThread.start();
+        handlerThread.start();
     }
 
     private void waitUntilOpportunityToStartThread() {

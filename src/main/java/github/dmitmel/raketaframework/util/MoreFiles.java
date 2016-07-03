@@ -1,7 +1,6 @@
 package github.dmitmel.raketaframework.util;
 
 import java.io.*;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,6 +82,7 @@ public class MoreFiles {
     public static String load(String path) {
         StringBuilder fileData = new StringBuilder(0);
         File file = new File(path);
+
         FileReader fileReader = null;
         BufferedReader buffer = null;
 

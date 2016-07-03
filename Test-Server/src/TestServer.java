@@ -3,32 +3,14 @@ import github.dmitmel.raketaframework.util.NetUtils;
 import github.dmitmel.raketaframework.web.MIMETypes;
 import github.dmitmel.raketaframework.web.errors.Error404;
 import github.dmitmel.raketaframework.web.handle.*;
-import github.dmitmel.raketaframework.web.handle.RedirectingThrowable;
-import github.dmitmel.raketaframework.web.server.LoggingLevel;
-import github.dmitmel.raketaframework.web.server.URLMapping;
 import github.dmitmel.raketaframework.web.server.Server;
-
-import java.util.Arrays;
-import java.util.HashMap;
+import github.dmitmel.raketaframework.web.server.URLMapping;
 
 public class TestServer {
-    private static HashMap<String, String> files = new HashMap<>();
-
     public static void main(String[] args) {
-        for (String file : new String[] {"./greet-form.html",
-                "./goodies/css/glowing-style.css",
-                "./index-js.js",
-                "./goodies/js-libs/jquery.min.js",
-                "./index.html"}) {
-            files.put(file.substring(2, file.length()), MoreFiles.load(MoreFiles.realPath(file)));
-        }
-
-        URLMapping urls = new URLMapping(new Main(), new Hello(), new LoadFile(), new GreetForm(),
-                new GetLoadedFile(), new LongTask(), new RedirectPage());
+        URLMapping urls = new URLMapping(new Main(), new Hello(), new LoadFile(), new GreetForm());
 
         Server app = new Server(urls, NetUtils.inetAddressToString(NetUtils.getCurrentSiteLocalIP()), 8015);
-        app.setLogLevelFilterer(level -> !Arrays.asList(LoggingLevel.CLIENT_ACCEPTING_START,
-                LoggingLevel.CLIENT_ACCEPTING_END, LoggingLevel.START_CONFIG).contains(level));
         app.start();
     }
 
@@ -36,8 +18,7 @@ public class TestServer {
     private static class Main implements RequestHandler {
         @RequestMethod("GET")
         public void GET(RequestData requestData, Document document) {
-            document.setMimeType(MIMETypes.HTML_DOCUMENT);
-            document.writeln(files.get("index.html"));
+            throw new RedirectionThrowable("/load/index.html");
         }
     }
 
@@ -65,20 +46,17 @@ public class TestServer {
         }
     }
 
-    @RequestURLPattern("/load-file/(.+)")
+    @RequestURLPattern("/load/(.+)")
     private static class LoadFile implements RequestHandler {
         @RequestMethod("GET")
         public void GET(RequestData requestData, Document document) {
-            String lines;
             try {
-                lines = MoreFiles.load(MoreFiles.realPath("../resources/" + requestData.getMatcherGroup(0)));
-                document.setMimeType(MIMETypes.getApproximateTypeFor(requestData.getMatcherGroup(0)));
-
+                String lines = MoreFiles.load(MoreFiles.realPath("./" + requestData.getMatcherGroup(0)));
+                document.setMimeType(MIMETypes.getContentType(requestData.getMatcherGroup(0)));
+                document.write(lines);
             } catch (NullPointerException e) {
                 throw new Error404();
             }
-
-            document.writeln(lines);
         }
     }
 
@@ -86,8 +64,7 @@ public class TestServer {
     private static class GreetForm implements RequestHandler {
         @RequestMethod("GET")
         public void GET(RequestData requestData, Document document) {
-            document.setMimeType(MIMETypes.HTML_DOCUMENT);
-            document.writeln(files.get("greet-form.html"));
+            throw new RedirectionThrowable("/load/greet-form.html");
         }
 
         @RequestMethod("POST")
@@ -96,35 +73,6 @@ public class TestServer {
             if (form.getFormParam("greet") == null) throw new Error404();
 
             document.writeF("%s %s!", form.getFormParam("greet"), form.getFormParam("name"));
-        }
-    }
-
-    @RequestURLPattern("/get-loaded/(.+)")
-    private static class GetLoadedFile implements RequestHandler {
-        @RequestMethod("GET")
-        public void GET(RequestData requestData, Document document) {
-            if (!files.containsKey(requestData.getMatcherGroup(0))) throw new Error404();
-
-            document.setMimeType(MIMETypes.getApproximateTypeFor(requestData.getMatcherGroup(0)));
-
-            document.writeln(files.get(requestData.getMatcherGroup(0)));
-        }
-    }
-
-    @RequestURLPattern("/long-task")
-    private static class LongTask implements RequestHandler {
-        @RequestMethod("GET")
-        public void GET(RequestData requestData, Document document) throws InterruptedException {
-            Thread.sleep(5000);
-            document.writeln("Finished!");
-        }
-    }
-
-    @RequestURLPattern("/redirect")
-    private static class RedirectPage implements RequestHandler {
-        @RequestMethod("GET")
-        public void GET(RequestData requestData, Document document) {
-            throw new RedirectingThrowable("/main");
         }
     }
 }

@@ -1,5 +1,10 @@
 package github.dmitmel.raketaframework.web;
 
+import github.dmitmel.raketaframework.util.StringUtils;
+import github.dmitmel.raketaframework.util.Terminal;
+
+import java.io.*;
+
 public class MIMETypes {
     public static final String PLAIN_TEXT = "text/plain";
     public static final String HTML_DOCUMENT = "text/html";
@@ -10,27 +15,29 @@ public class MIMETypes {
     public static final String JSON_DOCUMENT = "application/json";
     public static final String CSS_STYLESHEET = "text/css";
 
-    public static String getApproximateTypeFor(String filePath) {
-        String mime;
+    public static String getContentType(String name) {
+        try {
+            if (new File(name).exists()) {
+                Process process = Terminal.execAndWaitUntilStops("file --mime-type " + name);
 
-        if (filePath.endsWith("htm") || filePath.endsWith("html")) {
-            mime = HTML_DOCUMENT;
-        } else if (filePath.endsWith("png")) {
-            mime = PNG_IMAGE;
-        } else if (filePath.endsWith("jpg") || filePath.endsWith("jpeg")) {
-            mime = JPEG_IMAGE;
-        } else if (filePath.endsWith("bmp")) {
-            mime = BMP_IMAGE;
-        } else if (filePath.endsWith("json")) {
-            mime = JSON_DOCUMENT;
-        } else if (filePath.endsWith("css")) {
-            mime = CSS_STYLESHEET;
-        } else if (filePath.endsWith("ico")) {
-            mime = FAVICON;
-        } else {
-            mime = PLAIN_TEXT;
+                if (process != Terminal.INTERRUPTED_PROCESS_INSTANCE) {
+                    BufferedReader inputStream = new BufferedReader(new InputStreamReader(process.getInputStream()));
+
+                    StringBuilder builder = new StringBuilder(0);
+                    for (String line = StringUtils.EMPTY_STRING; line != null; line = inputStream.readLine())
+                        builder.append(line).append('\n');
+
+                    // Command "file --mime-type" returns such string:
+                    // /path/to/file: mime/type
+                    return builder.toString().split(":")[1].trim();
+                } else {
+                    throw new github.dmitmel.raketaframework.util.exceptions.IOException("can\'t determine file type");
+                }
+            } else {
+                throw new github.dmitmel.raketaframework.util.exceptions.FileNotFoundException(name);
+            }
+        } catch (java.io.IOException e) {
+            throw github.dmitmel.raketaframework.util.exceptions.IOException.extractFrom(e);
         }
-
-        return mime;
     }
 }

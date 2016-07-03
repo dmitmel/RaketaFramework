@@ -3,15 +3,19 @@ package github.dmitmel.raketaframework.web.server;
 import github.dmitmel.raketaframework.util.IterableUtils;
 import github.dmitmel.raketaframework.util.NetUtils;
 import github.dmitmel.raketaframework.util.ReflectionUtils;
+import github.dmitmel.raketaframework.util.exceptions.InvocationTargetException;
+import github.dmitmel.raketaframework.web.HTTPDateFormatter;
 import github.dmitmel.raketaframework.web.HTTPRequest;
 import github.dmitmel.raketaframework.web.HTTPResponse;
 import github.dmitmel.raketaframework.web.URL;
-import github.dmitmel.raketaframework.web.errors.*;
+import github.dmitmel.raketaframework.web.errors.Error404;
+import github.dmitmel.raketaframework.web.errors.Error405;
+import github.dmitmel.raketaframework.web.errors.Error500;
+import github.dmitmel.raketaframework.web.errors.HTTPError;
 import github.dmitmel.raketaframework.web.handle.Document;
-import github.dmitmel.raketaframework.web.handle.RedirectingThrowable;
+import github.dmitmel.raketaframework.web.handle.RedirectionThrowable;
 import github.dmitmel.raketaframework.web.handle.RequestData;
 import github.dmitmel.raketaframework.web.handle.WebFormData;
-import github.dmitmel.raketaframework.util.exceptions.InvocationTargetException;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -97,9 +101,6 @@ class ClientHandler implements Runnable {
             }
 
             printRequest();
-            InetSocketAddress inetSocketAddress = (InetSocketAddress) socket.getRemoteSocketAddress();
-            server.logger.log(LoggingLevel.CLIENT_ACCEPTING_END, String.format("Finished processing request from %s",
-                    NetUtils.inetSocketAddressToString(inetSocketAddress)));
         }
     }
 
@@ -191,8 +192,8 @@ class ClientHandler implements Runnable {
                         addErrorDataToResponse((HTTPError) cause);
                         break;
                 }
-            } else if (cause instanceof RedirectingThrowable) {
-                addRedirectDataToResponse(((RedirectingThrowable) cause).targetUrl);
+            } else if (cause instanceof RedirectionThrowable) {
+                addRedirectDataToResponse(((RedirectionThrowable) cause).targetUrl);
             } else {
                 addErrorDataToResponse(new Error500());
                 server.logger.exception(e);
@@ -206,9 +207,11 @@ class ClientHandler implements Runnable {
 
     private void printRequest() {
         InetSocketAddress inetSocketAddress = (InetSocketAddress) socket.getRemoteSocketAddress();
-        String message = String.format("%s => %s => \"%s %s %s\" => %s %s",
-                NetUtils.inetSocketAddressToString(inetSocketAddress), incomingMessage.url.path,
-                incomingMessage.method, incomingMessage.url, incomingMessage.protocolVersion,
+
+        String message = String.format("%s - - [%s] \"%s %s %s\" - %s %s",
+                NetUtils.inetSocketAddressToString(inetSocketAddress),
+                HTTPDateFormatter.formatCurrentDate(),
+                incomingMessage.protocol, incomingMessage.method, incomingMessage.url.path,
                 responseStatusCode, responseStatusDescription);
         server.logger.log(LoggingLevel.REQUEST_SUMMARY, message);
     }

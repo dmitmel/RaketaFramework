@@ -1,7 +1,10 @@
 package github.dmitmel.raketaframework.web.server;
 
 import github.dmitmel.raketaframework.util.AnnotationNotFoundException;
-import github.dmitmel.raketaframework.web.handle.*;
+import github.dmitmel.raketaframework.web.handle.NoHandleMethodsInHandlerException;
+import github.dmitmel.raketaframework.web.handle.RequestHandler;
+import github.dmitmel.raketaframework.web.handle.RequestMethod;
+import github.dmitmel.raketaframework.web.handle.RequestURLPattern;
 
 import java.lang.reflect.Method;
 import java.util.*;

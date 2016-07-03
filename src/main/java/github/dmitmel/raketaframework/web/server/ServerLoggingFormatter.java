@@ -1,19 +1,15 @@
 package github.dmitmel.raketaframework.web.server;
 
+import github.dmitmel.raketaframework.web.HTTPDateFormatter;
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 class ServerLoggingFormatter {
     public static final String MESSAGE_FORMAT = "[%s]: %-23s %s";
-    public static final String DATE_FORMAT = "dd/MMM/yyyy hh:mm:ss";
 
     public String format(LoggingLevel level, String message) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
-        String date = dateFormat.format(new Date());
-
-        return String.format(MESSAGE_FORMAT, date, level.toString() + ':', message);
+        return String.format(MESSAGE_FORMAT, HTTPDateFormatter.formatCurrentDate(), level.toString() + ':', message);
     }
 
     public String formatException(Throwable e) {
