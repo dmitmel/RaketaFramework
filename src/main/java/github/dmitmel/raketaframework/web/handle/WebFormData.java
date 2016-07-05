@@ -11,7 +11,7 @@ public class WebFormData extends RequestData {
 
     public WebFormData(Matcher urlPatternMatcher, HTTPRequest httpRequest) {
         super(urlPatternMatcher, httpRequest);
-        this.formParams = URL.parseUrlParams(URL.decodeFromUrlFormat(httpRequest.body));
+        this.formParams = URL.parseUrlParams(URL.decodeFromUrlFormat(new String(httpRequest.body)));
     }
 
     public static WebFormData castFrom(RequestData requestData) {

@@ -100,10 +100,13 @@ public class Server {
                 NetUtils.inetSocketAddressToString(inetSocketAddress)));
 
         Thread handlerThread = new Thread(() -> {
-            new ClientHandler(this, clientSocket).run();
-            activeThreads--;
-            logger.log(LoggingLevel.CLIENT_ACCEPTING_END, String.format("Finished processing request from %s",
-                    NetUtils.inetSocketAddressToString(inetSocketAddress)));
+            try {
+                new ClientHandler(this, clientSocket).run();
+            } finally {
+                activeThreads--;
+                logger.log(LoggingLevel.CLIENT_ACCEPTING_END, String.format("Finished processing request from %s",
+                        NetUtils.inetSocketAddressToString(inetSocketAddress)));
+            }
         });
         handlerThread.setPriority(Thread.NORM_PRIORITY);
         handlerThread.setDaemon(true);

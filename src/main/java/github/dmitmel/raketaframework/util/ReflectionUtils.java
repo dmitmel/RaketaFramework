@@ -12,19 +12,17 @@ public class ReflectionUtils {
             Object result;
 
             boolean accessible = method.isAccessible();
-            if (accessible) {
-                result = method.invoke(object, args);
-            } else {
-                method.setAccessible(true);
-                result = method.invoke(object, args);
-                method.setAccessible(false);
-            }
+            if (!accessible) method.setAccessible(true);
+            result = method.invoke(object, args);
+            if (!accessible) method.setAccessible(false);
 
             return result;
         } catch (java.lang.reflect.InvocationTargetException e) {
             throw github.dmitmel.raketaframework.util.exceptions.InvocationTargetException.extractFrom(e);
         } catch (IllegalAccessException e) {
-            throw new RuntimeException("isn\'t reachable in this case");
+            // This's unreachable code because java.lang.IllegalAccessException can be thrown only if accessible object
+            // is locked
+            throw new RuntimeException("unreachable code");
         }
     }
 }

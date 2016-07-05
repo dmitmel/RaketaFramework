@@ -1,0 +1,24 @@
+span.keyword {
+    color: #000080;
+    font-weight: bold;
+}
+
+span.built-in {
+    color: #000080;
+}
+
+span.string {
+    color: #008000;
+}
+
+span.predefined-name {
+    color: #B200B2;
+}
+
+span.python-self-arg {
+    color: #94558D;
+}
+
+span.annotation {
+    color: #808000;
+}

@@ -1,0 +1,51 @@
+input[type=submit] {
+    height: 50px;
+    width: 50%;
+    color: FFF;
+    font-weight: bold;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.35);
+    background-image: linear-gradient(#8ADD6D, #60B044);
+    border: 1px solid #5CA941;
+    cursor: pointer;
+    border-radius: 5px;
+    border-collapse: collapse;
+    margin-top: 30px;
+    box-shadow: 0 2px 12px 0 #B6D8F4;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+input[type=text] {
+    width: 70%;
+    padding: 6px 12px;
+    border-radius: 5px;
+    border: 1px solid #BBB;
+    border-collapse: collapse;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+input[type=text]:focus {
+    border-color:#51A7E8;
+    box-shadow:inset 0 1px 2px rgba(0,0,0,0.075),0 0 10px rgba(81,167,232,0.5)
+}
+
+input[type=submit]:hover {
+    border-color:#5CA941;
+    box-shadow:inset 0 1px 2px rgba(0,0,0,0.075),0 0 10px rgba(92,169,65,0.5)
+}
+
+input {
+    font: bold 17px Trebuchet MS;
+}
+
+button {
+    border: 1px solid #555;
+    cursor: pointer;
+    border-radius: 5px;
+    border-collapse: collapse;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+button:hover {
+    box-shadow: 0 2px 12px 0 #AAA;
+}

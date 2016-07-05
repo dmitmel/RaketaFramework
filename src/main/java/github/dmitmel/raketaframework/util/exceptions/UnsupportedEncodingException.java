@@ -3,7 +3,7 @@ package github.dmitmel.raketaframework.util.exceptions;
 /**
  * {@link java.io.UnsupportedEncodingException}
  */
-public class UnsupportedEncodingException extends RuntimeException {
+public class UnsupportedEncodingException extends IOException {
     public UnsupportedEncodingException() {
     }
 

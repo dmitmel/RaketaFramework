@@ -1,5 +1,7 @@
 package github.dmitmel.raketaframework.web.errors;
 
+import github.dmitmel.raketaframework.web.MIMETypes;
+
 /**
  * Factory for default responders. Before adding factory, all default responders had such structure:
  *
@@ -28,6 +30,9 @@ public class DefaultErrorResponderFactory {
     }
 
     public static ErrorResponder makeResponder() {
-        return (document, httpError) -> document.writeln(httpError.toString());
+        return (document, httpError) -> {
+            document.mimeType = MIMETypes.PLAIN_TEXT;
+            document.writeln(httpError.toString());
+        };
     }
 }

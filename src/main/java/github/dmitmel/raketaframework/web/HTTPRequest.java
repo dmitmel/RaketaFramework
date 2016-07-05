@@ -1,17 +1,11 @@
 package github.dmitmel.raketaframework.web;
 
+import java.io.ByteArrayOutputStream;
 import java.util.*;
 
 public class HTTPRequest extends HTTPMessage {
-    public static final String LINE_SEPARATOR = "\r\n";
-    public static final String EMPTY_BODY = "";
-    public static final Map<String, String> EMPTY_HEADERS = Collections.emptyMap();
-
     public final String method;
     public final URL url;
-    public final String protocol;
-    public final Map<String, String> headers;
-    public final String body;
 
     public HTTPRequest(String method, URL url, String protocol) {
         this(method, url, protocol, EMPTY_HEADERS);
@@ -21,11 +15,11 @@ public class HTTPRequest extends HTTPMessage {
         this(method, url, protocol, headers, EMPTY_BODY);
     }
 
-    public HTTPRequest(String method, URL url, String protocol, String body) {
+    public HTTPRequest(String method, URL url, String protocol, byte[] body) {
         this(method, url, protocol, EMPTY_HEADERS, body);
     }
 
-    public HTTPRequest(String method, URL url, String protocol, Map<String, String> headers, String body) {
+    public HTTPRequest(String method, URL url, String protocol, Map<String, String> headers, byte[] body) {
         super(protocol, headers, body);
 
         if (method.trim().isEmpty())
@@ -33,9 +27,6 @@ public class HTTPRequest extends HTTPMessage {
 
         this.method = method;
         this.url = Objects.requireNonNull(url);
-        this.protocol = protocol;
-        this.headers = headers;
-        this.body = body;
     }
 
 
@@ -64,23 +55,19 @@ public class HTTPRequest extends HTTPMessage {
 
         List<String> headersAndBodyLines = lines.subList(1, lines.size());
         Map<String, String> headers = new HashMap<>(0);
-        StringBuilder body = new StringBuilder(0);
+        ByteArrayOutputStream body = new ByteArrayOutputStream();
 
         HTTPMessage.parseHeadersAndBodyFromLines(headersAndBodyLines, body, headers);
 
-        return new HTTPRequest(method, url, protocol, headers, body.toString());
+        return new HTTPRequest(method, url, protocol, headers, body.toByteArray());
     }
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder(0);
+        return new String(getBytes());
+    }
 
-        builder.append(method).append(' ').append(url.toString()).append(' ').append(protocol)
-                .append(LINE_SEPARATOR);
-        for (Map.Entry<String, String> entry : headers.entrySet())
-            builder.append(entry.getKey()).append(": ").append(entry.getValue()).append(LINE_SEPARATOR);
-        builder.append(LINE_SEPARATOR).append(body);
-
-        return builder.toString();
+    public byte[] getBytes() {
+        return toByteArrayWithMainLine(String.format("%s %s %s", method, url, protocol));
     }
 }

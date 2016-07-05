@@ -1,6 +1,5 @@
 package github.dmitmel.raketaframework.web.server;
 
-import github.dmitmel.raketaframework.util.IterableUtils;
 import github.dmitmel.raketaframework.util.NetUtils;
 import github.dmitmel.raketaframework.util.ReflectionUtils;
 import github.dmitmel.raketaframework.util.exceptions.InvocationTargetException;
@@ -39,7 +38,7 @@ class ClientHandler implements Runnable {
     private int responseStatusCode;
     private String responseStatusDescription;
     private HashMap<String, String> responseHeaders = new HashMap<>(0);
-    private String responseBody;
+    private byte[] responseBody;
 
     private OutputStream outputStream;
     private InputStream inputStream;
@@ -90,7 +89,7 @@ class ClientHandler implements Runnable {
             HTTPResponse outgoingMessage = new HTTPResponse("HTTP/1.1", responseStatusCode, responseStatusDescription,
                     responseHeaders, responseBody);
 
-            outputStream.write(outgoingMessage.toString().getBytes());
+            outputStream.write(outgoingMessage.getBytes());
         } catch (IOException e) {
             server.logger.exception(e);
         } finally {
@@ -134,7 +133,7 @@ class ClientHandler implements Runnable {
 
     private void addAllowedMethodsToResponseHeadersFromHandlerData(URLMapping.HandlerData currentHandlerData) {
         Set<String> supportedMethodsNames = currentHandlerData.supportedMethods.keySet();
-        responseHeaders.put("Allow", IterableUtils.join(supportedMethodsNames, ", "));
+        responseHeaders.put("Allow", String.join(", ", supportedMethodsNames));
     }
 
     private void addRedirectDataToResponse(String targetUrl) {
@@ -149,10 +148,10 @@ class ClientHandler implements Runnable {
 
         responseStatusCode = httpError.getCode();
         responseStatusDescription = httpError.getDescription();
-        responseHeaders.put("Content-Type", errorDocument.getMimeType());
+        responseHeaders.put("Content-Type", errorDocument.mimeType);
         responseHeaders.put("Connection", "close");
         responseHeaders.put("Pragma", "no-cache");
-        responseBody = errorDocument.getData();
+        responseBody = errorDocument.getBytes();
     }
 
     private void executeHandleMethodFromData(URLMapping.HandlerData currentHandlerData) {
@@ -172,10 +171,10 @@ class ClientHandler implements Runnable {
 
             responseStatusCode = 200;
             responseStatusDescription = "OK";
-            responseHeaders.put("Content-Length", Integer.toString(document.getData().length()));
-            responseHeaders.put("Content-Type", document.getMimeType());
+            responseHeaders.put("Content-Length", Integer.toString(document.getBytes().length));
+            responseHeaders.put("Content-Type", document.mimeType);
             responseHeaders.put("Connection", "close");
-            responseBody = document.getData();
+            responseBody = document.getBytes();
         } catch (InvocationTargetException e) {
             Throwable cause = e.getCause();
 

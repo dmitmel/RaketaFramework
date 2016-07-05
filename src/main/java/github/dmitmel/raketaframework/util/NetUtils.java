@@ -36,7 +36,7 @@ public class NetUtils {
             throw github.dmitmel.raketaframework.util.exceptions.SocketException.extractFrom(e);
         }
 
-        throw new CurrentIpCannotBeFoundException();
+        throw new SiteLocalIPCannotBeFoundException();
     }
 
     public static boolean isAddressSiteLocal(InetAddress address) {

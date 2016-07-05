@@ -1,5 +1,6 @@
 package github.dmitmel.raketaframework.web;
 
+import java.io.ByteArrayOutputStream;
 import java.util.*;
 
 public class HTTPResponse extends HTTPMessage {
@@ -15,12 +16,12 @@ public class HTTPResponse extends HTTPMessage {
         this(protocol, statusCode, statusDescription, headers, EMPTY_BODY);
     }
 
-    public HTTPResponse(String protocol, int statusCode, String statusDescription, String body) {
+    public HTTPResponse(String protocol, int statusCode, String statusDescription, byte[] body) {
         this(protocol, statusCode, statusDescription, EMPTY_HEADERS, body);
     }
 
     public HTTPResponse(String protocol, int statusCode, String statusDescription, Map<String, String> headers,
-                        String body) {
+                        byte[] body) {
         super(protocol, headers, body);
 
         if (protocol.trim().isEmpty())
@@ -56,24 +57,19 @@ public class HTTPResponse extends HTTPMessage {
 
         List<String> headersAndBodyLines = lines.subList(1, lines.size());
         Map<String, String> headers = new HashMap<>(0);
-        StringBuilder body = new StringBuilder(0);
+        ByteArrayOutputStream body = new ByteArrayOutputStream();
 
         HTTPMessage.parseHeadersAndBodyFromLines(headersAndBodyLines, body, headers);
 
-        return new HTTPResponse(protocol, statusCode, statusDescription, headers, body.toString());
+        return new HTTPResponse(protocol, statusCode, statusDescription, headers, body.toByteArray());
     }
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder(0);
+        return new String(getBytes());
+    }
 
-        builder.append(protocol).append(' ').append(statusCode).append(' ').append(statusDescription)
-                .append(LINE_SEPARATOR);
-        for (Map.Entry<String, String> entry : headers.entrySet())
-            builder.append(entry.getKey()).append(": ").append(entry.getValue()).append(LINE_SEPARATOR);
-        builder.append(LINE_SEPARATOR);
-        builder.append(body);
-
-        return builder.toString();
+    public byte[] getBytes() {
+        return toByteArrayWithMainLine(String.format("%s %s %s", protocol, statusCode, statusDescription));
     }
 }

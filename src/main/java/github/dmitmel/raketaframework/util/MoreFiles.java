@@ -1,6 +1,9 @@
 package github.dmitmel.raketaframework.util;
 
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,64 +75,34 @@ public class MoreFiles {
                 }
             }
 
-            return IterableUtils.join(realPathParts, StringUtils.EMPTY_STRING);
+            return String.join(StringUtils.EMPTY_STRING, realPathParts);
         } catch (ClassNotFoundException e) {
             // Isn't reachable in this case
             throw new RuntimeException();
         }
     }
 
-    public static String load(String path) {
-        StringBuilder fileData = new StringBuilder(0);
-        File file = new File(path);
-
-        FileReader fileReader = null;
-        BufferedReader buffer = null;
-
+    public static String read(String path) {
+        return new String(readBytes(path));
+    }
+    public static byte[] readBytes(String path) {
         try {
-            fileReader = new FileReader(file);
-            buffer = new BufferedReader(fileReader);
-
-            for (String line = StringUtils.EMPTY_STRING; line != null; line = buffer.readLine())
-                fileData.append(line).append('\n');
-        } catch (java.io.IOException e) {
-             throw new github.dmitmel.raketaframework.util.exceptions.IOException(e);
-        } finally {
-            try {
-                if (fileReader != null)
-                    fileReader.close();
-                if (buffer != null)
-                    buffer.close();
-            } catch (java.io.IOException e) {
-                throw new github.dmitmel.raketaframework.util.exceptions.IOException(e);
-            }
+            BufferedInputStream inputStream = new BufferedInputStream(new FileInputStream(path));
+            return StreamUtils.readAll(inputStream);
+        } catch (java.io.FileNotFoundException e) {
+            throw github.dmitmel.raketaframework.util.exceptions.FileNotFoundException.extractFrom(e);
         }
-
-        return fileData.toString();
     }
 
-    public static void write(String path, String lines) {
-        File file = new File(path);
-        FileWriter fileWriter = null;
-        BufferedWriter buffer = null;
-
+    public static void writeBytes(String path, byte[] bytes) {
         try {
-            fileWriter = new FileWriter(file);
-            buffer = new BufferedWriter(fileWriter);
-            buffer.write(lines);
-        } catch (java.io.IOException e) {
-            throw new github.dmitmel.raketaframework.util.exceptions.IOException(e);
-        } finally {
-            try {
-                if (buffer != null) {
-                    buffer.flush();
-                    buffer.close();
-                }
-                if (fileWriter != null)
-                    fileWriter.close();
-            } catch (java.io.IOException e) {
-                throw new github.dmitmel.raketaframework.util.exceptions.IOException(e);
-            }
+            BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(path));
+            StreamUtils.writeAll(bytes, outputStream);
+        } catch (java.io.FileNotFoundException e) {
+            throw github.dmitmel.raketaframework.util.exceptions.FileNotFoundException.extractFrom(e);
         }
+    }
+    public static void write(String path, String lines) {
+        writeBytes(path, lines.getBytes());
     }
 }
