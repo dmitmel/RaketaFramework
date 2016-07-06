@@ -4,11 +4,11 @@ package github.dmitmel.raketaframework.util.exceptions;
  * {@link java.lang.reflect.InvocationTargetException}
  */
 public class InvocationTargetException extends ReflectiveOperationException {
-    public InvocationTargetException(String message) {
-        super(message);
+    public InvocationTargetException() {
     }
 
-    public InvocationTargetException() {
+    public InvocationTargetException(String message) {
+        super(message);
     }
 
     public InvocationTargetException(String message, Throwable cause) {

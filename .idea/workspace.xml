@@ -2,34 +2,45 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fdcbb719-ac34-4825-a5f3-1b28074fe15e" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test-Server/build/main/classes/goodies/css/code-util.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test-Server/build/main/classes/goodies/css/glowing-style.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test-Server/build/main/classes/goodies/css/spoilers.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test-Server/build/main/classes/goodies/js-libs/jquery.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test-Server/build/main/classes/greet-form.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test-Server/build/main/classes/index-js.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test-Server/build/main/classes/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/main/classes/github/dmitmel/raketaframework/util/CurrentIpCannotBeFoundException.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/main/classes/github/dmitmel/raketaframework/util/IterableUtils.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/main/classes/github/dmitmel/raketaframework/util/Pair.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/main/classes/github/dmitmel/raketaframework/util/StringOutputStream.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/main/classes/github/dmitmel/raketaframework/util/Terminal$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/main/classes/github/dmitmel/raketaframework/util/Terminal$InterruptedProcess.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/main/classes/github/dmitmel/raketaframework/util/Terminal$NullProcess.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/main/classes/github/dmitmel/raketaframework/util/Terminal.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/test/classes/TestsForHttpRequestsFromStrings.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/test/classes/TestsForHttpResponsesFromStrings.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/test/classes/TestsForStringsFromHttpRequests.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/test/classes/TestsForStringsFromHttpResponses.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/test/classes/TestsForStringsFromUrls.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/test/classes/TestsForUrlsFromStrings.class" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" afterPath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/dmitriy.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/dmitriy.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/mime_util_2_1_3.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/slf4j_1_7.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Sources-Generator/runtime-exceptions.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Sources-Generator/runtime-exceptions.rb" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Raketa_Framework_1_0.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/hamcrest_core_1_3.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/gen/java/github/dmitmel/raketaframework/web/errors/Error400.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/gen/java/github/dmitmel/raketaframework/web/errors/Error404.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/gen/java/github/dmitmel/raketaframework/web/errors/Error405.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/gen/java/github/dmitmel/raketaframework/web/errors/Error500.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/gen/java/github/dmitmel/raketaframework/web/errors/Error501.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/util/exceptions/FileNotFoundException.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/util/exceptions/IOException.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/util/exceptions/InvocationTargetException.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/util/exceptions/ReflectiveOperationException.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/util/exceptions/SocketException.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/util/exceptions/URISyntaxException.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/util/exceptions/UnknownHostException.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/util/exceptions/UnsupportedEncodingException.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Test-Server/build/jar/Test-Server-1.0-sources.zip" afterPath="$PROJECT_DIR$/Test-Server/build/jar/Test-Server-1.0-sources.zip" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Test-Server/build/jar/Test-Server-1.0.jar" afterPath="$PROJECT_DIR$/Test-Server/build/jar/Test-Server-1.0.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/jar/Raketa-Framework-1.0-sources.zip" afterPath="$PROJECT_DIR$/build/jar/Raketa-Framework-1.0-sources.zip" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/jar/Raketa-Framework-1.0.jar" afterPath="$PROJECT_DIR$/build/jar/Raketa-Framework-1.0.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/main/classes/github/dmitmel/raketaframework/Version.class" afterPath="$PROJECT_DIR$/build/main/classes/github/dmitmel/raketaframework/Version.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/main/classes/github/dmitmel/raketaframework/util/exceptions/FileNotFoundException.class" afterPath="$PROJECT_DIR$/build/main/classes/github/dmitmel/raketaframework/util/exceptions/FileNotFoundException.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/main/classes/github/dmitmel/raketaframework/util/exceptions/IOException.class" afterPath="$PROJECT_DIR$/build/main/classes/github/dmitmel/raketaframework/util/exceptions/IOException.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/main/classes/github/dmitmel/raketaframework/util/exceptions/InvocationTargetException.class" afterPath="$PROJECT_DIR$/build/main/classes/github/dmitmel/raketaframework/util/exceptions/InvocationTargetException.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/main/classes/github/dmitmel/raketaframework/web/server/ClientHandler.class" afterPath="$PROJECT_DIR$/build/main/classes/github/dmitmel/raketaframework/web/server/ClientHandler.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/hamcrest_core_1_3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/hamcrest_core_1_3.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/junit_4_12.xml" afterPath="$PROJECT_DIR$/.idea/libraries/junit_4_12.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RaketaFramework.iml" afterPath="$PROJECT_DIR$/RaketaFramework.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Sources-Generator/Sources-Generator.iml" afterPath="$PROJECT_DIR$/Sources-Generator/Sources-Generator.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Sources-Generator/http-errors.rb" afterPath="$PROJECT_DIR$/Sources-Generator/http-errors.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Sources-Generator/main.rb" afterPath="$PROJECT_DIR$/Sources-Generator/main.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Test-Server/Test-Server.iml" afterPath="$PROJECT_DIR$/Test-Server/Test-Server.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.xml" afterPath="$PROJECT_DIR$/build.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/Version.java" afterPath="$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/Version.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/web/server/ClientHandler.java" afterPath="$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/web/server/ClientHandler.java" />
     </list>
     <ignored path="Jonnect-Framework.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -44,7 +55,7 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/RaketaFramework@Generate_sources.coverage" NAME="Generate sources Coverage Results" MODIFIED="1467747669339" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Sources-Generator" />
+    <SUITE FILE_PATH="coverage/RaketaFramework@Generate_sources.coverage" NAME="Generate sources Coverage Results" MODIFIED="1467777665492" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Sources-Generator" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -87,10 +98,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/build/jar/Raketa-Framework-1.0-sources.zip!/github/dmitmel/raketaframework/web/MIMETypes.java" />
-        <option value="$PROJECT_DIR$/xml.ka" />
-        <option value="$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/util/Image.java" />
-        <option value="$PROJECT_DIR$/build/jar/Raketa-Framework-1.0-sources.zip!/github/dmitmel/raketaframework/util/MoreFiles.java" />
         <option value="$PROJECT_DIR$/Test-Server/resources/index.html" />
         <option value="$PROJECT_DIR$/Test-Server/resources/greet-form.html" />
         <option value="$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/web/handle/RedirectingThrowable.java" />
@@ -129,15 +136,19 @@
         <option value="$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/util/Pair.java" />
         <option value="$PROJECT_DIR$/Sources-Generator/utils.rb" />
         <option value="$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/web/errors/DefaultErrorResponderFactory.java" />
-        <option value="$PROJECT_DIR$/build.xml" />
         <option value="$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/web/handle/WebFormData.java" />
         <option value="$PROJECT_DIR$/src/test/java/TestsForStringsFromHttpRequests.java" />
         <option value="$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/web/HTTPMessage.java" />
         <option value="$PROJECT_DIR$/src/test/java/StringsFromHttpRequests.java" />
         <option value="$PROJECT_DIR$/src/test/java/StringsFromHttpResponses.java" />
-        <option value="$PROJECT_DIR$/Sources-Generator/http-errors.rb" />
-        <option value="$PROJECT_DIR$/Sources-Generator/main.rb" />
+        <option value="$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/Version.java" />
         <option value="$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/web/server/ClientHandler.java" />
+        <option value="$PROJECT_DIR$/Sources-Generator/main.rb" />
+        <option value="$PROJECT_DIR$/Sources-Generator/http-errors.rb" />
+        <option value="$PROJECT_DIR$/Sources-Generator/runtime-exceptions.json" />
+        <option value="$PROJECT_DIR$/Sources-Generator/runtime-exceptions.rb" />
+        <option value="$PROJECT_DIR$/src/gen/java/github/dmitmel/raketaframework/util/exceptions/FileNotFoundException.java" />
+        <option value="$PROJECT_DIR$/build.xml" />
       </list>
     </option>
   </component>
@@ -291,7 +302,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
+              <option name="myItemId" value="util" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -321,39 +332,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
+              <option name="myItemId" value="util" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="server" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RaketaFramework" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RaketaFramework" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Sources-Generator" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RaketaFramework" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RaketaFramework" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value=".idea" />
+              <option name="myItemId" value="exceptions" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -366,8 +349,8 @@
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.XML" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/build/jar/Raketa-Framework-1.0.jar!/" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/libs/mime-util-2.1.3-sources.jar!/" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.14848763" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="extract.method.default.visibility" value="private" />
@@ -378,6 +361,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js-jscs-nodeInterpreter" value="/usr/bin/node" />
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/sudo ls.txt" />
+    <property name="two.files.diff.last.used.folder" value="$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/util/exceptions" />
   </component>
   <component name="RecentsManager">
     <key name="ExtractSuperBase.RECENT_KEYS">
@@ -1250,7 +1234,7 @@
       <workItem from="1467539171870" duration="9966000" />
       <workItem from="1467559205138" duration="23877000" />
       <workItem from="1467654169383" duration="23636000" />
-      <workItem from="1467714116130" duration="9792000" />
+      <workItem from="1467714116130" duration="12655000" />
     </task>
     <servers />
   </component>
@@ -1287,7 +1271,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="78759000" />
+    <option name="totallyTimeSpent" value="81622000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="1023" extended-state="6" />
@@ -1296,17 +1280,17 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="SBT Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32832617" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32760474" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32867885" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294621" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32867885" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32760474" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32760474" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32330826" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21393643" sideWeight="0.49624062" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21393643" sideWeight="0.49624062" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24938875" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294621" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32832617" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1335,14 +1319,6 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/web/server/ClientHandler.java</url>
-          <line>176</line>
-          <properties />
-          <option name="timeStamp" value="65" />
-        </line-breakpoint>
-      </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
@@ -1384,119 +1360,6 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_92.jdk/Contents/Home/src.zip!/java/io/ByteArrayOutputStream.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="38" column="38" selection-start-line="38" selection-start-column="38" selection-end-line="38" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_92.jdk/Contents/Home/src.zip!/java/util/List.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="301">
-          <caret line="110" column="17" selection-start-line="110" selection-start-column="17" selection-end-line="110" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/web/HTTPResponse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="750">
-          <caret line="74" column="107" selection-start-line="74" selection-start-column="8" selection-end-line="74" selection-end-column="107" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/web/HTTPRequest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="37" selection-start-line="2" selection-start-column="37" selection-end-line="2" selection-end-column="37" />
-          <folding>
-            <element signature="e#2139#2140#0" expanded="false" />
-            <element signature="e#2184#2185#0" expanded="false" />
-            <element signature="e#2216#2217#0" expanded="false" />
-            <element signature="e#2312#2313#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/web/HTTPDateFormatter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/web/URLEncoder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/util/IterableUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="31" selection-start-line="5" selection-start-column="31" selection-end-line="5" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/util/StringOutputStream.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/util/Terminal.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/util/StreamUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/util/StringUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/util/SiteLocalIPCannotBeFoundException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_92.jdk/Contents/Home/src.zip!/java/lang/IllegalAccessException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="58" column="13" selection-start-line="58" selection-start-column="13" selection-end-line="58" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_92.jdk/Contents/Home/src.zip!/java/lang/reflect/AccessibleObject.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="301">
@@ -1716,14 +1579,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="54" selection-start-line="3" selection-start-column="54" selection-end-line="3" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/web/HTTPMessage.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="528">
@@ -1758,22 +1613,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gen/java/github/dmitmel/raketaframework/web/errors/Error400.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Sources-Generator/main.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="29" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/web/server/Server.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -1787,20 +1626,166 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/ant.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/Version.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="7" selection-start-line="0" selection-start-column="7" selection-end-line="0" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/web/server/ClientHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="91" column="48" selection-start-line="91" selection-start-column="48" selection-end-line="91" selection-end-column="48" />
+        <state relative-caret-position="2380">
+          <caret line="142" column="17" selection-start-line="142" selection-start-column="17" selection-end-line="142" selection-end-column="17" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file:///Library/Ruby/Gems/2.0.0/gems/json-1.8.3/lib/json/common.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="453">
+          <caret line="153" column="6" selection-start-line="153" selection-start-column="6" selection-end-line="153" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Sources-Generator/http-errors.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+        <state relative-caret-position="646">
+          <caret line="38" column="30" selection-start-line="38" selection-start-column="30" selection-end-line="38" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/util/exceptions/IOException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="13" selection-start-line="0" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gen/java/github/dmitmel/raketaframework/web/errors/Error400.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Sources-Generator/main.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="26" selection-start-line="12" selection-start-column="26" selection-end-line="12" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gen/java/github/dmitmel/raketaframework/util/exceptions/IOException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/util/exceptions/FileNotFoundException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/util/exceptions/ReflectiveOperationException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/util/exceptions/InvocationTargetException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="56" selection-start-line="5" selection-start-column="56" selection-end-line="5" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/util/exceptions/URISyntaxException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://JAVA/github.dmitmel.raketaframework.util.exceptions">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement>github.dmitmel.raketaframework.util.exceptions</OriginalElement>
+          <nodes>
+            <node x="" y="">github.dmitmel.raketaframework.util.exceptions.InvocationTargetException</node>
+            <node x="" y="">github.dmitmel.raketaframework.util.exceptions.IOException</node>
+            <node x="" y="">github.dmitmel.raketaframework.util.exceptions.UnsupportedEncodingException</node>
+            <node x="" y="">github.dmitmel.raketaframework.util.exceptions.UnknownHostException</node>
+            <node x="" y="">github.dmitmel.raketaframework.util.exceptions.SocketException</node>
+            <node x="" y="">github.dmitmel.raketaframework.util.exceptions.ReflectiveOperationException</node>
+            <node x="" y="">github.dmitmel.raketaframework.util.exceptions.package-info</node>
+            <node x="" y="">github.dmitmel.raketaframework.util.exceptions.URISyntaxException</node>
+            <node x="" y="">github.dmitmel.raketaframework.util.exceptions.FileNotFoundException</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="1.0" x="328.5" y="210.0" />
+          <SelectedNodes />
+          <Categories />
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gen/java/github/dmitmel/raketaframework/util/exceptions/FileNotFoundException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-381">
+          <caret line="32" column="55" selection-start-line="32" selection-start-column="55" selection-end-line="32" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Sources-Generator/runtime-exceptions.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="359">
+          <caret line="24" column="5" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Sources-Generator/runtime-exceptions.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="30" column="32" selection-start-line="30" selection-start-column="32" selection-end-line="30" selection-end-column="32" />
           <folding />
         </state>
       </provider>
@@ -1858,12 +1843,11 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>RaketaFramework</last-edited>
+          <last-edited>Test-Server</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
                 <option value="0.2" />
-                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>
@@ -1883,7 +1867,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>slf4j-1.7.21</last-edited>
+          <last-edited>mime-util-2.1.3</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

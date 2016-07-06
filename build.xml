@@ -20,7 +20,7 @@
         <format property="build.date" pattern="dd/MMMM/yyyy hh:mm:ss" />
     </tstamp>
 
-    <target name="build" depends="clear, compile, jars, sources">
+    <target name="build" depends="clear, gen-sources, compile, test:compile, jars, pack-sources">
         <copydir src="${dir.test.resources}" dest="${dir.build.root}/test/resources" />
     </target>
 
@@ -28,10 +28,14 @@
         <delete dir="${dir.build.root}" />
     </target>
 
+    <target name="gen-sources">
+        <exec executable="ruby">
+            <arg value="./Sources-Generator/main.rb" />
+        </exec>
+    </target>
+
     <target name="compile">
         <mkdir dir="${dir.main.bin}" />
-        <mkdir dir="${dir.test.bin}" />
-
         <javac srcdir="${dir.main.src}" destdir="${dir.main.bin}" debug="true" includeantruntime="yes">
             <src location="${dir.gen}" />
 
@@ -39,6 +43,10 @@
             <classpath location="./libs/slf4j-1.7.21/slf4j-simple-1.7.21.jar" />
             <classpath location="./libs/slf4j-1.7.21/slf4j-api-1.7.21.jar" />
         </javac>
+    </target>
+
+    <target name="test:compile">
+        <mkdir dir="${dir.test.bin}" />
         <javac srcdir="${dir.test.src}" destdir="${dir.test.bin}" debug="true" includeantruntime="yes">
             <classpath location="libs/hamcrest-core-1.3.jar" />
             <classpath location="libs/junit-4.12.jar" />
@@ -59,7 +67,7 @@
         </jar>
     </target>
 
-    <target name="sources">
+    <target name="pack-sources">
         <jar destfile="${dir.main.jar}/${product.name}-${product.version}-sources.zip" compress="true"
              basedir="${dir.main.src}" encoding="UTF-8">
             <manifest>

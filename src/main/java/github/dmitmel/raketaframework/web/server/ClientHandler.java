@@ -1,20 +1,10 @@
 package github.dmitmel.raketaframework.web.server;
 
-import github.dmitmel.raketaframework.util.NetUtils;
-import github.dmitmel.raketaframework.util.ReflectionUtils;
-import github.dmitmel.raketaframework.util.exceptions.InvocationTargetException;
-import github.dmitmel.raketaframework.web.HTTPDateFormatter;
-import github.dmitmel.raketaframework.web.HTTPRequest;
-import github.dmitmel.raketaframework.web.HTTPResponse;
-import github.dmitmel.raketaframework.web.URL;
-import github.dmitmel.raketaframework.web.errors.Error404;
-import github.dmitmel.raketaframework.web.errors.Error405;
-import github.dmitmel.raketaframework.web.errors.Error500;
-import github.dmitmel.raketaframework.web.errors.HTTPError;
-import github.dmitmel.raketaframework.web.handle.Document;
-import github.dmitmel.raketaframework.web.handle.RedirectionThrowable;
-import github.dmitmel.raketaframework.web.handle.RequestData;
-import github.dmitmel.raketaframework.web.handle.WebFormData;
+import github.dmitmel.raketaframework.util.*;
+import github.dmitmel.raketaframework.util.exceptions.*;
+import github.dmitmel.raketaframework.web.*;
+import github.dmitmel.raketaframework.web.errors.*;
+import github.dmitmel.raketaframework.web.handle.*;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -60,15 +50,11 @@ class ClientHandler implements Runnable {
 
             if (currentHandlerData == null) {
                 addErrorDataToResponse(new Error404());
-
             } else if (!currentHandlerData.supportsMethod(incomingMessage.method)) {
                 addErrorDataToResponse(new Error405());
-
                 addAllowedMethodsToResponseHeadersFromHandlerData(currentHandlerData);
-
             } else if (incomingMessage.method.equals("OPTIONS")) {
                 addAllowedMethodsToResponseHeadersFromHandlerData(currentHandlerData);
-
             } else {
                 executeHandleMethodFromData(currentHandlerData);
             }

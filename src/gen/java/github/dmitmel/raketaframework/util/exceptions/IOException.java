@@ -4,11 +4,11 @@ package github.dmitmel.raketaframework.util.exceptions;
  * {@link java.io.IOException}
  */
 public class IOException extends RuntimeException {
-    public IOException(String message) {
-        super(message);
+    public IOException() {
     }
 
-    public IOException() {
+    public IOException(String message) {
+        super(message);
     }
 
     public IOException(String message, Throwable cause) {

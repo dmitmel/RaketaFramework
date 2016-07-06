@@ -4,11 +4,11 @@ package github.dmitmel.raketaframework.util.exceptions;
  * {@link java.io.FileNotFoundException}
  */
 public class FileNotFoundException extends IOException {
-    public FileNotFoundException(String message) {
-        super(message);
+    public FileNotFoundException() {
     }
 
-    public FileNotFoundException() {
+    public FileNotFoundException(String message) {
+        super(message);
     }
 
     public FileNotFoundException(String message, Throwable cause) {

@@ -1,9 +1,7 @@
 package github.dmitmel.raketaframework;
 
 public class Version {
-    private Version() {
-
-    }
+    private Version() {}
 
     public static String id() {
         return "1.0.0";

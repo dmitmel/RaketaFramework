@@ -9,10 +9,10 @@ module HTTPErrors
             500 => 'Internal Server Error',
             501 => 'Not Implemented'
         }
-        ERRORS_PACKAGE_DIR = real_path "#{GEN_DIR}/github/dmitmel/raketaframework/web/errors"
+        PACKAGE_DIR = real_path "#{GEN_DIR}/github/dmitmel/raketaframework/web/errors"
 
         def create_packages
-            FileUtils.mkdir_p(ERRORS_PACKAGE_DIR)
+            FileUtils.mkdir_p(PACKAGE_DIR)
         end
 
         def create_files
@@ -36,7 +36,7 @@ public class Error#{status} extends HTTPError {
     }
 }
 JAVA
-                File.write("#{ERRORS_PACKAGE_DIR}/Error#{status}.java", content)
+                File.write("#{PACKAGE_DIR}/Error#{status}.java", content)
             end
         end
     end

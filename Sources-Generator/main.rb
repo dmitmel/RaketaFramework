@@ -1,6 +1,7 @@
 require 'fileutils'
 require_relative 'utils'
 require_relative 'http-errors'
+require_relative 'runtime-exceptions'
 
 def clear_gen_dir
     FileUtils.rm_r GEN_DIR if File.exists? GEN_DIR
@@ -9,3 +10,4 @@ end
 
 clear_gen_dir
 HTTPErrors.generate
+RuntimeExceptions.generate

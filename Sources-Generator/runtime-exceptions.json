@@ -1,0 +1,33 @@
+{
+    "IOException": {
+        "jdk-package": "java.io"
+    },
+    "FileNotFoundException": {
+        "jdk-package": "java.io",
+        "parent": "IOException"
+    },
+    "UnsupportedEncodingException": {
+        "jdk-package": "java.io",
+        "parent": "IOException"
+    },
+    "SocketException": {
+        "jdk-package": "java.net",
+        "parent": "IOException"
+    },
+    "UnknownHostException": {
+        "jdk-package": "java.net",
+        "parent": "SocketException"
+    },
+
+    "ReflectiveOperationException": {
+        "jdk-package": "java.lang"
+    },
+    "InvocationTargetException": {
+        "jdk-package": "java.lang.reflect",
+        "parent": "ReflectiveOperationException"
+    },
+
+    "URISyntaxException": {
+        "jdk-package": "java.net"
+    }
+}
