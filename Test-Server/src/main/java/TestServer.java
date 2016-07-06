@@ -18,7 +18,7 @@ public class TestServer {
     @RequestURLPattern("/main")
     private static class Main implements RequestHandler {
         @RequestMethod("GET")
-        public void GET(RequestData requestData, Document document) {
+        public String GET(RequestData requestData) {
             throw new RedirectionThrowable("/load/index.html");
         }
     }
@@ -26,7 +26,8 @@ public class TestServer {
     @RequestURLPattern("/hello")
     private static class Hello implements RequestHandler {
         @RequestMethod("GET")
-        public void GET(RequestData requestData, Document document) {
+        public Document GET(RequestData requestData) {
+            Document document = new Document();
             document.mimeType = MIMETypes.HTML_DOCUMENT;
 
             String name = requestData.getUrlParamOrElse("name", "World");
@@ -44,17 +45,17 @@ public class TestServer {
             }
 
             document.write("\r\n\t\t</tt>\r\n\t</body>\r\n</html>");
+
+            return document;
         }
     }
 
     @RequestURLPattern("/load/(.+)")
     private static class LoadFile implements RequestHandler {
         @RequestMethod("GET")
-        public void GET(RequestData requestData, Document document) {
+        public byte[] GET(RequestData requestData) {
             try {
-                byte[] bytes = MoreFiles.readBytes(MoreFiles.realPath("../resources/" + requestData.getMatcherGroup(0)));
-                document.mimeType = MIMETypes.getContentType(requestData.getMatcherGroup(0));
-                document.write(bytes);
+                return MoreFiles.readBytes(MoreFiles.realPath("../resources/" + requestData.getMatcherGroup(0)));
             } catch (FileNotFoundException e) {
                 throw new Error404();
             }
@@ -64,16 +65,16 @@ public class TestServer {
     @RequestURLPattern("/greet")
     private static class GreetForm implements RequestHandler {
         @RequestMethod("GET")
-        public void GET(RequestData requestData, Document document) {
+        public String  GET(RequestData requestData) {
             throw new RedirectionThrowable("/load/greet-form.html");
         }
 
         @RequestMethod("POST")
-        public void POST(WebFormData form, Document document) {
+        public String POST(WebFormData form) {
             if (form.getFormParam("name") == null) throw new Error404();
             if (form.getFormParam("greet") == null) throw new Error404();
 
-            document.writeF("%s %s!", form.getFormParam("greet"), form.getFormParam("name"));
+            return String.format("%s %s!", form.getFormParam("greet"), form.getFormParam("name"));
         }
     }
 }

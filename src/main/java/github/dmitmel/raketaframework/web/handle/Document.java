@@ -18,13 +18,14 @@ public class Document {
     public Document() {}
 
     public void write(byte[] newData) {
-        for (byte b : newData) {
-            byte[] savedData = Arrays.copyOf(bytes, bytes.length);
-            bytes = new byte[savedData.length + 1];
-            // Copy all elements of savedData, starting from index 0, to starting of bytes
-            System.arraycopy(savedData, 0, bytes, 0, savedData.length);
-            bytes[savedData.length] = b;
-        }
+        byte[] savedData = Arrays.copyOf(bytes, bytes.length);
+        bytes = new byte[savedData.length + newData.length];
+
+        // Copy all elements of savedData, starting from index 0, to starting of bytes
+        System.arraycopy(savedData, 0, bytes, 0, savedData.length);
+
+        // Copy all elements of newData, starting from index 0, after savedData
+        System.arraycopy(newData, 0, bytes, savedData.length, newData.length);
     }
 
     public void write(String newData) { write(newData.getBytes()); }

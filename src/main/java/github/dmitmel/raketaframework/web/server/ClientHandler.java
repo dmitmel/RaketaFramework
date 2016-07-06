@@ -13,7 +13,7 @@ import java.lang.reflect.Method;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.text.DateFormat;
-import java.util.Date;
+import java.util.*;
 import java.util.HashMap;
 import java.util.Set;
 import java.util.TimeZone;
@@ -126,6 +126,7 @@ class ClientHandler implements Runnable {
         responseStatusCode = 303;
         responseStatusDescription = "See Other";
         responseHeaders.put("Location", targetUrl);
+        responseBody = HTTPMessage.EMPTY_BODY;
     }
 
     private void addErrorDataToResponse(HTTPError httpError) {
@@ -142,25 +143,44 @@ class ClientHandler implements Runnable {
 
     private void executeHandleMethodFromData(URLMapping.HandlerData currentHandlerData) {
         try {
-            Document document = new Document();
+            Object result;
             RequestData requestData = new RequestData(urlPatternMatcher, incomingMessage);
             Method handleMethod =
                     currentHandlerData.supportedMethods.get(incomingMessage.method);
 
             if (requestData.isForm()) {
-                ReflectionUtils.invokeMethodInAnyCase(handleMethod, currentHandlerData.requestHandlerInstance,
-                        WebFormData.castFrom(requestData), document);
+                result = ReflectionUtils.invokeMethodInAnyCase(handleMethod, currentHandlerData.requestHandlerInstance,
+                        WebFormData.castFrom(requestData));
             } else {
-                ReflectionUtils.invokeMethodInAnyCase(handleMethod, currentHandlerData.requestHandlerInstance,
-                        requestData, document);
+                result = ReflectionUtils.invokeMethodInAnyCase(handleMethod, currentHandlerData.requestHandlerInstance,
+                        requestData);
+            }
+
+            if (result instanceof String) {
+                String string = (String) result;
+                responseHeaders.put("Content-Length", Integer.toString(string.length()));
+                responseHeaders.put("Content-Type", MIMETypes.getContentType(string.getBytes()));
+                responseBody = string.getBytes();
+            } else if (result instanceof byte[]) {
+                byte[] bytes = (byte[]) result;
+                responseHeaders.put("Content-Length", Integer.toString(bytes.length));
+                responseHeaders.put("Content-Type", MIMETypes.getContentType(bytes));
+                responseBody = bytes;
+            } else if (result instanceof Document) {
+                Document document = (Document) result;
+                responseHeaders.put("Content-Length", Integer.toString(document.getBytes().length));
+                responseHeaders.put("Content-Type", MIMETypes.getContentType(document.getBytes()));
+                responseBody = document.getBytes();
+            } else if (result instanceof StringBuilder) {
+                StringBuilder stringBuilder = (StringBuilder) result;
+                responseHeaders.put("Content-Length", Integer.toString(stringBuilder.length()));
+                responseHeaders.put("Content-Type", MIMETypes.getContentType(stringBuilder.toString().getBytes()));
+                responseBody = stringBuilder.toString().getBytes();
             }
 
             responseStatusCode = 200;
             responseStatusDescription = "OK";
-            responseHeaders.put("Content-Length", Integer.toString(document.getBytes().length));
-            responseHeaders.put("Content-Type", document.mimeType);
             responseHeaders.put("Connection", "close");
-            responseBody = document.getBytes();
         } catch (InvocationTargetException e) {
             Throwable cause = e.getCause();
 

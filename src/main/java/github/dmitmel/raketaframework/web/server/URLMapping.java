@@ -1,16 +1,19 @@
 package github.dmitmel.raketaframework.web.server;
 
 import github.dmitmel.raketaframework.util.AnnotationNotFoundException;
-import github.dmitmel.raketaframework.web.handle.NoHandleMethodsInHandlerException;
-import github.dmitmel.raketaframework.web.handle.RequestHandler;
-import github.dmitmel.raketaframework.web.handle.RequestMethod;
-import github.dmitmel.raketaframework.web.handle.RequestURLPattern;
+import github.dmitmel.raketaframework.util.InvalidMethodSignatureException;
+import github.dmitmel.raketaframework.web.handle.*;
 
 import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 import java.util.*;
 import java.util.regex.Pattern;
 
 public class URLMapping implements Iterable<URLMapping.HandlerData> {
+    public static final List<Class<?>> VALID_HANDLER_METHOD_RETURN_TYPES = Arrays.asList(
+            byte[].class, String.class, Document.class, StringBuilder.class
+    );
+
     private List<HandlerData> urls = new ArrayList<>();
 
     public URLMapping(RequestHandler... handlers) {
@@ -70,13 +73,19 @@ public class URLMapping implements Iterable<URLMapping.HandlerData> {
 
             for (Method method : requestHandlerClass.getDeclaredMethods()) {
                 RequestMethod requestMethodAnnotation = method.getAnnotation(RequestMethod.class);
+
                 if (requestMethodAnnotation != null) {
                     String webMethodName = requestMethodAnnotation.value();
-                    if (webMethodName.equals("OPTIONS"))
+
+                    if (webMethodName.equals("OPTIONS")) {
                         throw new UnsupportedOperationException(
                                 "defining handle method for web method OPTIONS");
-                    else
+                    } else if (isMethodSignatureValid(method)) {
                         out.put(webMethodName, method);
+                    } else {
+                        throw new InvalidMethodSignatureException("must be " +
+                                "MODIFIER RETURN_TYPE SOME_NAME(RequestData|WebFormData data)");
+                    }
                 }
             }
 
@@ -84,6 +93,14 @@ public class URLMapping implements Iterable<URLMapping.HandlerData> {
                 throw new NoHandleMethodsInHandlerException(requestHandlerClass);
 
             return out;
+        }
+
+        private boolean isMethodSignatureValid(Method method) {
+            boolean paramsAreValid = Arrays.equals(method.getParameterTypes(), new Class<?>[] {RequestData.class}) ||
+                    Arrays.equals(method.getParameterTypes(), new Class<?>[] {WebFormData.class});
+            boolean returnTypeIsValid = VALID_HANDLER_METHOD_RETURN_TYPES.contains(method.getReturnType());
+
+            return paramsAreValid && returnTypeIsValid;
         }
 
         public boolean supportsMethod(String method) {

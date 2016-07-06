@@ -8,22 +8,20 @@ import java.lang.annotation.Target;
 /**
  * Annotation specifies on what web-method Java-method of {@link RequestHandler} will be used. This methods:
  *
- * <ul>
+ * <ol>
  *     <li>can be not accessible for
- *     {@link github.dmitmel.raketaframework.web.server.ClientHandler}</li>
- *     <li>if they receive form, they must have 2 arguments:
- *         <ul>
- *             <li>{@link WebFormData}</li>
+ *         {@link github.dmitmel.raketaframework.web.server.ClientHandler}</li>
+ *     <li>if they receive form, they must have 1 param with type {@link WebFormData}</li>
+ *     <li>if they receive simple request, they must have 1 param with type {@link RequestData}</li>
+ *     <li>They can return this types:
+ *         <ol>
+ *             <li>{@link String}</li>
+ *             <li>{@code byte[]}</li>
  *             <li>{@link Document}</li>
- *         </ul>
+ *             <li>{@link StringBuilder}</li>
+ *         </ol>
  *     </li>
- *     <li>if they receive simple request, they must have 2 arguments:
- *         <ul>
- *             <li>{@link RequestData}</li>
- *             <li>{@link Document}</li>
- *         </ul>
- *     </li>
- * </ul>
+ * </ol>
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
