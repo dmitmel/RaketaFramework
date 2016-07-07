@@ -2,62 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fdcbb719-ac34-4825-a5f3-1b28074fe15e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/README.ru.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/compile-readme.sh" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/gen/java/github/dmitmel/raketaframework/web/errors/DefaultErrorResponderMapMaker.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/TestApplication.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/mime_util_2_1_3.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/slf4j_1_7.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/README.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test-Server/Test-Server.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test-Server/build.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test-Server/build/jar/Test-Server-1.0-sources.zip" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test-Server/build/jar/Test-Server-1.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test-Server/build/main/classes/TestServer$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test-Server/build/main/classes/TestServer$GreetForm.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test-Server/build/main/classes/TestServer$Hello.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test-Server/build/main/classes/TestServer$LoadFile.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test-Server/build/main/classes/TestServer$Main.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test-Server/build/main/classes/TestServer.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test-Server/build/main/resources/goodies/css/code-util.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test-Server/build/main/resources/goodies/css/glowing-style.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test-Server/build/main/resources/goodies/css/spoilers.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test-Server/build/main/resources/goodies/js-libs/jquery.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test-Server/build/main/resources/greet-form.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test-Server/build/main/resources/index-js.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test-Server/build/main/resources/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test-Server/src/main/java/TestServer.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test-Server/src/main/resources/goodies/css/code-util.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test-Server/src/main/resources/goodies/css/glowing-style.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test-Server/src/main/resources/goodies/css/spoilers.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test-Server/src/main/resources/goodies/js-libs/jquery.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test-Server/src/main/resources/greet-form.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test-Server/src/main/resources/index-js.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test-Server/src/main/resources/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/jar/Raketa-Framework-1.0-sources.zip" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/jar/Raketa-Framework-1.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/main/classes/github/dmitmel/raketaframework/web/server/URLMapping$HandlerData.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/main/classes/github/dmitmel/raketaframework/web/server/URLMapping.class" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/web/server/URLMapping.java" afterPath="$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/web/server/HandlersList.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/main/classes/github/dmitmel/raketaframework/web/HTTPDateFormatter.class" afterPath="$PROJECT_DIR$/build/main/classes/github/dmitmel/raketaframework/web/HTTPDateFormatter.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/main/classes/github/dmitmel/raketaframework/web/MIMETypes.class" afterPath="$PROJECT_DIR$/build/main/classes/github/dmitmel/raketaframework/web/MIMETypes.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/main/classes/github/dmitmel/raketaframework/web/handle/Document.class" afterPath="$PROJECT_DIR$/build/main/classes/github/dmitmel/raketaframework/web/handle/Document.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/main/classes/github/dmitmel/raketaframework/web/server/ClientHandler.class" afterPath="$PROJECT_DIR$/build/main/classes/github/dmitmel/raketaframework/web/server/ClientHandler.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/main/classes/github/dmitmel/raketaframework/web/server/Server.class" afterPath="$PROJECT_DIR$/build/main/classes/github/dmitmel/raketaframework/web/server/Server.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RaketaFramework.iml" afterPath="$PROJECT_DIR$/RaketaFramework.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Sources-Generator/http-errors.rb" afterPath="$PROJECT_DIR$/Sources-Generator/http-errors.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.xml" afterPath="$PROJECT_DIR$/build.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/Version.java" afterPath="$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/Version.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/web/HTTPDateFormatter.java" afterPath="$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/web/HTTPDateFormatter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/web/MIMETypes.java" afterPath="$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/web/MIMETypes.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/web/handle/Document.java" afterPath="$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/web/handle/Document.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/web/handle/RequestMethod.java" afterPath="$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/web/handle/RequestMethod.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/web/server/ClientHandler.java" afterPath="$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/web/server/ClientHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/web/server/Server.java" afterPath="$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/web/server/Server.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.ru.md" afterPath="$PROJECT_DIR$/README.ru.md" />
     </list>
     <ignored path="Jonnect-Framework.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -89,40 +36,7 @@
     <favorites_list name="Jonnect-Framework" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/README.md">
-          <provider editor-type-id="MarkdownFxPreviewEditor">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-            <state split_layout="FIRST">
-              <first_editor relative-caret-position="133">
-                <caret line="108" column="10" selection-start-line="108" selection-start-column="10" selection-end-line="108" selection-end-column="10" />
-                <folding />
-              </first_editor>
-              <second_editor />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="README.ru.md" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/README.ru.md">
-          <provider editor-type-id="MarkdownFxPreviewEditor">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-            <state split_layout="FIRST">
-              <first_editor relative-caret-position="201">
-                <caret line="111" column="10" selection-start-line="111" selection-start-column="10" selection-end-line="111" selection-end-column="10" />
-                <folding />
-              </first_editor>
-              <second_editor />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -267,8 +181,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -277,123 +192,8 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RaketaFramework" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RaketaFramework" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RaketaFramework" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RaketaFramework" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RaketaFramework" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RaketaFramework" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="raketaframework" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RaketaFramework" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RaketaFramework" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="raketaframework" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RaketaFramework" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RaketaFramework" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="raketaframework" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="server" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1314,6 +1114,7 @@
       <workItem from="1467794157513" duration="2701000" />
       <workItem from="1467797430386" duration="1484000" />
       <workItem from="1467810769043" duration="18529000" />
+      <workItem from="1467911034083" duration="149000" />
     </task>
     <servers />
   </component>
@@ -1350,7 +1151,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="110580000" />
+    <option name="totallyTimeSpent" value="110729000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="1023" extended-state="6" />
@@ -1359,7 +1160,6 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="SBT Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32725322" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39742213" sideWeight="0.502445" order="7" side_tool="true" content_ui="tabs" />
@@ -1369,7 +1169,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32188842" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21393643" sideWeight="0.49624062" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21393643" sideWeight="0.49624062" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294621" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24938875" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24938875" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1380,6 +1180,7 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24938875" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32725322" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" x="200" y="252" width="1655" height="856" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32832617" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1479,9 +1280,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="177">
           <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1489,7 +1287,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="379">
           <caret line="72" column="0" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1512,43 +1309,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="16" column="25" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Test-Server/build.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="537">
-          <caret line="32" column="52" selection-start-line="32" selection-start-column="52" selection-end-line="32" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.common-mark-gen/highlight.js/highlight.pack.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="278">
-          <caret line="1" column="8243" selection-start-line="1" selection-start-column="8243" selection-end-line="1" selection-end-column="8243" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/idea-dracula-hljs.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Test-Server/build.xml" />
+    <entry file="file://$USER_HOME$/.common-mark-gen/highlight.js/highlight.pack.js" />
+    <entry file="file://$PROJECT_DIR$/idea-dracula-hljs.css" />
     <entry file="file://$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/web/handle/Document.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
           <caret line="36" column="33" selection-start-line="36" selection-start-column="33" selection-end-line="36" selection-end-column="33" />
-          <folding>
-            <element signature="e#1222#1223#0" expanded="true" />
-            <element signature="e#1262#1263#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1564,25 +1334,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
           <caret line="23" column="44" selection-start-line="23" selection-start-column="44" selection-end-line="23" selection-end-column="44" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/web/errors/ErrorResponderMapMaker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/github/dmitmel/raketaframework/web/errors/ErrorResponderMapMaker.java" />
     <entry file="file://$PROJECT_DIR$/src/gen/java/github/dmitmel/raketaframework/web/errors/DefaultErrorResponderMapMaker.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1590,7 +1349,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="229">
           <caret line="18" column="19" selection-start-line="18" selection-start-column="19" selection-end-line="18" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1598,7 +1356,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="201">
           <caret line="447" column="8" selection-start-line="447" selection-start-column="8" selection-end-line="447" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1606,7 +1363,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="382">
           <caret line="31" column="46" selection-start-line="31" selection-start-column="33" selection-end-line="31" selection-end-column="46" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1614,9 +1370,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1624,7 +1377,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="801">
           <caret line="141" column="0" selection-start-line="141" selection-start-column="0" selection-end-line="141" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1632,18 +1384,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="495">
           <caret line="48" column="12" selection-start-line="48" selection-start-column="12" selection-end-line="48" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Test-Server/src/main/java/TestServer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Test-Server/src/main/java/TestServer.java" />
     <entry file="file://$PROJECT_DIR$/build.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="419">
@@ -1656,7 +1400,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="50" selection-start-line="0" selection-start-column="4" selection-end-line="6" selection-end-column="50" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1664,10 +1407,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="301">
           <caret line="147" column="19" selection-start-line="147" selection-start-column="19" selection-end-line="147" selection-end-column="19" />
-          <folding>
-            <element signature="e#5748#5749#0" expanded="true" />
-            <element signature="e#5784#5785#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1675,7 +1414,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1037">
           <caret line="69" column="44" selection-start-line="69" selection-start-column="44" selection-end-line="69" selection-end-column="44" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1683,7 +1421,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="301">
           <caret line="519" column="26" selection-start-line="519" selection-start-column="26" selection-end-line="519" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1691,7 +1428,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="767">
           <caret line="112" column="8" selection-start-line="112" selection-start-column="8" selection-end-line="112" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1699,7 +1435,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="454">
           <caret line="813" column="44" selection-start-line="813" selection-start-column="44" selection-end-line="813" selection-end-column="44" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1707,10 +1442,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="18" column="33" selection-start-line="18" selection-start-column="33" selection-end-line="18" selection-end-column="33" />
-          <folding>
-            <element signature="e#546#547#0" expanded="true" />
-            <element signature="e#590#591#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1718,7 +1449,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="612">
           <caret line="70" column="77" selection-start-line="70" selection-start-column="77" selection-end-line="70" selection-end-column="77" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1726,9 +1456,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="527">
           <caret line="33" column="5" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1736,10 +1463,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="19" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
-          <folding>
-            <element signature="e#120#121#0" expanded="true" />
-            <element signature="e#148#149#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1747,7 +1470,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="16" column="21" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1755,7 +1477,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
           <caret line="2" column="128" selection-start-line="2" selection-start-column="128" selection-end-line="2" selection-end-column="128" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1765,8 +1486,8 @@
       </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="133">
-            <caret line="108" column="10" selection-start-line="108" selection-start-column="10" selection-end-line="108" selection-end-column="10" />
+          <first_editor relative-caret-position="307">
+            <caret line="242" column="0" selection-start-line="242" selection-start-column="0" selection-end-line="242" selection-end-column="0" />
             <folding />
           </first_editor>
           <second_editor />
@@ -1779,8 +1500,8 @@
       </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="201">
-            <caret line="111" column="10" selection-start-line="111" selection-start-column="10" selection-end-line="111" selection-end-column="10" />
+          <first_editor relative-caret-position="473">
+            <caret line="244" column="144" selection-start-line="244" selection-start-column="144" selection-end-line="244" selection-end-column="144" />
             <folding />
           </first_editor>
           <second_editor />
