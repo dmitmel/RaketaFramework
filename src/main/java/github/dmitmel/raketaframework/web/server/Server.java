@@ -2,8 +2,8 @@ package github.dmitmel.raketaframework.web.server;
 
 import github.dmitmel.raketaframework.Version;
 import github.dmitmel.raketaframework.util.NetUtils;
-import github.dmitmel.raketaframework.web.errors.DefaultErrorResponderFactory;
 import github.dmitmel.raketaframework.web.errors.ErrorResponder;
+import github.dmitmel.raketaframework.web.errors.DefaultErrorResponderMapMaker;
 
 import java.net.*;
 import java.util.HashMap;
@@ -17,7 +17,7 @@ public class Server {
             Version.id(), System.getProperty("os.name"), System.getProperty("os.version"));
     public static final int DEFAULT_MAX_ACTIVE_THREADS_COUNT = 10;
 
-    public final URLMapping urls;
+    public final HandlersList urls;
 
     public final String host;
     public final int port;
@@ -35,17 +35,14 @@ public class Server {
     public int maxActiveThreads = DEFAULT_MAX_ACTIVE_THREADS_COUNT;
     private int activeThreads;
 
-    public Server(URLMapping urls) {
+    public Server(HandlersList urls) {
         this(urls, DEFAULT_HOST, DEFAULT_PORT);
     }
-    public Server(URLMapping urls, String host, int port) {
+    public Server(HandlersList urls, String host, int port) {
         this.urls = urls;
         this.port = port;
         this.host = host;
-        this.errorResponders.put(404, DefaultErrorResponderFactory.makeResponder()); // 404 Not Found
-        this.errorResponders.put(405, DefaultErrorResponderFactory.makeResponder()); // 405 Method Not Allowed
-        this.errorResponders.put(500, DefaultErrorResponderFactory.makeResponder()); // 500 Internal Server Error
-        this.errorResponders.put(501, DefaultErrorResponderFactory.makeResponder()); // 501 Not Implemented
+        this.errorResponders = DefaultErrorResponderMapMaker.makeMap();
     }
 
     public void start() {

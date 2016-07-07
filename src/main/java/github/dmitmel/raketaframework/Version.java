@@ -4,7 +4,7 @@ public class Version {
     private Version() {}
 
     public static String id() {
-        return "1.0.0";
+        return "1.0";
     }
 
     public static void main(String[] args) {

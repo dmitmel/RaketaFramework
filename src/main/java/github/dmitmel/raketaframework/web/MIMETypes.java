@@ -1,15 +1,7 @@
 package github.dmitmel.raketaframework.web;
 
-import eu.medsea.mimeutil.MimeType;
-import eu.medsea.mimeutil.MimeUtil;
-
 import java.io.ByteArrayInputStream;
 import java.net.URLConnection;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.function.Supplier;
 
 public class MIMETypes {
     public static final String PLAIN_TEXT = "text/plain";
@@ -22,15 +14,19 @@ public class MIMETypes {
     public static final String CSS_STYLESHEET = "text/css";
     public static final String BYTE_STREAM = "application/octet-stream";
 
+    public static String getContentTypeOrDefault(byte[] content) {
+        return getContentTypeOrDefault(content, BYTE_STREAM);
+    }
+
+    public static String getContentTypeOrDefault(byte[] content, String defaultContentType) {
+        String mime = getContentType(content);
+        return mime == null ? defaultContentType : mime;
+    }
+
     public static String getContentType(byte[] content) {
         try {
             ByteArrayInputStream inputStream = new ByteArrayInputStream(content);
-            String mime = URLConnection.guessContentTypeFromStream(inputStream);
-
-            if (mime == null)
-                return BYTE_STREAM;
-            else
-                return mime;
+            return URLConnection.guessContentTypeFromStream(inputStream);
         } catch (java.io.IOException e) {
             throw github.dmitmel.raketaframework.util.exceptions.IOException.extractFrom(e);
         }

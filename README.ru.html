@@ -8,18 +8,18 @@
     <body class="markdown-body">
 <!-- Page content mustn't be aligned, because of code blocks which will be moved. -->
 <h1>RaketaFramework</h1>
-<h2>Contents</h2>
+<h2>Содержание</h2>
 <ol>
 <li><a href="#hello">Hello World!</a></li>
-<li><a href="#params">Reading URL parameters</a></li>
-<li><a href="#urls">Flexible URLs</a></li>
-<li><a href="#forms">Receiving forms</a></li>
-<li><a href="#downloads">Downloads</a></li>
-<li><a href="#license">License</a></li>
+<li><a href="#params">Чтение параметров URL’ов</a></li>
+<li><a href="#urls">Гибкие URL’ы</a></li>
+<li><a href="#forms">Получение форм</a></li>
+<li><a href="#downloads">Загрузки</a></li>
+<li><a href="#license">Лицензия</a></li>
 </ol>
 <p><h2 id="hello">Hello World!</h2></p>
-<p>Everyone knows, that tutorials usually start from “Hello World!”. I’ll make exception. Our first program using
-RaketaFramework will show “Hello World!” twice :). Well, let’s write some code:</p>
+<p>Каждый знает, что туториалы обычно начинаются с “Hello World!”. Я сделаю исключение. Наша первая программа на
+RaketaFramework’е будет показывать “Hello World!” дважды :). Итак, давайте напишем немного кода:</p>
 <h5>Main.java:</h5>
 <pre><code class="java"><span class="hljs-keyword">import</span> github.dmitmel.raketaframework.web.handle.*;
 <span class="hljs-keyword">import</span> github.dmitmel.raketaframework.web.server.*;
@@ -41,39 +41,42 @@ RaketaFramework will show “Hello World!” twice :). Well, let’s write some 
     }
 }
 </code></pre>
-<p>My congratulations! It’s your first app! To run it from terminal, you can type something like this:</p>
+<p>Мои поздравления! Это твоё первое приложение! Чтобы запустить его в терминале/консоли, ты можешь написать
+что-нибудь вроде этого:</p>
 <pre><code class="bash">javac Main.java
 java -cp libs/RaketaFramework-1.0.jar Main
 </code></pre>
-<p>And to use app, you can open page <code>http://localhost:8080/hello</code>.</p>
-<p>Well, now I’ll describe some things in code.</p>
+<p>И чтоб использовать приложение, ты можешь зайти на <code>http://localhost:8080/hello</code>.</p>
+<p>Итак, теперь я опишу пару вещей в коде.</p>
 <h3>Code parts</h3>
 <ol>
 <li>
-<p>All request handlers (for example, <code>HelloHandler</code>) must implement empty marker-interface
+<p>Все обработчики запросов (например, <code>HelloHandler</code>) должны реализовать пустой интрефейс-маркер
 <a href="https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/web/handle/RequestHandler.java"><code>github.dmitmel.raketaframework.web.handle.RequestHandler</code></a>
-and be annotated by
+и быть аннотированы аннотацией
 <a href="https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/web/handle/RequestURLPattern.java"><code>github.dmitmel.raketaframework.web.handle.RequestURLPattern</code></a>.
-This annotation can set Regexp for URLs, which can be handled by this handler. Groups are supported, you can read about them in
-next parts.</p>
+Эта аннотация может установить Regexp для URL’ов, которые могут быть обработаными этим обработчиком. Поддерживаются
+группы, ты можешь почитать про них в следуйших частях.</p>
 </li>
 <li>
-<p>All handler methods must have 1 parameter and return value. You can read more detailed info about signatures
-<a href="https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/web/handle/RequestMethod.java">here</a>.
-Also, they must be annotated using annotation
+<p>Все методы-обработчики должны иметь 1 параметер и возвращать значение. Ты можешь почитать более детализированую
+информацию о сигнатурах
+<a href="https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/web/handle/RequestMethod.java">здесь</a>.
+Также, методы-обработчики должны быть аннотированы аннотацией
 <a href="https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/web/handle/RequestMethod.java"><code>github.dmitmel.raketaframework.web.handle.RequestMethod</code></a>.
-This annotation describes on which web-method this Java-method will be used. But, you can’t set handler for <code>OPTIONS</code> -
-this method must return supported web-methods.</p>
+Эта аннотация описывает на каком веб-методе этот Java-метод будет использован. Но, ты не можешь установить
+обработчик для <code>OPTIONS</code> -
+этот метод должен вернуть поддерживаемые методы.</p>
 </li>
 <li>
-<p>Class <a href="https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/web/handle/RequestData.java"><code>github.dmitmel.raketaframework.web.handle.RequestData</code></a>
-stores data about request.</p>
+<p>Класс <a href="https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/web/handle/RequestData.java"><code>github.dmitmel.raketaframework.web.handle.RequestData</code></a>
+хранит информацию о запросе.</p>
 </li>
 </ol>
-<p><h2 id="params">Reading URL parameters</h2></p>
-<p>Well, this’s nice that we can send data to user, but what if user wants to talk with us? Let’s make request handler
-which will return some greetings.</p>
-<pre><code class="java"><span class="hljs-comment">// This class is inner class of Main</span>
+<p><h2 id="params">Чтение параметров URL’ов</h2></p>
+<p>Ну, это хорошо что мы можем отправлять информацию пользователю, но что если пользователь хочет поговорить с нами?
+Давайте сделаем обработчик запросов который может возвращать несколько приветствий.</p>
+<pre><code class="java"><span class="hljs-comment">// Это внутренний класс класса Main</span>
 <span class="hljs-meta">@RequestURLPattern</span>(<span class="hljs-string">"/greet"</span>)
 <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Greeter</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">RequestHandler</span> </span>{
     <span class="hljs-meta">@RequestMethod</span>(<span class="hljs-string">"GET"</span>)
@@ -91,31 +94,31 @@ which will return some greetings.</p>
     }
 }
 </code></pre>
-<p>Don’t forget to add new handler to handlers list!</p>
-<pre><code class="java"><span class="hljs-comment">// First way (add handler in constructor):</span>
+<p>Не забудь добавить новый обработчик в список обработчиков!</p>
+<pre><code class="java"><span class="hljs-comment">// Первый способ (добавить обработчик в конструкторе):</span>
 HandlersList handlersList = <span class="hljs-keyword">new</span> HandlersList(<span class="hljs-keyword">new</span> Greeter(), ...);
-<span class="hljs-comment">// Second way (use method "add"):</span>
+<span class="hljs-comment">// Второй способ (использовать метод "add"):</span>
 handlersList.add(<span class="hljs-keyword">new</span> Greeter());
 </code></pre>
-<p>What’s new?</p>
+<p>Что нового?</p>
 <ol>
-<li>Class <a href="https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/web/handle/Document.java"><code>github.dmitmel.raketaframework.web.handle.Document</code></a>.
-It works like stream or <code>java.lang.StringBuilder</code> - you can append it’s data. It stores binary data, so you can put there
-image.</li>
-<li>Methods <a href="https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/web/handle/RequestData.java#L27"><code>RequestData#getUrlParamOrElse</code></a>
-and <a href="https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/web/handle/RequestData.java#L24"><code>RequestData#getUrlParam</code></a>.
-These methods simply return one of params in URL.</li>
+<li>Класс <a href="https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/web/handle/Document.java"><code>github.dmitmel.raketaframework.web.handle.Document</code></a>.
+Он работает на подобии потока или <code>java.lang.StringBuilder</code> - ты можешь добавлять в него данные. Он хранит
+бинарные данные, так что ты можешь положить туда картинку.</li>
+<li>Методы <a href="https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/web/handle/RequestData.java#L27"><code>RequestData#getUrlParamOrElse</code></a>
+и <a href="https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/web/handle/RequestData.java#L24"><code>RequestData#getUrlParam</code></a>.
+Эти методы просто возвращают один из параметров URL’а.</li>
 </ol>
-<p>Now, let’s use class <code>Greeter</code>!</p>
-<pre><code class="bash"><span class="hljs-comment"># Imagine, that server has been already started</span>
+<p>Теперь, давайте поиспользуем класс <code>Greeter</code>!</p>
+<pre><code class="bash"><span class="hljs-comment"># Представь, что сервер уже запущен</span>
 curl -i <span class="hljs-string">'http://localhost:8080/greet?who=Dmitriy&amp;how-many=5'</span>
 </code></pre>
-<p>Output will be like this:</p>
+<p>Вывод будет наподобии этого:</p>
 <pre><code class="http">HTTP/1.1 <span class="hljs-number">200</span> OK
 <span class="hljs-attribute">Connection</span>: close
-<span class="hljs-attribute">Server</span>: RaketaFramework/1.0.0 on Mac OS X 10.11.5
+<span class="hljs-attribute">Server</span>: RaketaFramework/1.0 on Mac OS X 10.11.5
 <span class="hljs-attribute">Content-Length</span>: 85
-<span class="hljs-attribute">Date</span>: 8:14:04 PM
+<span class="hljs-attribute">Date</span>: Thu, Jul 7, 2016 07:50:18 AM GMT
 <span class="hljs-attribute">Content-Type</span>: text/plain
 
 <span class="erlang-repl">Hello, Dmitriy!
@@ -124,47 +127,47 @@ Hello, Dmitriy!
 Hello, Dmitriy!
 Hello, Dmitriy!
 </span></code></pre>
-<p><h2 id="urls">Flexible URLs</h2></p>
-<p>As I said in the 1<sup>st</sup> part,</p>
+<p><h2 id="urls">Гибкие URL’ы</h2></p>
+<p>Как я сказал в первой части,</p>
 <blockquote>
-<p>This annotation can set URL regexp, which can be handled by this handler. Groups are supported, you can read about them in
-next parts.</p>
+<p>Эта аннотация может установить Regexp для URL’ов, которые могут быть обработаными этим обработчиком. Поддерживаются
+группы, ты можешь почитать про них в следуйших частях.</p>
 </blockquote>
-<p>Yeah, I’m talking about Regexps, URLs, and annotation
+<p>Да, я говорю о Regexp’ах, URL’ах, и аннотации
 <a href="https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/web/handle/RequestURLPattern.java"><code>github.dmitmel.raketaframework.web.handle.RequestURLPattern</code></a>.
-Time to talk about them!</p>
-<p>Let’s imagine, that we’re making handler for serving files. Client must send path of file. For example, he/she/it can
-send path using URL param.</p>
-<pre><code class="java"><span class="hljs-comment">// Usage: /load-file?path=...</span>
+Время поговорить о них!</p>
+<p>Давайте представим, что мы делаем обработчик для раздачи файлов. Клиент должен отправить путь к файлу. Например,
+он/она/оно может отправить путь с помощью параметра URL’а.</p>
+<pre><code class="java"><span class="hljs-comment">// Использование: /load-file?path=...</span>
 <span class="hljs-meta">@RequestURLPattern</span>(<span class="hljs-string">"/load-file"</span>)
 <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FileLoader</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">RequestHandler</span> </span>{
     <span class="hljs-meta">@RequestMethod</span>(<span class="hljs-string">"GET"</span>)
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">byte</span>[] GET(RequestData requestData) {
         String fileName = requestData.getUrlParam(<span class="hljs-string">"path"</span>);
-        <span class="hljs-keyword">byte</span>[] bytes = <span class="hljs-comment">/* Some code for loading files... */</span>;
+        <span class="hljs-keyword">byte</span>[] bytes = <span class="hljs-comment">/* Немного кода для загрузки файлов... */</span>;
         <span class="hljs-keyword">return</span> bytes;
     }
 }
 </code></pre>
-<p>But, you can use Regexps!</p>
-<pre><code class="java"><span class="hljs-comment">// Usage: /load-file/...</span>
+<p>Но, мы можем использовать Regexp’ы!</p>
+<pre><code class="java"><span class="hljs-comment">// Использование: /load-file/...</span>
 <span class="hljs-meta">@RequestURLPattern</span>(<span class="hljs-string">"/load-file/(.+)"</span>)
 <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FileLoader</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">RequestHandler</span> </span>{
     <span class="hljs-meta">@RequestMethod</span>(<span class="hljs-string">"GET"</span>)
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">byte</span>[] GET(RequestData requestData) {
         String fileName = requestData.getMatcherGroup(<span class="hljs-number">0</span>);
-        <span class="hljs-keyword">byte</span>[] bytes = <span class="hljs-comment">/* Some code for loading files... */</span>;
+        <span class="hljs-keyword">byte</span>[] bytes = <span class="hljs-comment">/* Немного кода для загрузки файлов... */</span>;
         <span class="hljs-keyword">return</span> bytes;
     }
 }
 </code></pre>
-<p>Methods <a href="https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/web/handle/RequestData.java#L31"><code>RequestData#getMatcherGroup</code></a>
-and <a href="https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/web/handle/RequestData.java#L34"><code>RequestData#getMatcherGroupOrElse</code></a>
-return match groups from URL Regexp.</p>
-<p><h2 id="forms">Receiving forms</h2></p>
-<p>Many web-applications use forms. But how to receive them using RaketaFramework?</p>
-<p>Let’s create simple greeting-app.</p>
-<h5>In the Main.java:</h5>
+<p>Методы <a href="https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/web/handle/RequestData.java#L31"><code>RequestData#getMatcherGroup</code></a>
+и <a href="https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/web/handle/RequestData.java#L34"><code>RequestData#getMatcherGroupOrElse</code></a>
+возвращают группы совпадения из Regexp’а URL’а.</p>
+<p><h2 id="forms">Получение форм</h2></p>
+<p>Много веб-приложений используют формы. Но как их можно получать используя RaketaFramework?</p>
+<p>Давайте сделаем простое приветственное приложение.</p>
+<h5>В Main.java:</h5>
 <pre><code class="java"><span class="hljs-meta">@RequestURLPattern</span>(<span class="hljs-string">"/form-greeter"</span>)
 <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FormGreeter</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">RequestHandler</span> </span>{
     <span class="hljs-meta">@RequestMethod</span>(<span class="hljs-string">"GET"</span>)
@@ -202,19 +205,19 @@ return match groups from URL Regexp.</p>
     <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
 </code></pre>
-<p>That’s all! But, some notes about code:</p>
+<p>Это всё! Но, немного заметок о коде:</p>
 <ol>
-<li>You can send to client HTTP errors. To use them, you must just throw exception with name
+<li>Ты можешь отсылать клиенту ошибки HTTP. Чтоб использовать их, ты должен просто вызвать исключение с именем
 <a href="https://github.com/dmitmel/RaketaFramework/tree/master/src/gen/java/github/dmitmel/raketaframework/web/errors"><code>Error${STATE}</code></a>.</li>
-<li>To redirect user to other page, you must throw
+<li>Чтобы перенаправить пользователя на другую страницу, ты должен вызвать исключение
 <a href="https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/web/handle/RedirectionThrowable.java"><code>github.dmitmel.raketaframework.web.handle.RedirectionThrowable</code></a></li>
 </ol>
-<p><h2 id="downloads">Downloads</h2></p>
-<p>Binaries - <a href="https://raw.githubusercontent.com/dmitmel/RaketaFramework/master/build/jar/RaketaFramework-last.jar"><code>RaketaFramework-last.jar</code></a></p>
-<p>Sources - <a href="https://raw.githubusercontent.com/dmitmel/RaketaFramework/master/build/jar/RaketaFramework-sources.jar"><code>RaketaFramework-last-sources.jar</code></a></p>
-<p><h2 id="license">License</h2>
-Copyright © 2016 Meleshko Dmitriy</p>
-<p>Licensed under the Apache License, Version 2.0. You can get a copy at</p>
+<p><h2 id="downloads">Загрузки</h2></p>
+<p>Бинарники - <a href="https://raw.githubusercontent.com/dmitmel/RaketaFramework/master/build/jar/RaketaFramework-last.jar"><code>RaketaFramework-last.jar</code></a></p>
+<p>Исходники - <a href="https://raw.githubusercontent.com/dmitmel/RaketaFramework/master/build/jar/RaketaFramework-sources.jar"><code>RaketaFramework-last-sources.jar</code></a></p>
+<p><h2 id="license">Лицензия</h2></p>
+<p>Copyright © 2016 Meleshko Dmitriy</p>
+<p>Лицензировано под Лицензией Apache, Версии 2.0. Ты можешь получить копию по ссылке</p>
 <pre><code><a href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a></code></pre>
 
 

@@ -31,4 +31,9 @@ public class Document {
     public void write(String newData) { write(newData.getBytes()); }
     public void writeln(String newData) { write(newData + "\n"); }
     public void writeF(String newData, Object... params) { write(String.format(newData, params)); }
+
+    @Override
+    public String toString() {
+        return new String(bytes);
+    }
 }

@@ -5,26 +5,25 @@ import github.dmitmel.raketaframework.util.InvalidMethodSignatureException;
 import github.dmitmel.raketaframework.web.handle.*;
 
 import java.lang.reflect.Method;
-import java.lang.reflect.Parameter;
 import java.util.*;
 import java.util.regex.Pattern;
 
-public class URLMapping implements Iterable<URLMapping.HandlerData> {
+public class HandlersList implements Iterable<HandlersList.HandlerData> {
     public static final List<Class<?>> VALID_HANDLER_METHOD_RETURN_TYPES = Arrays.asList(
             byte[].class, String.class, Document.class, StringBuilder.class
     );
 
-    private List<HandlerData> urls = new ArrayList<>();
+    private List<HandlerData> handlers = new ArrayList<>();
 
-    public URLMapping(RequestHandler... handlers) {
+    public HandlersList(RequestHandler... handlers) {
         for (RequestHandler handler : handlers)
-             urls.add(new HandlerData(handler));
+             this.handlers.add(new HandlerData(handler));
     }
 
     public void add(RequestHandler first, RequestHandler... others) {
-        urls.add(new HandlerData(first));
+        handlers.add(new HandlerData(first));
         for (RequestHandler other : others)
-            urls.add(new HandlerData(other));
+            handlers.add(new HandlerData(other));
     }
 
     /**
@@ -32,7 +31,7 @@ public class URLMapping implements Iterable<URLMapping.HandlerData> {
      */
     @Override
     public Iterator<HandlerData> iterator() {
-        return urls.iterator();
+        return handlers.iterator();
     }
 
     class HandlerData {
@@ -64,11 +63,14 @@ public class URLMapping implements Iterable<URLMapping.HandlerData> {
                 throw new AnnotationNotFoundException(exceptionMessage);
             }
 
-            return Pattern.compile(urlPatternAnnotation.value());
+            String pattern = urlPatternAnnotation.value();
+            for (HandlerData handler : handlers)
+                if (handler.urlPattern.pattern().equals(pattern))
+                    throw new UnsupportedOperationException("duplicate request handlers");
+            return Pattern.compile(pattern);
         }
 
-        private Map<String, Method> extractSupportedMethods(
-                Class<? extends RequestHandler> requestHandlerClass) {
+        private Map<String, Method> extractSupportedMethods(Class<? extends RequestHandler> requestHandlerClass) {
             Map<String, Method> out = new HashMap<>(0);
 
             for (Method method : requestHandlerClass.getDeclaredMethods()) {
@@ -81,10 +83,15 @@ public class URLMapping implements Iterable<URLMapping.HandlerData> {
                         throw new UnsupportedOperationException(
                                 "defining handle method for web method OPTIONS");
                     } else if (isMethodSignatureValid(method)) {
-                        out.put(webMethodName, method);
+
+                        if (out.containsKey(webMethodName))
+                            throw new UnsupportedOperationException("duplicate web-methods");
+                        else
+                            out.put(webMethodName, method);
+
                     } else {
                         throw new InvalidMethodSignatureException("must be " +
-                                "MODIFIER RETURN_TYPE SOME_NAME(RequestData|WebFormData data)");
+                                "MODIFIERS RETURN_TYPE SOME_NAME(RequestData|WebFormData data)");
                     }
                 }
             }

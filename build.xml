@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<project name="Raketa-Framework" default="build">
+<project name="RaketaFramework" default="build">
     <property name="dir.build.root" value="./build" />
 
     <property name="dir.main.src" value="./src/main/java" />
@@ -15,7 +15,7 @@
 
     <property name="product.vendor" value="Dmitriy Meleshko" />
     <property name="product.version" value="1.0" />
-    <property name="product.name" value="Raketa-Framework" />
+    <property name="product.name" value="RaketaFramework" />
     <tstamp>
         <format property="build.date" pattern="dd/MMMM/yyyy hh:mm:ss" />
     </tstamp>
@@ -65,6 +65,9 @@
                 <attribute name="Project-Author" value="${product.vendor}" />
             </manifest>
         </jar>
+
+        <copyfile src="${dir.main.jar}/${product.name}-${product.version}.jar"
+                  dest="${dir.main.jar}/${product.name}-last.jar" />
     </target>
 
     <target name="pack-sources">
@@ -78,5 +81,8 @@
                 <attribute name="Project-Author" value="${product.vendor}" />
             </manifest>
         </jar>
+
+        <copyfile src="${dir.main.jar}/${product.name}-${product.version}-sources.zip"
+                  dest="${dir.main.jar}/${product.name}-last-sources.zip" />
     </target>
 </project>

@@ -21,6 +21,7 @@ import java.lang.annotation.Target;
  *             <li>{@link StringBuilder}</li>
  *         </ol>
  *     </li>
+ *     <li>can be {@code static} or instance</li>
  * </ol>
  */
 @Retention(RetentionPolicy.RUNTIME)

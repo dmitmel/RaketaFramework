@@ -46,7 +46,7 @@ class ClientHandler implements Runnable {
 
             addInitialResponseHeaders();
             incomingMessage = getIncomingMessage();
-            URLMapping.HandlerData currentHandlerData = getHandlerDataForURL(incomingMessage.url);
+            HandlersList.HandlerData currentHandlerData = getHandlerDataForURL(incomingMessage.url);
 
             if (currentHandlerData == null) {
                 addErrorDataToResponse(new Error404());
@@ -68,9 +68,7 @@ class ClientHandler implements Runnable {
      	    So, now message is being generated, and date must be specified NOW. Also, if handle method took many time
      	    to execute - date added before execution wouldn't be valid.
              */
-            DateFormat df = DateFormat.getTimeInstance();
-            df.setTimeZone(TimeZone.getTimeZone("GMT"));
-            responseHeaders.put("Date", df.format(new Date()));
+            responseHeaders.put("Date", HTTPDateFormatter.currentDateInGMT());
 
             HTTPResponse outgoingMessage = new HTTPResponse("HTTP/1.1", responseStatusCode, responseStatusDescription,
                     responseHeaders, responseBody);
@@ -105,8 +103,8 @@ class ClientHandler implements Runnable {
         return new String(buffer, 0, receivedLength);
     }
 
-    private URLMapping.HandlerData getHandlerDataForURL(URL url) {
-        for (URLMapping.HandlerData handlerData : server.urls) {
+    private HandlersList.HandlerData getHandlerDataForURL(URL url) {
+        for (HandlersList.HandlerData handlerData : server.urls) {
             Matcher matcher = handlerData.urlPattern.matcher(url.path);
             if (matcher.matches()) {
                 urlPatternMatcher = matcher;
@@ -117,7 +115,7 @@ class ClientHandler implements Runnable {
         return null;
     }
 
-    private void addAllowedMethodsToResponseHeadersFromHandlerData(URLMapping.HandlerData currentHandlerData) {
+    private void addAllowedMethodsToResponseHeadersFromHandlerData(HandlersList.HandlerData currentHandlerData) {
         Set<String> supportedMethodsNames = currentHandlerData.supportedMethods.keySet();
         responseHeaders.put("Allow", String.join(", ", supportedMethodsNames));
     }
@@ -141,7 +139,7 @@ class ClientHandler implements Runnable {
         responseBody = errorDocument.getBytes();
     }
 
-    private void executeHandleMethodFromData(URLMapping.HandlerData currentHandlerData) {
+    private void executeHandleMethodFromData(HandlersList.HandlerData currentHandlerData) {
         try {
             Object result;
             RequestData requestData = new RequestData(urlPatternMatcher, incomingMessage);
@@ -159,22 +157,25 @@ class ClientHandler implements Runnable {
             if (result instanceof String) {
                 String string = (String) result;
                 responseHeaders.put("Content-Length", Integer.toString(string.length()));
-                responseHeaders.put("Content-Type", MIMETypes.getContentType(string.getBytes()));
+                responseHeaders.put("Content-Type",
+                        MIMETypes.getContentTypeOrDefault(string.getBytes(), MIMETypes.PLAIN_TEXT));
                 responseBody = string.getBytes();
             } else if (result instanceof byte[]) {
                 byte[] bytes = (byte[]) result;
                 responseHeaders.put("Content-Length", Integer.toString(bytes.length));
-                responseHeaders.put("Content-Type", MIMETypes.getContentType(bytes));
+                responseHeaders.put("Content-Type",
+                        MIMETypes.getContentTypeOrDefault(bytes, MIMETypes.BYTE_STREAM));
                 responseBody = bytes;
             } else if (result instanceof Document) {
                 Document document = (Document) result;
                 responseHeaders.put("Content-Length", Integer.toString(document.getBytes().length));
-                responseHeaders.put("Content-Type", MIMETypes.getContentType(document.getBytes()));
+                responseHeaders.put("Content-Type", document.mimeType);
                 responseBody = document.getBytes();
             } else if (result instanceof StringBuilder) {
                 StringBuilder stringBuilder = (StringBuilder) result;
                 responseHeaders.put("Content-Length", Integer.toString(stringBuilder.length()));
-                responseHeaders.put("Content-Type", MIMETypes.getContentType(stringBuilder.toString().getBytes()));
+                responseHeaders.put("Content-Type",
+                        MIMETypes.getContentTypeOrDefault(stringBuilder.toString().getBytes(), MIMETypes.PLAIN_TEXT));
                 responseBody = stringBuilder.toString().getBytes();
             }
 

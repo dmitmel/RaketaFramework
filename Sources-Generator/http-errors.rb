@@ -38,6 +38,22 @@ public class Error#{status} extends HTTPError {
 JAVA
                 File.write("#{PACKAGE_DIR}/Error#{status}.java", content)
             end
+
+            content = "package github.dmitmel.raketaframework.web.errors;
+
+import java.util.Map;
+import java.util.HashMap;
+
+public class DefaultErrorResponderMapMaker {
+    public static Map<Integer, ErrorResponder> makeMap() {
+        HashMap<Integer, ErrorResponder> map = new HashMap<>(#{HTTP_ERRORS_LIST.length});\n"
+            for status in HTTP_ERRORS_LIST.keys
+                content += "        map.put(#{status}, DefaultErrorResponderFactory.makeResponder());   // #{HTTP_ERRORS_LIST[status]}\n"
+            end
+            content += "        return map;
+    }
+}\n"
+            File.write("#{PACKAGE_DIR}/DefaultErrorResponderMapMaker.java", content)
         end
     end
     private_constant :Logic
