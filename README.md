@@ -239,7 +239,7 @@ That's all! But, some notes about code:
 
 Binaries - [`RaketaFramework-last.jar`](https://raw.githubusercontent.com/dmitmel/RaketaFramework/master/build/jar/RaketaFramework-last.jar)
 
-Sources - [`RaketaFramework-last-sources.jar`](https://raw.githubusercontent.com/dmitmel/RaketaFramework/master/build/jar/RaketaFramework-last-sources.jar)
+Sources - [`RaketaFramework-last-sources.jar`](https://raw.githubusercontent.com/dmitmel/RaketaFramework/master/build/jar/RaketaFramework-last-sources.zip)
 
 <h2 id="license">License</h2>
 Copyright (c) 2016 Meleshko Dmitriy

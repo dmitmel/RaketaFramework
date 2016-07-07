@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fdcbb719-ac34-4825-a5f3-1b28074fe15e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.html" afterPath="$PROJECT_DIR$/README.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.ru.html" afterPath="$PROJECT_DIR$/README.ru.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.ru.md" afterPath="$PROJECT_DIR$/README.ru.md" />
     </list>
     <ignored path="Jonnect-Framework.iws" />
@@ -1114,7 +1115,7 @@
       <workItem from="1467794157513" duration="2701000" />
       <workItem from="1467797430386" duration="1484000" />
       <workItem from="1467810769043" duration="18529000" />
-      <workItem from="1467911034083" duration="149000" />
+      <workItem from="1467911034083" duration="292000" />
     </task>
     <servers />
   </component>
@@ -1151,7 +1152,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="110729000" />
+    <option name="totallyTimeSpent" value="110872000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="1023" extended-state="6" />
@@ -1486,8 +1487,8 @@
       </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="307">
-            <caret line="242" column="0" selection-start-line="242" selection-start-column="0" selection-end-line="242" selection-end-column="0" />
+          <first_editor relative-caret-position="596">
+            <caret line="241" column="154" selection-start-line="241" selection-start-column="154" selection-end-line="241" selection-end-column="154" />
             <folding />
           </first_editor>
           <second_editor />
@@ -1500,8 +1501,8 @@
       </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="473">
-            <caret line="244" column="144" selection-start-line="244" selection-start-column="144" selection-end-line="244" selection-end-column="144" />
+          <first_editor relative-caret-position="579">
+            <caret line="244" column="156" selection-start-line="244" selection-start-column="156" selection-end-line="244" selection-end-column="156" />
             <folding />
           </first_editor>
           <second_editor />

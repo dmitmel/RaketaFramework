@@ -242,7 +242,7 @@ private static class FormGreeter implements RequestHandler {
 
 Бинарники - [`RaketaFramework-last.jar`](https://raw.githubusercontent.com/dmitmel/RaketaFramework/master/build/jar/RaketaFramework-last.jar)
 
-Исходники - [`RaketaFramework-last-sources.jar`](https://raw.githubusercontent.com/dmitmel/RaketaFramework/master/build/jar/RaketaFramework-last-sources.jar)
+Исходники - [`RaketaFramework-last-sources.jar`](https://raw.githubusercontent.com/dmitmel/RaketaFramework/master/build/jar/RaketaFramework-last-sources.zip)
 
 <h2 id="license">Лицензия</h2>
 
