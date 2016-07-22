@@ -1,0 +1,25 @@
+package github.dmitmel.raketaframework.util.exceptions;
+
+/**
+ * {@link %{jdk_package}.%{name}}
+ */
+public class %{name} extends %{parent} {
+    public %{name}() {
+    }
+
+    public %{name}(String message) {
+        super(message);
+    }
+
+    public %{name}(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public %{name}(Throwable cause) {
+        super(cause);
+    }
+
+    public static %{name} extractFrom(%{jdk_package}.%{name} e) {
+        return new %{name}(e.getMessage(), e.getCause());
+    }
+}

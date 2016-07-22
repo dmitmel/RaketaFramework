@@ -1,31 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <project name="RaketaFramework" default="build">
-    <!-- /////////////////////////////////// VARIABLES DECLARATION /////////////////////////////////// -->
-    <property name="dir.build.root" value="./build" />
-
-    <property name="dir.src.root" value="./src" />
-    <property name="dir.main.src" value="${dir.src.root}/main/java" />
-    <property name="dir.main.resources" value="${dir.src.root}/main/resources" />
-    <property name="dir.main.gen" value="${dir.src.root}/gen/java" />
-
-    <property name="dir.test.src" value="${dir.src.root}/test/java" />
-    <property name="dir.test.resources" value="${dir.src.root}/test/resources" />
-
-    <property name="dir.main.bin" value="${dir.build.root}/main" />
-    <property name="dir.main.jar" value="${dir.build.root}/jar" />
-    <property name="dir.test.bin" value="${dir.build.root}/test" />
-
+    <!-- /////////////////////////////////// DATA DECLARATION /////////////////////////////////// -->
+    <property name="build.dir.root" value="./build" />
+    
     <property name="product.author" value="Dmitriy Meleshko" />
-    <property name="product.version" value="1.0" />
-
+    <loadfile srcfile="./version.txt" property="product.version">
+        <filterchain>
+            <deletecharacters chars="\n\r\t\v\f " />
+        </filterchain>
+    </loadfile>
+    
+    <property name="src.dir.root" value="./src" />
+    <property name="src.file.zip" value="${build.dir.root}/${ant.project.name}-${product.version}-src.zip" />
+    
+    <property name="main.dir.src" value="${src.dir.root}/main/java" />
+    <property name="main.dir.resources" value="${src.dir.root}/main/resources" />
+    <property name="main.dir.gen" value="${src.dir.root}/gen/java" />
+    <property name="main.dir.bin" value="${build.dir.root}/main" />
+    <property name="main.file.jar" value="${build.dir.root}/${ant.project.name}-${product.version}.jar" />
+    
+    <property name="test.dir.src" value="${src.dir.root}/test/java" />
+    <property name="test.dir.resources" value="${src.dir.root}/test/resources" />
+    <property name="test.dir.bin" value="${build.dir.root}/test" />
+    <property name="test.file.jar" value="${build.dir.root}/${ant.project.name}-${product.version}-test.jar" />
+    
     <tstamp>
         <!--
             Getting date in GMT format.
 
             EEE    abbreviated name of weekday
             MMM    abbreviated name of month
-            d      day in month number
+            d      number of day in month
             yyyy   4-digit number of year
             hh     hour, 12-hour format
             mm     minute
@@ -35,73 +41,78 @@
         -->
         <format property="build.date" pattern="EEE, MMM d, yyyy hh:mm:ss a z" />
     </tstamp>
-
+    
     <property name="dir.libs" value="./libs" />
-
+    
     <property name="dir.javadoc" value="./javadoc" />
-    <!-- /////////////////////////////////// END OF VARIABLES DECLARATION /////////////////////////////////// -->
-
-    <target name="build" depends="clear, generate-sources, compile, test:compile, resources, test:resources, jars, sources" />
-
+    <!-- /////////////////////////////////// END OF DATA DECLARATION /////////////////////////////////// -->
+    
+    <target name="build" depends="clear, generate, compile, resources, jars, sources, test:compile, test:resources, test:jars, copy-last-jar-versions" />
+    
     <!-- /////////////////////////////////// TARGETS DECLARATION /////////////////////////////////// -->
     <target name="clear">
-        <delete dir="${dir.build.root}" />
+        <delete dir="${build.dir.root}" />
     </target>
-
-    <target name="generate-sources">
+    
+    <target name="generate">
         <exec executable="ruby">
-            <arg value="./Sources-Generator/main.rb" />
+            <arg line="./Sources-Generator/main.rb" />
         </exec>
     </target>
-
+    
     <target name="compile">
-        <mkdir dir="${dir.main.bin}" />
-
-        <!-- Option "includeantruntime" is very important - it allows compiling multiple times.
+        <mkdir dir="${main.dir.bin}" />
+        
+        <!-- Option "includeantruntime" is very important - it allows project compilation multiple times.
              Option "includejavaruntime" just adds default JRE-libraries to classpath. -->
-        <javac srcdir="${dir.main.src}" destdir="${dir.main.bin}" debug="true" includeantruntime="true"
+        <javac srcdir="${main.dir.src}" destdir="${main.dir.bin}" debug="true" includeantruntime="true"
                includejavaruntime="true" encoding="UTF-8">
             <!-- Add your paths to libraries here. -->
-
+            
+            <!-- Pattern for including all JARs in the libraries directory. -->
+            <classpath>
+                <fileset dir="${dir.libs}" includes="*.jar" />
+            </classpath>
+            
             <!-- Path to generated sources. -->
-            <sourcepath location="${dir.main.gen}" />
+            <sourcepath location="${main.dir.gen}" />
         </javac>
     </target>
-
+    
     <target name="test:compile">
-        <mkdir dir="${dir.test.bin}" />
-
+        <mkdir dir="${test.dir.bin}" />
+        
         <!-- Option "includeantruntime" is very important - it allows compiling multiple times.
              Option "includejavaruntime" just adds default JRE-libraries to classpath. -->
-        <javac srcdir="${dir.test.src}" destdir="${dir.test.bin}" debug="true" includeantruntime="true"
+        <javac srcdir="${test.dir.src}" destdir="${test.dir.bin}" debug="true" includeantruntime="true"
                includejavaruntime="true" encoding="UTF-8">
-            <classpath location="${dir.main.bin}" />
+            <classpath location="${main.dir.bin}" />
             <!-- Paths to JUnit. -->
             <classpath location="${dir.libs}/junit-4.12.jar" />
             <classpath location="${dir.libs}/hamcrest-core-1.3.jar" />
         </javac>
     </target>
-
+    
     <target name="resources">
-        <copy todir="${dir.main.bin}">
-            <fileset dir="${dir.main.resources}" includes="**/*"/>
+        <copy todir="${main.dir.bin}">
+            <fileset dir="${main.dir.resources}" includes="**/*" />
         </copy>
     </target>
-
+    
     <target name="test:resources">
-        <copy todir="${dir.test.bin}">
-            <fileset dir="${dir.test.resources}" includes="**/*"/>
+        <copy todir="${test.dir.bin}">
+            <fileset dir="${test.dir.resources}" includes="**/*" />
         </copy>
     </target>
-
+    
     <target name="jars">
-        <jar destfile="${dir.main.jar}/${ant.project.name}-${product.version}.jar" basedir="${dir.main.bin}"
+        <jar destfile="${main.file.jar}" basedir="${main.dir.bin}"
              encoding="UTF-8">
             <manifest>
                 <attribute name="Manifest-Version" value="1.0" />
-                
+        
                 <!-- Add your custom MANIFEST.MF parameters here. -->
-                
+        
                 <attribute name="Ant-Version" value="${ant.version}" />
                 <attribute name="Built-On" value="${build.date}" />
                 <attribute name="Build-Version" value="${product.version}" />
@@ -110,21 +121,90 @@
             </manifest>
         </jar>
     </target>
-
+    
+    <target name="test:jars">
+        <jar destfile="${test.file.jar}" basedir="${test.dir.bin}"
+             encoding="UTF-8">
+            <manifest>
+                <attribute name="Manifest-Version" value="1.0" />
+        
+                <!-- Add your custom MANIFEST.MF parameters here. -->
+                <attribute name="Main-Class" value="github.dmitmel.raketaframework.tests.TestApplication" />
+        
+                <attribute name="Ant-Version" value="${ant.version}" />
+                <attribute name="Built-On" value="${build.date}" />
+                <attribute name="Build-Version" value="${product.version}" />
+                <attribute name="Project-Author" value="${product.author}" />
+                <attribute name="Project-Name" value="${ant.project.name}" />
+            </manifest>
+        </jar>
+    </target>
+    
     <target name="sources">
-        <zip destfile="${dir.main.jar}/${ant.project.name}-${product.version}-sources.zip">
+        <zip destfile="${src.file.zip}">
             <fileset dir="./" includes="src/**/*" />
         </zip>
     </target>
-
+    
+    <target name="copy-last-jar-versions">
+        <copy tofile="${build.dir.root}/${ant.project.name}-last.jar">
+            <file file="${main.file.jar}" />
+        </copy>
+    
+        <copy tofile="${build.dir.root}/${ant.project.name}-last-src.zip">
+            <file file="${src.file.zip}" />
+        </copy>
+        
+        <copy tofile="${build.dir.root}/${ant.project.name}-last-test.jar">
+            <file file="${test.file.jar}" />
+        </copy>
+    </target>
+    
     <target name="clean-javadoc">
         <delete dir="${dir.javadoc}" />
     </target>
-
+    
     <target name="javadoc" depends="clean-javadoc">
         <!-- Additional params allow all HTML tags in JavaDoc. -->
-        <javadoc sourcepath="${dir.main.src}" destdir="${dir.javadoc}" access="private"
-                 additionalparam="-Xdoclint:none -splitindex"/>
+        <javadoc sourcepath="${main.dir.src}" destdir="${dir.javadoc}" access="private"
+                 additionalparam="-Xdoclint:none -splitindex" />
     </target>
     <!-- /////////////////////////////////// END OF TARGETS DECLARATION /////////////////////////////////// -->
+    
+    
+    <!-- /////////////////////////////////// HELPER TARGETS DECLARATION /////////////////////////////////// -->
+    <target name="markdown:compile">
+        <!-- Target requires Markdown compiler from my GitHub repo https://github.com/dmitmel/common-mark-gen. -->
+        
+        <property name="md.document.style" value="https://raw.githubusercontent.com/sindresorhus/github-markdown-css/gh-pages/github-markdown.css" />
+        <property name="md.code.style" value="file:///${user.home}/node_modules/highlight.js/styles/github.css" />
+    
+        <echo message="Compiling &quot;README.md&quot;..." />
+        <exec executable="${user.home}/.common-mark-gen/common-mark-gen">
+            <arg line="--code-style ${md.code.style} --doc-style ${md.document.style} -1 README.md README.html" />
+        </exec>
+    
+        <echo message="Compiling &quot;README.ru.md&quot;..." />
+        <exec executable="${user.home}/.common-mark-gen/common-mark-gen">
+            <arg line="--code-style ${md.code.style} --doc-style ${md.document.style} -1 README.ru.md README.ru.html" />
+        </exec>
+    
+        <echo message="Compiling &quot;TESTING.md&quot;..." />
+        <exec executable="${user.home}/.common-mark-gen/common-mark-gen">
+            <arg line="--code-style ${md.code.style} --doc-style ${md.document.style} -1 TESTING.md TESTING.html" />
+        </exec>
+    
+        <echo message="Compiling &quot;TESTING.ru.md&quot;..." />
+        <exec executable="${user.home}/.common-mark-gen/common-mark-gen">
+            <arg line="--code-style ${md.code.style} --doc-style ${md.document.style} -1 TESTING.ru.md TESTING.ru.html" />
+        </exec>
+    </target>
+    
+    <target name="test-app:run">
+        <java classname="github.dmitmel.raketaframework.tests.TestApplication">
+            <classpath location="${build.dir.root}/RaketaFramework-last-test.jar" />
+            <classpath location="${build.dir.root}/RaketaFramework-last.jar" />
+        </java>
+    </target>
+    <!-- /////////////////////////////////// END OF HELPER TARGETS DECLARATION /////////////////////////////////// -->
 </project>

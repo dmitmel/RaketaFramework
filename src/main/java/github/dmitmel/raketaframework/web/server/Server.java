@@ -13,17 +13,17 @@ import java.util.function.Predicate;
 public class Server {
     public static final String DEFAULT_HOST = "localhost";
     public static final int DEFAULT_PORT = 8080;
-    public static final String DEFAULT_HOST_NAME = String.format("RaketaFramework/%s on %s %s",
+    public static final String DEFAULT_SERVER_NAME = String.format("RaketaFramework/%s on %s %s",
             Version.id(), System.getProperty("os.name"), System.getProperty("os.version"));
     public static final int DEFAULT_MAX_ACTIVE_THREADS_COUNT = 10;
 
-    public final HandlersList urls;
+    public final HandlersList handlersList;
 
     public final String host;
     public final int port;
 
-    /** Value, that will be used in HTTP-header "Server". Default value is {@link #DEFAULT_HOST_NAME}. */
-    public String serverName = DEFAULT_HOST_NAME;
+    /** Value, that will be used in HTTP-header "Server". Default value is {@link #DEFAULT_SERVER_NAME}. */
+    public String serverName = DEFAULT_SERVER_NAME;
 
     public Map<Integer, ErrorResponder> errorResponders = new HashMap<>(0);
 
@@ -34,12 +34,16 @@ public class Server {
 
     public int maxActiveThreads = DEFAULT_MAX_ACTIVE_THREADS_COUNT;
     private int activeThreads;
+    
+    private ServerSocket serverSocket;
+    
+    public boolean stopped = false;
 
-    public Server(HandlersList urls) {
-        this(urls, DEFAULT_HOST, DEFAULT_PORT);
+    public Server(HandlersList handlersList) {
+        this(handlersList, DEFAULT_HOST, DEFAULT_PORT);
     }
-    public Server(HandlersList urls, String host, int port) {
-        this.urls = urls;
+    public Server(HandlersList handlersList, String host, int port) {
+        this.handlersList = handlersList;
         this.port = port;
         this.host = host;
         this.errorResponders = DefaultErrorResponderMapMaker.makeMap();
@@ -50,10 +54,14 @@ public class Server {
             logger.log(LoggingLevel.INFO, "Starting server...");
 
             logger.log(LoggingLevel.STARTING_CONFIG, "Initializing server socket...");
-            ServerSocket serverSocket = initServerSocket();
+            serverSocket = initServerSocket();
+            
+            logger.log(LoggingLevel.STARTING_CONFIG, "Initializing shutdown hooks...");
+            initShutdownHooks();
 
             logger.log(LoggingLevel.INFO, String.format("Server started on address http://%s:%d/", host, port));
-            while (true) {
+            
+            while (!stopped) {
                 Socket clientSocket = serverSocket.accept();
                 acceptClient(clientSocket);
             }
@@ -65,7 +73,7 @@ public class Server {
             logger.exception(e);
         }
     }
-
+    
     private ServerSocket initServerSocket() {
         try {
             return new ServerSocket(port, 0, InetAddress.getByName(host));
@@ -83,6 +91,28 @@ public class Server {
         } catch (java.net.UnknownHostException e) {
             throw github.dmitmel.raketaframework.util.exceptions.UnknownHostException.extractFrom(e);
 
+        } catch (java.io.IOException e) {
+            throw github.dmitmel.raketaframework.util.exceptions.IOException.extractFrom(e);
+        }
+    }
+    
+    private void initShutdownHooks() {
+        Thread serverStopperShutdownHook = new Thread(this::stop);
+        serverStopperShutdownHook.setName("ServerStopperShutdownHook");
+        Runtime.getRuntime().addShutdownHook(new Thread(this::stop));
+    }
+    
+    public void stop() {
+        try {
+            System.err.println();
+        
+            logger.log(LoggingLevel.INFO, "Stopping server...");
+            stopped = true;
+        
+            logger.log(LoggingLevel.STOPPING_CONFIG, "Closing server socket...");
+            serverSocket.close();
+        
+            logger.log(LoggingLevel.INFO, "Server successfully stopped!");
         } catch (java.io.IOException e) {
             throw github.dmitmel.raketaframework.util.exceptions.IOException.extractFrom(e);
         }
@@ -109,7 +139,7 @@ public class Server {
         handlerThread.setDaemon(true);
 
         int acceptorIndex = activeThreads - 1;
-        String threadName = String.format("%s-%d", ClientHandler.class.getTypeName(), acceptorIndex);
+        String threadName = String.format("HandlerThread-%d", acceptorIndex);
         handlerThread.setName(threadName);
 
         handlerThread.start();
@@ -118,5 +148,4 @@ public class Server {
     private void waitUntilOpportunityToStartThread() {
         while (activeThreads >= maxActiveThreads);
     }
-
 }

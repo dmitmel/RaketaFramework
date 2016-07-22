@@ -1,0 +1,17 @@
+package github.dmitmel.raketaframework.web.errors;
+
+public class Error%{status} extends HTTPError {
+    public Error%{status}() {
+        super();
+    }
+
+    @Override
+    public int getCode() {
+        return %{status};
+    }
+
+    @Override
+    public String getDescription() {
+        return "%{description}";
+    }
+}

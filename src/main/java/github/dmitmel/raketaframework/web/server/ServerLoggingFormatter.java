@@ -9,7 +9,7 @@ class ServerLoggingFormatter {
     public static final String MESSAGE_FORMAT = "[%s]: %-23s %s";
 
     public String format(LoggingLevel level, String message) {
-        return String.format(MESSAGE_FORMAT, HTTPDateFormatter.formatCurrentDate(), level.toString() + ':', message);
+        return String.format(MESSAGE_FORMAT, HTTPDateFormatter.currentDateInRequestSummaryFormat(), level.toString() + ':', message);
     }
 
     public String formatException(Throwable e) {

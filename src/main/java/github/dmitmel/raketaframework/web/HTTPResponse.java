@@ -47,21 +47,25 @@ public class HTTPResponse extends HTTPMessage {
      */
     public static HTTPResponse fromRequestString(String request) {
         List<String> lines = Arrays.asList(request.split(LINE_SEPARATOR));
-
+        
         String statusLine = lines.get(0);
         String[] statusLineParts = statusLine.split(" ");
-
+        
         String protocol = statusLineParts[0];
         int statusCode = Integer.parseInt(statusLineParts[1]);
         String statusDescription = statusLineParts[2];
-
+        
         List<String> headersAndBodyLines = lines.subList(1, lines.size());
         Map<String, String> headers = new HashMap<>(0);
         ByteArrayOutputStream body = new ByteArrayOutputStream();
-
+        
         HTTPMessage.parseHeadersAndBodyFromLines(headersAndBodyLines, body, headers);
-
+        
         return new HTTPResponse(protocol, statusCode, statusDescription, headers, body.toByteArray());
+    }
+    
+    public String bodyToString() {
+        return new String(super.body);
     }
 
     @Override
@@ -70,6 +74,6 @@ public class HTTPResponse extends HTTPMessage {
     }
 
     public byte[] getBytes() {
-        return toByteArrayWithMainLine(String.format("%s %s %s", protocol, statusCode, statusDescription));
+        return super.toByteArrayWithMainLine(String.format("%s %s %s", super.protocol, statusCode, statusDescription));
     }
 }

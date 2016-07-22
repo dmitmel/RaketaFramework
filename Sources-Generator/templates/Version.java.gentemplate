@@ -1,0 +1,13 @@
+package github.dmitmel.raketaframework;
+
+public class Version {
+    private Version() {}
+
+    public static String id() {
+        return "%{version}";
+    }
+
+    public static void main(String[] args) {
+        System.out.println(id());
+    }
+}

@@ -12,11 +12,8 @@ import java.io.OutputStream;
 import java.lang.reflect.Method;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.text.DateFormat;
-import java.util.*;
 import java.util.HashMap;
 import java.util.Set;
-import java.util.TimeZone;
 import java.util.regex.Matcher;
 
 class ClientHandler implements Runnable {
@@ -68,7 +65,7 @@ class ClientHandler implements Runnable {
      	    So, now message is being generated, and date must be specified NOW. Also, if handle method took many time
      	    to execute - date added before execution wouldn't be valid.
              */
-            responseHeaders.put("Date", HTTPDateFormatter.currentDateInGMT());
+            responseHeaders.put("Date", HTTPDateFormatter.currentDateInGMTFormat());
 
             HTTPResponse outgoingMessage = new HTTPResponse("HTTP/1.1", responseStatusCode, responseStatusDescription,
                     responseHeaders, responseBody);
@@ -104,7 +101,7 @@ class ClientHandler implements Runnable {
     }
 
     private HandlersList.HandlerData getHandlerDataForURL(URL url) {
-        for (HandlersList.HandlerData handlerData : server.urls) {
+        for (HandlersList.HandlerData handlerData : server.handlersList) {
             Matcher matcher = handlerData.urlPattern.matcher(url.path);
             if (matcher.matches()) {
                 urlPatternMatcher = matcher;
@@ -129,7 +126,7 @@ class ClientHandler implements Runnable {
 
     private void addErrorDataToResponse(HTTPError httpError) {
         Document errorDocument = new Document();
-        server.errorResponders.get(httpError.getCode()).makeResponseDocument(errorDocument, httpError);
+        server.errorResponders.get(httpError.getCode()).makeResponseDocument(errorDocument);
 
         responseStatusCode = httpError.getCode();
         responseStatusDescription = httpError.getDescription();
@@ -202,7 +199,7 @@ class ClientHandler implements Runnable {
                 addRedirectDataToResponse(((RedirectionThrowable) cause).targetUrl);
             } else {
                 addErrorDataToResponse(new Error500());
-                server.logger.exception(e);
+                server.logger.exception(cause);
             }
 
         } catch (Exception e) {
@@ -216,7 +213,7 @@ class ClientHandler implements Runnable {
 
         String message = String.format("%s - - [%s] \"%s %s %s\" - %s %s",
                 NetUtils.inetSocketAddressToString(inetSocketAddress),
-                HTTPDateFormatter.formatCurrentDate(),
+                HTTPDateFormatter.currentDateInRequestSummaryFormat(),
                 incomingMessage.protocol, incomingMessage.method, incomingMessage.url.path,
                 responseStatusCode, responseStatusDescription);
         server.logger.log(LoggingLevel.REQUEST_SUMMARY, message);

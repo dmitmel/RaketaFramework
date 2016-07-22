@@ -10,6 +10,7 @@ module HTTPErrors
             501 => 'Not Implemented'
         }
         PACKAGE_DIR = real_path "#{GEN_DIR}/github/dmitmel/raketaframework/web/errors"
+        HTTP_ERROR_TEMPLATE = File.read(real_path "#{TEMPLATES_DIR}/HttpError.java.gentemplate")
 
         def create_packages
             FileUtils.mkdir_p(PACKAGE_DIR)
@@ -17,25 +18,11 @@ module HTTPErrors
 
         def create_files
             for status in HTTP_ERRORS_LIST.keys
-                content = <<JAVA
-package github.dmitmel.raketaframework.web.errors;
+                content = HTTP_ERROR_TEMPLATE % {
+                    :status => status,
+                    :description => HTTP_ERRORS_LIST[status]
+                }
 
-public class Error#{status} extends HTTPError {
-    public Error#{status}() {
-        super();
-    }
-
-    @Override
-    public int getCode() {
-        return #{status};
-    }
-
-    @Override
-    public String getDescription() {
-        return "#{HTTP_ERRORS_LIST[status]}";
-    }
-}
-JAVA
                 File.write("#{PACKAGE_DIR}/Error#{status}.java", content)
             end
 
@@ -48,7 +35,7 @@ public class DefaultErrorResponderMapMaker {
     public static Map<Integer, ErrorResponder> makeMap() {
         HashMap<Integer, ErrorResponder> map = new HashMap<>(#{HTTP_ERRORS_LIST.length});\n"
             for status in HTTP_ERRORS_LIST.keys
-                content += "        map.put(#{status}, DefaultErrorResponderFactory.makeResponder());   // #{HTTP_ERRORS_LIST[status]}\n"
+                content += "        map.put(#{status}, DefaultErrorResponderFactory.makeResponder(new Error#{status}()));   // #{HTTP_ERRORS_LIST[status]}\n"
             end
             content += "        return map;
     }

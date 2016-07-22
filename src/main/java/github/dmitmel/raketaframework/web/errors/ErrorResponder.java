@@ -7,5 +7,5 @@ import github.dmitmel.raketaframework.web.handle.Document;
  * {@link github.dmitmel.raketaframework.web.server.ClientHandler}, and receive document to build error text.
  */
 public interface ErrorResponder {
-    void makeResponseDocument(Document document, HTTPError httpError);
+    void makeResponseDocument(Document document);
 }

@@ -29,7 +29,7 @@ public class Main {
     @RequestURLPattern("/hello")
     private static class HelloHandler implements RequestHandler {
         @RequestMethod("GET")
-        private String GET(RequestData requestData) {
+        public String GET(RequestData requestData) {
             return "Hello World!\r\n" + 
                     "Hello World!";
         }
@@ -80,7 +80,7 @@ java -cp libs/RaketaFramework-1.0.jar Main
 @RequestURLPattern("/greet")
 private static class Greeter implements RequestHandler {
     @RequestMethod("GET")
-    private Document GET(RequestData requestData) {
+    public Document GET(RequestData requestData) {
         Document document = new Document();
         
         String who = requestData.getUrlParamOrElse("who", "World");
@@ -156,7 +156,7 @@ Hello, Dmitriy!
 @RequestURLPattern("/load-file")
 private static class FileLoader implements RequestHandler {
     @RequestMethod("GET")
-    private byte[] GET(RequestData requestData) {
+    public byte[] GET(RequestData requestData) {
         String fileName = requestData.getUrlParam("path");
         byte[] bytes = /* Немного кода для загрузки файлов... */;
         return bytes;
@@ -171,7 +171,7 @@ private static class FileLoader implements RequestHandler {
 @RequestURLPattern("/load-file/(.+)")
 private static class FileLoader implements RequestHandler {
     @RequestMethod("GET")
-    private byte[] GET(RequestData requestData) {
+    public byte[] GET(RequestData requestData) {
         String fileName = requestData.getMatcherGroup(0);
         byte[] bytes = /* Немного кода для загрузки файлов... */;
         return bytes;
@@ -194,12 +194,12 @@ private static class FileLoader implements RequestHandler {
 @RequestURLPattern("/form-greeter")
 private static class FormGreeter implements RequestHandler {
     @RequestMethod("GET")
-    private String GET(RequestData requestData) {
+    public String GET(RequestData requestData) {
         throw new RedirectionThrowable("/load-file/index.html");
     }
     
     @RequestMethod("POST")
-    private String POST(WebFormData form) {
+    public String POST(WebFormData form) {
         if (form.getFormParam("name") == null) throw new Error404();
         if (form.getFormParam("greet") == null) throw new Error404();
         
@@ -240,9 +240,11 @@ private static class FormGreeter implements RequestHandler {
 
 <h2 id="downloads">Загрузки</h2>
 
-Бинарники - [`RaketaFramework-last.jar`](https://raw.githubusercontent.com/dmitmel/RaketaFramework/master/build/jar/RaketaFramework-last.jar)
+Бинарники - [`RaketaFramework-last.jar`](https://raw.githubusercontent.com/dmitmel/RaketaFramework/master/build/RaketaFramework-last.jar)
 
-Исходники - [`RaketaFramework-last-sources.jar`](https://raw.githubusercontent.com/dmitmel/RaketaFramework/master/build/jar/RaketaFramework-last-sources.zip)
+Бинарники тестов - [`RaketaFramework-last-test.jar`](https://raw.githubusercontent.com/dmitmel/RaketaFramework/master/build/RaketaFramework-last-test.jar)
+
+Исходники - [`RaketaFramework-last-src.jar`](https://raw.githubusercontent.com/dmitmel/RaketaFramework/master/build/RaketaFramework-last-src.zip)
 
 <h2 id="license">Лицензия</h2>
 

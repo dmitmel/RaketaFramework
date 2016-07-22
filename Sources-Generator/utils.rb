@@ -4,3 +4,4 @@ def real_path(path)
 end
 
 GEN_DIR = real_path '../src/gen/java'
+TEMPLATES_DIR = './templates'

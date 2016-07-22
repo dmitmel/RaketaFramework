@@ -25,9 +25,5 @@
     "InvocationTargetException": {
         "jdk-package": "java.lang.reflect",
         "parent": "ReflectiveOperationException"
-    },
-
-    "URISyntaxException": {
-        "jdk-package": "java.net"
     }
 }

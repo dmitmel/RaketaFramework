@@ -29,10 +29,10 @@ public class DefaultErrorResponderFactory {
 
     }
 
-    public static ErrorResponder makeResponder() {
-        return (document, httpError) -> {
+    public static ErrorResponder makeResponder(HTTPError target) {
+        return (document) -> {
             document.mimeType = MIMETypes.PLAIN_TEXT;
-            document.writeln(httpError.toString());
+            document.writeln(target.toString());
         };
     }
 }

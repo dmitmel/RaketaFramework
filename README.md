@@ -29,7 +29,7 @@ public class Main {
     @RequestURLPattern("/hello")
     private static class HelloHandler implements RequestHandler {
         @RequestMethod("GET")
-        private String GET(RequestData requestData) {
+        public String GET(RequestData requestData) {
             return "Hello World!\r\n" + 
                     "Hello World!";
         }
@@ -77,7 +77,7 @@ which will return some greetings.
 @RequestURLPattern("/greet")
 private static class Greeter implements RequestHandler {
     @RequestMethod("GET")
-    private Document GET(RequestData requestData) {
+    public Document GET(RequestData requestData) {
         Document document = new Document();
         
         String who = requestData.getUrlParamOrElse("who", "World");
@@ -153,7 +153,7 @@ send path using URL param.
 @RequestURLPattern("/load-file")
 private static class FileLoader implements RequestHandler {
     @RequestMethod("GET")
-    private byte[] GET(RequestData requestData) {
+    public byte[] GET(RequestData requestData) {
         String fileName = requestData.getUrlParam("path");
         byte[] bytes = /* Some code for loading files... */;
         return bytes;
@@ -168,7 +168,7 @@ But, you can use Regexps!
 @RequestURLPattern("/load-file/(.+)")
 private static class FileLoader implements RequestHandler {
     @RequestMethod("GET")
-    private byte[] GET(RequestData requestData) {
+    public byte[] GET(RequestData requestData) {
         String fileName = requestData.getMatcherGroup(0);
         byte[] bytes = /* Some code for loading files... */;
         return bytes;
@@ -191,12 +191,12 @@ Let's create simple greeting-app.
 @RequestURLPattern("/form-greeter")
 private static class FormGreeter implements RequestHandler {
     @RequestMethod("GET")
-    private String GET(RequestData requestData) {
+    public String GET(RequestData requestData) {
         throw new RedirectionThrowable("/load-file/index.html");
     }
     
     @RequestMethod("POST")
-    private String POST(WebFormData form) {
+    public String POST(WebFormData form) {
         if (form.getFormParam("name") == null) throw new Error404();
         if (form.getFormParam("greet") == null) throw new Error404();
         
@@ -237,9 +237,11 @@ That's all! But, some notes about code:
 
 <h2 id="downloads">Downloads</h2>
 
-Binaries - [`RaketaFramework-last.jar`](https://raw.githubusercontent.com/dmitmel/RaketaFramework/master/build/jar/RaketaFramework-last.jar)
+Binaries - [`RaketaFramework-last.jar`](https://raw.githubusercontent.com/dmitmel/RaketaFramework/master/build/RaketaFramework-last.jar)
 
-Sources - [`RaketaFramework-last-sources.jar`](https://raw.githubusercontent.com/dmitmel/RaketaFramework/master/build/jar/RaketaFramework-last-sources.zip)
+Test binaries - [`RaketaFramework-last-test.jar`](https://raw.githubusercontent.com/dmitmel/RaketaFramework/master/build/RaketaFramework-last-test.jar)
+
+Sources - [`RaketaFramework-last-src.jar`](https://raw.githubusercontent.com/dmitmel/RaketaFramework/master/build/RaketaFramework-last-src.zip)
 
 <h2 id="license">License</h2>
 Copyright (c) 2016 Meleshko Dmitriy

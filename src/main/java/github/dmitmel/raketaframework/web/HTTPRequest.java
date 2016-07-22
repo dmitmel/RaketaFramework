@@ -68,6 +68,6 @@ public class HTTPRequest extends HTTPMessage {
     }
 
     public byte[] getBytes() {
-        return toByteArrayWithMainLine(String.format("%s %s %s", method, url, protocol));
+        return super.toByteArrayWithMainLine(String.format("%s %s %s", method, url, super.protocol));
     }
 }
