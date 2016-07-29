@@ -1,4 +1,4 @@
-package github.dmitmel.raketaframework.errors;
+package org.willthisfly.raketaframework.errors;
 
 public class Error%{status} extends HTTPError {
     public Error%{status}() {

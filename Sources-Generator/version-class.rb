@@ -2,7 +2,7 @@ require 'fileutils'
 
 module VersionClass
     class Logic
-        PACKAGE_DIR = real_path "#{GEN_DIR}/github/dmitmel/raketaframework"
+        PACKAGE_DIR = real_path "#{GEN_DIR}/org/willthisfly/raketaframework"
         TEMPLATE = File.read(real_path "#{TEMPLATES_DIR}/Version.java.gentemplate")
         VERSION = File.read(real_path '../version.txt').strip
 

@@ -1,4 +1,4 @@
-package github.dmitmel.raketaframework;
+package org.willthisfly.raketaframework;
 
 public class Version {
     private Version() {

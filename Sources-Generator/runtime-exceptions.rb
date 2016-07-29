@@ -4,7 +4,7 @@ require 'json'
 module RuntimeExceptions
     class Logic
         RUNTIME_EXCEPTIONS_LIST = JSON.parse(File.read(real_path './runtime-exceptions.json'))
-        PACKAGE_DIR = real_path "#{GEN_DIR}/github/dmitmel/raketaframework/exceptions"
+        PACKAGE_DIR = real_path "#{GEN_DIR}/org/willthisfly/raketaframework/exceptions"
         TEMPLATE = File.read(real_path "#{TEMPLATES_DIR}/RuntimeException.java.gentemplate")
 
         def create_packages

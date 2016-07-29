@@ -10,7 +10,7 @@ module HTTPErrors
             500 => 'Internal Server Error',
             501 => 'Not Implemented'
         }
-        PACKAGE_DIR = real_path "#{GEN_DIR}/github/dmitmel/raketaframework/errors"
+        PACKAGE_DIR = real_path "#{GEN_DIR}/org/willthisfly/raketaframework/errors"
         HTTP_ERROR_TEMPLATE = File.read(real_path "#{TEMPLATES_DIR}/HttpError.java.gentemplate")
 
         def create_packages
@@ -27,7 +27,7 @@ module HTTPErrors
                 File.write("#{PACKAGE_DIR}/Error#{status}.java", content)
             end
 
-            content = "package github.dmitmel.raketaframework.errors;
+            content = "package org.willthisfly.raketaframework.errors;
 
 import java.util.Map;
 import java.util.HashMap;
