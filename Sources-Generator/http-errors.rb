@@ -1,4 +1,5 @@
 require 'fileutils'
+require_relative 'utils'
 
 module HTTPErrors
     class Logic
@@ -9,7 +10,7 @@ module HTTPErrors
             500 => 'Internal Server Error',
             501 => 'Not Implemented'
         }
-        PACKAGE_DIR = real_path "#{GEN_DIR}/github/dmitmel/raketaframework/web/errors"
+        PACKAGE_DIR = real_path "#{GEN_DIR}/github/dmitmel/raketaframework/errors"
         HTTP_ERROR_TEMPLATE = File.read(real_path "#{TEMPLATES_DIR}/HttpError.java.gentemplate")
 
         def create_packages
@@ -26,7 +27,7 @@ module HTTPErrors
                 File.write("#{PACKAGE_DIR}/Error#{status}.java", content)
             end
 
-            content = "package github.dmitmel.raketaframework.web.errors;
+            content = "package github.dmitmel.raketaframework.errors;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -35,7 +36,7 @@ public class DefaultErrorResponderMapMaker {
     public static Map<Integer, ErrorResponder> makeMap() {
         HashMap<Integer, ErrorResponder> map = new HashMap<>(#{HTTP_ERRORS_LIST.length});\n"
             for status in HTTP_ERRORS_LIST.keys
-                content += "        map.put(#{status}, DefaultErrorResponderFactory.makeResponder(new Error#{status}()));   // #{HTTP_ERRORS_LIST[status]}\n"
+                content += "        map.put(#{status}, DefaultErrorResponderFactory.makeResponderForError(new Error#{status}()));   // #{HTTP_ERRORS_LIST[status]}\n"
             end
             content += "        return map;
     }

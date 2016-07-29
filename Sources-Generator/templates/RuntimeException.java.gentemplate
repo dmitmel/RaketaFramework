@@ -1,4 +1,4 @@
-package github.dmitmel.raketaframework.util.exceptions;
+package github.dmitmel.raketaframework.exceptions;
 
 /**
  * {@link %{jdk_package}.%{name}}

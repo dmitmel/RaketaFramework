@@ -25,5 +25,13 @@
     "InvocationTargetException": {
         "jdk-package": "java.lang.reflect",
         "parent": "ReflectiveOperationException"
+    },
+    "InstantiationException": {
+        "jdk-package": "java.lang",
+        "parent": "ReflectiveOperationException"
+    },
+    "NoSuchMethodException": {
+        "jdk-package": "java.lang",
+        "parent": "ReflectiveOperationException"
     }
 }

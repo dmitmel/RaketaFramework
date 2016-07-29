@@ -1,4 +1,4 @@
-package github.dmitmel.raketaframework.web.errors;
+package github.dmitmel.raketaframework.errors;
 
 public class Error%{status} extends HTTPError {
     public Error%{status}() {

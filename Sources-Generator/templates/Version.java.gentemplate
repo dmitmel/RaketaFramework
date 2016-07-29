@@ -1,7 +1,10 @@
 package github.dmitmel.raketaframework;
 
 public class Version {
-    private Version() {}
+    private Version() {
+        throw new RuntimeException("Can\'t create instance of Version");
+    }
+
 
     public static String id() {
         return "%{version}";

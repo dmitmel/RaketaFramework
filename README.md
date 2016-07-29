@@ -1,5 +1,7 @@
 # RaketaFramework
 
+#### This tutorial is too old. It'll be updated soon.
+
 ## Contents
 
 1. [Hello World!](#hello)
@@ -16,8 +18,8 @@ RaketaFramework will show "Hello World!" twice :). Well, let's write some code:
 
 ##### Main.java:
 ```java
-import github.dmitmel.raketaframework.web.handle.*;
-import github.dmitmel.raketaframework.web.server.*;
+import github.dmitmel.raketaframework.handle.*;
+import github.dmitmel.raketaframework.server.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -51,20 +53,20 @@ Well, now I'll describe some things in code.
 ### Code parts
 
 1. All request handlers (for example, `HelloHandler`) must implement empty marker-interface 
-[`github.dmitmel.raketaframework.web.handle.RequestHandler`](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/web/handle/RequestHandler.java)
+[`github.dmitmel.raketaframework.handle.RequestHandler`](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/handle/RequestHandler.java)
 and be annotated by
-[`github.dmitmel.raketaframework.web.handle.RequestURLPattern`](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/web/handle/RequestURLPattern.java).
+[`github.dmitmel.raketaframework.handle.RequestURLPattern`](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/handle/RequestURLPattern.java).
 This annotation can set Regexp for URLs, which can be handled by this handler. Groups are supported, you can read about them in
 next parts.
 
 2. All handler methods must have 1 parameter and return value. You can read more detailed info about signatures
-[here](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/web/handle/RequestMethod.java).
+[here](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/handle/RequestMethod.java).
 Also, they must be annotated using annotation
-[`github.dmitmel.raketaframework.web.handle.RequestMethod`](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/web/handle/RequestMethod.java).
-This annotation describes on which web-method this Java-method will be used. But, you can't set handler for `OPTIONS` - 
-this method must return supported web-methods.
+[`github.dmitmel.raketaframework.handle.RequestMethod`](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/handle/RequestMethod.java).
+This annotation describes on which-method this Java-method will be used. But, you can't set handler for `OPTIONS` - 
+this method must return supported-methods.
 
-3. Class [`github.dmitmel.raketaframework.web.handle.RequestData`](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/web/handle/RequestData.java)
+3. Class [`github.dmitmel.raketaframework.handle.RequestData`](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/handle/RequestData.java)
 stores data about request.
 
 <h2 id="params">Reading URL parameters</h2>
@@ -103,11 +105,11 @@ handlersList.add(new Greeter());
 
 What's new?
 
-1. Class [`github.dmitmel.raketaframework.web.handle.Document`](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/web/handle/Document.java).
+1. Class [`github.dmitmel.raketaframework.handle.Document`](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/handle/Document.java).
 It works like stream or `java.lang.StringBuilder` - you can append it's data. It stores binary data, so you can put there
 image.
-2. Methods [`RequestData#getUrlParamOrElse`](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/web/handle/RequestData.java#L27)
-and [`RequestData#getUrlParam`](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/web/handle/RequestData.java#L24).
+2. Methods [`RequestData#getUrlParamOrElse`](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/handle/RequestData.java#L27)
+and [`RequestData#getUrlParam`](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/handle/RequestData.java#L24).
 These methods simply return one of params in URL.
 
 Now, let's use class `Greeter`!
@@ -142,7 +144,7 @@ As I said in the 1^st^ part,
 > next parts.
 
 Yeah, I'm talking about Regexps, URLs, and annotation
-[`github.dmitmel.raketaframework.web.handle.RequestURLPattern`](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/web/handle/RequestURLPattern.java).
+[`github.dmitmel.raketaframework.handle.RequestURLPattern`](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/handle/RequestURLPattern.java).
 Time to talk about them!
 
 Let's imagine, that we're making handler for serving files. Client must send path of file. For example, he/she/it can
@@ -176,13 +178,13 @@ private static class FileLoader implements RequestHandler {
 }
 ```
 
-Methods [`RequestData#getMatcherGroup`](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/web/handle/RequestData.java#L31)
-and [`RequestData#getMatcherGroupOrElse`](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/web/handle/RequestData.java#L34)
+Methods [`RequestData#getMatcherGroup`](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/handle/RequestData.java#L31)
+and [`RequestData#getMatcherGroupOrElse`](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/handle/RequestData.java#L34)
 return match groups from URL Regexp.
 
 <h2 id="forms">Receiving forms</h2>
 
-Many web-applications use forms. But how to receive them using RaketaFramework?
+Many-applications use forms. But how to receive them using RaketaFramework?
 
 Let's create simple greeting-app.
 
@@ -231,9 +233,9 @@ private static class FormGreeter implements RequestHandler {
 That's all! But, some notes about code:
 
 1. You can send to client HTTP errors. To use them, you must just throw exception with name 
-[`Error${STATE}`](https://github.com/dmitmel/RaketaFramework/tree/master/src/gen/java/github/dmitmel/raketaframework/web/errors).
+[`Error${STATE}`](https://github.com/dmitmel/RaketaFramework/tree/master/src/gen/java/github/dmitmel/raketaframework/errors).
 2. To redirect user to other page, you must throw 
-[`github.dmitmel.raketaframework.web.handle.RedirectionThrowable`](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/web/handle/RedirectionThrowable.java)
+[`github.dmitmel.raketaframework.handle.RedirectionThrowable`](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/handle/RedirectionThrowable.java)
 
 <h2 id="downloads">Downloads</h2>
 

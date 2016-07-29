@@ -1,8 +1,8 @@
 require 'fileutils'
-require_relative 'utils'
 require_relative 'http-errors'
 require_relative 'runtime-exceptions'
 require_relative 'version-class'
+require_relative 'utils'
 
 def clear_gen_dir
     FileUtils.rm_r GEN_DIR if File.exists? GEN_DIR

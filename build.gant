@@ -1,0 +1,224 @@
+import java.text.SimpleDateFormat
+
+ant.project.name = ant.project.baseDir.name
+
+buildRoot = './build'
+
+sourcesRoot = './src'
+
+mainRoot = "$sourcesRoot/main"
+mainSources = "$mainRoot/java"
+mainResources = "$mainRoot/resources"
+mainGeneratedSources = "$sourcesRoot/gen/java"
+mainBinaries = "$buildRoot/main"
+
+testRoot = "$sourcesRoot/test"
+testSources = "$testRoot/java"
+testResources = "$testRoot/resources"
+testBinaries = "$buildRoot/test"
+
+projectAuthor = 'Dmitriy Meleshko'
+projectVersion = new File("./version.txt").text.trim()
+
+static String formatCurrentDate(String format) {
+    return new SimpleDateFormat(format).format(new Date())
+}
+
+// Getting date in GMT format.
+// EEE    abbreviated name of weekday
+// MMM    abbreviated name of month
+// d      number of day in month
+// yyyy   4-digit number of year
+// hh     hour, 12-hour format
+// mm     minute
+// ss     second
+// a      PM or AM
+// z      abbreviated name of time-zone
+buildDate = formatCurrentDate("EEE, MMM d, yyyy hh:mm:ss a z")
+
+librariesDirectory = './libs'
+javadocDirectory = './javadoc'
+
+void clearBuildDirectory() {
+    delete(dir: buildRoot)
+}
+
+void generateSources() {
+    exec(executable: 'ruby') {
+        arg(line: './Sources-Generator/main.rb')
+    }
+}
+
+void compileMainSources() {
+    mkdir(dir: mainBinaries)
+    
+    // Setting option "includeantruntime" to false is very important - it allows repeatable builds
+    // Option "includejavaruntime" just adds default JRE-libraries to classpath
+    javac([srcdir            : mainSources, destdir: mainBinaries, debug: true, includeantruntime: false,
+           includejavaruntime: true, encoding: 'UTF-8']) {
+        // Add your paths to libraries here using construction:
+        // classpath(location: '/path/to/library.jar')
+        
+        // Pattern for including all JARs in the libraries directory
+        classpath {
+            fileset([dir: librariesDirectory, includes: '*.jar'])
+        }
+        
+        sourcepath(location: mainGeneratedSources)
+    }
+}
+
+void putMainResourcesToMainBinaries() {
+    copy(todir: mainBinaries) {
+        fileset([dir: mainResources, includes: '**/*'])
+    }
+}
+
+void createMainJar() {
+    String jarFile = "$buildRoot/${ant.project.name}-${projectVersion}.jar"
+    
+    jar([destfile: jarFile, basedir: mainBinaries, encoding: 'UTF-8']) {
+        manifest {
+            attribute([name: 'Manifest-Version', value: '1.0'])
+            
+            // Add your custom MANIFEST.MF parameters here
+            
+            attribute([name: 'Ant-Version', value: getProperty('ant.version')])
+            attribute([name: 'Built-On', value: buildDate])
+            attribute([name: 'Build-Version', value: projectVersion])
+            attribute([name: 'Project-Author', value: projectAuthor])
+            attribute([name: 'Project-Name', value: ant.project.name])
+        }
+    }
+    
+    copy(tofile: "$buildRoot/${ant.project.name}-last.jar") {
+        file(file: jarFile)
+    }
+}
+
+void compileTestSources() {
+    mkdir(dir: testBinaries)
+    
+    // Setting option "includeantruntime" to false is very important - it allows repeatable builds
+    // Option "includejavaruntime" just adds default JRE-libraries to classpath
+    javac([srcdir            : testSources, destdir: testBinaries, debug: true, includeantruntime: false,
+           includejavaruntime: true, encoding: 'UTF-8']) {
+        classpath(location: mainBinaries)
+        
+        // Paths to JUnit
+        classpath(location: "${librariesDirectory}/junit-4.12.jar")
+        classpath(location: "${librariesDirectory}/hamcrest-core-1.3.jar")
+    }
+}
+
+void putTestResourcesToTestBinaries() {
+    copy(todir: testBinaries) {
+        fileset([dir: testResources, includes: '**/*'])
+    }
+}
+
+void createTestsJar() {
+    String jarFile = "$buildRoot/${ant.project.name}-${projectVersion}-tests.jar"
+    
+    jar([destfile: jarFile, basedir: testBinaries,
+         encoding: 'UTF-8']) {
+        manifest {
+            attribute([name: 'Manifest-Version', value: '1.0'])
+            
+            // Add your custom MANIFEST.MF parameters here
+            
+            attribute([name: 'Ant-Version', value: getProperty('ant.version')])
+            attribute([name: 'Built-On', value: buildDate])
+            attribute([name: 'Build-Version', value: projectVersion])
+            attribute([name: 'Project-Author', value: projectAuthor])
+            attribute([name: 'Project-Name', value: ant.project.name])
+        }
+    }
+    
+    copy(tofile: "$buildRoot/${ant.project.name}-last-tests.jar") {
+        file(file: jarFile)
+    }
+}
+
+void createSourcesZip() {
+    String zipFile = "$buildRoot/${ant.project.name}-${projectVersion}-src.zip"
+    
+    zip(destfile: zipFile) {
+        fileset([dir: './', includes: 'src/**/*'])
+    }
+    
+    copy(tofile: "$buildRoot/${ant.project.name}-last-src.zip") {
+        file(file: zipFile)
+    }
+}
+
+void build() {
+    echo(message: 'Running target \'compile\'...')
+    compileMainSources()
+    
+    echo(message: 'Running target \'resources\'...')
+    putMainResourcesToMainBinaries()
+    
+    echo(message: 'Running target \'jars\'...')
+    createMainJar()
+    
+    echo(message: 'Running target \'test:compile\'...')
+    compileTestSources()
+    
+    echo(message: 'Running target \'test:resources\'...')
+    putTestResourcesToTestBinaries()
+    
+    echo(message: 'Running target \'test:jars\'...')
+    createTestsJar()
+    
+    echo(message: 'Running target \'sources\'...')
+    createSourcesZip()
+}
+
+target(name: 'default') { build() }
+target(name: 'build') { build() }
+target(name: 'clear') { clearBuildDirectory() }
+target(name: 'sources:generate') { generateSources() }
+target(name: 'compile') { compileMainSources() }
+target(name: 'resources') { putMainResourcesToMainBinaries() }
+target(name: 'jars') { createMainJar() }
+target(name: 'test:compile') { compileTestSources() }
+target(name: 'test:resources') { putTestResourcesToTestBinaries() }
+target(name: 'test:jars') { createTestsJar() }
+target(name: 'sources') { createSourcesZip() }
+
+target(name: 'javadoc:compile') {
+    javadoc([sourcepath     : mainSources, destdir: javadocDirectory, access: 'private',
+             additionalparam: '-Xdoclint:none -splitindex'])
+}
+
+target(name: 'javadoc:clear') {
+    delete(dir: javadocDirectory)
+}
+
+void compileMarkdown(Map<String, String> options) {
+    String userHome = System.getProperty('user.home')
+    String documentStyle = "file://$userHome/.common-mark-gen/github-markdown.css"
+    String codeStyle = "file://${userHome}/node_modules/highlight.js/styles/github.css"
+    String compilerExecutable = "${userHome}/.common-mark-gen/common-mark-gen"
+    
+    echo(message: "Compiling \"${options['from']}\"...")
+    exec(executable: compilerExecutable) {
+        arg(line: "--code-style $codeStyle --doc-style $documentStyle -1 ${options['from']} ${options['to']}")
+    }
+}
+
+target(name: 'markdown:compile') {
+    // Target requires Markdown compiler from my GitHub repo https://github.com/dmitmel/common-mark-gen
+    compileMarkdown([from: 'README.md', to: 'README.html'])
+    compileMarkdown([from: 'README.ru.md', to: 'README.ru.html'])
+    compileMarkdown([from: 'TESTING.md', to: 'TESTING.html'])
+    compileMarkdown([from: 'TESTING.ru.md', to: 'TESTING.ru.html'])
+}
+
+target(name: 'test-app:run') {
+    java(classname:'github.dmitmel.raketaframework.tests.TestApplication') {
+        classpath(location: "$buildRoot/RaketaFramework-last-tests.jar")
+        classpath(location: "$buildRoot/RaketaFramework-last.jar")
+    }
+}

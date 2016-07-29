@@ -1,5 +1,7 @@
 # RaketaFramework
 
+#### Этот туториал слишком старый. Он будет скоро обновлён.
+
 ## Содержание
 
 1. [Hello World!](#hello)
@@ -16,8 +18,8 @@ RaketaFramework'е будет показывать "Hello World!" дважды :
 
 ##### Main.java:
 ```java
-import github.dmitmel.raketaframework.web.handle.*;
-import github.dmitmel.raketaframework.web.server.*;
+import github.dmitmel.raketaframework.handle.*;
+import github.dmitmel.raketaframework.server.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -52,22 +54,22 @@ java -cp libs/RaketaFramework-1.0.jar Main
 ### Code parts
 
 1. Все обработчики запросов (например, `HelloHandler`) должны реализовать пустой интрефейс-маркер
-[`github.dmitmel.raketaframework.web.handle.RequestHandler`](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/web/handle/RequestHandler.java)
+[`github.dmitmel.raketaframework.handle.RequestHandler`](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/handle/RequestHandler.java)
 и быть аннотированы аннотацией
-[`github.dmitmel.raketaframework.web.handle.RequestURLPattern`](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/web/handle/RequestURLPattern.java).
+[`github.dmitmel.raketaframework.handle.RequestURLPattern`](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/handle/RequestURLPattern.java).
 Эта аннотация может установить Regexp для URL'ов, которые могут быть обработаными этим обработчиком. Поддерживаются
 группы, ты можешь почитать про них в следуйших частях.
 
 2. Все методы-обработчики должны иметь 1 параметер и возвращать значение. Ты можешь почитать более детализированую
 информацию о сигнатурах
-[здесь](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/web/handle/RequestMethod.java).
+[здесь](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/handle/RequestMethod.java).
 Также, методы-обработчики должны быть аннотированы аннотацией
-[`github.dmitmel.raketaframework.web.handle.RequestMethod`](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/web/handle/RequestMethod.java).
+[`github.dmitmel.raketaframework.handle.RequestMethod`](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/handle/RequestMethod.java).
 Эта аннотация описывает на каком веб-методе этот Java-метод будет использован. Но, ты не можешь установить
 обработчик для `OPTIONS` - 
 этот метод должен вернуть поддерживаемые методы.
 
-3. Класс [`github.dmitmel.raketaframework.web.handle.RequestData`](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/web/handle/RequestData.java)
+3. Класс [`github.dmitmel.raketaframework.handle.RequestData`](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/handle/RequestData.java)
 хранит информацию о запросе.
 
 <h2 id="params">Чтение параметров URL'ов</h2>
@@ -106,11 +108,11 @@ handlersList.add(new Greeter());
 
 Что нового?
 
-1. Класс [`github.dmitmel.raketaframework.web.handle.Document`](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/web/handle/Document.java).
+1. Класс [`github.dmitmel.raketaframework.handle.Document`](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/handle/Document.java).
 Он работает на подобии потока или `java.lang.StringBuilder` - ты можешь добавлять в него данные. Он хранит 
 бинарные данные, так что ты можешь положить туда картинку.
-2. Методы [`RequestData#getUrlParamOrElse`](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/web/handle/RequestData.java#L27)
-и [`RequestData#getUrlParam`](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/web/handle/RequestData.java#L24).
+2. Методы [`RequestData#getUrlParamOrElse`](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/handle/RequestData.java#L27)
+и [`RequestData#getUrlParam`](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/handle/RequestData.java#L24).
 Эти методы просто возвращают один из параметров URL'а.
 
 Теперь, давайте поиспользуем класс `Greeter`!
@@ -145,7 +147,7 @@ Hello, Dmitriy!
 > группы, ты можешь почитать про них в следуйших частях.
 
 Да, я говорю о Regexp'ах, URL'ах, и аннотации
-[`github.dmitmel.raketaframework.web.handle.RequestURLPattern`](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/web/handle/RequestURLPattern.java).
+[`github.dmitmel.raketaframework.handle.RequestURLPattern`](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/handle/RequestURLPattern.java).
 Время поговорить о них!
 
 Давайте представим, что мы делаем обработчик для раздачи файлов. Клиент должен отправить путь к файлу. Например, 
@@ -179,8 +181,8 @@ private static class FileLoader implements RequestHandler {
 }
 ```
 
-Методы [`RequestData#getMatcherGroup`](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/web/handle/RequestData.java#L31)
-и [`RequestData#getMatcherGroupOrElse`](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/web/handle/RequestData.java#L34)
+Методы [`RequestData#getMatcherGroup`](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/handle/RequestData.java#L31)
+и [`RequestData#getMatcherGroupOrElse`](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/handle/RequestData.java#L34)
 возвращают группы совпадения из Regexp'а URL'а.
 
 <h2 id="forms">Получение форм</h2>
@@ -234,9 +236,9 @@ private static class FormGreeter implements RequestHandler {
 Это всё! Но, немного заметок о коде:
 
 1. Ты можешь отсылать клиенту ошибки HTTP. Чтоб использовать их, ты должен просто вызвать исключение с именем 
-[`Error${STATE}`](https://github.com/dmitmel/RaketaFramework/tree/master/src/gen/java/github/dmitmel/raketaframework/web/errors).
+[`Error${STATE}`](https://github.com/dmitmel/RaketaFramework/tree/master/src/gen/java/github/dmitmel/raketaframework/errors).
 2. Чтобы перенаправить пользователя на другую страницу, ты должен вызвать исключение
-[`github.dmitmel.raketaframework.web.handle.RedirectionThrowable`](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/web/handle/RedirectionThrowable.java)
+[`github.dmitmel.raketaframework.handle.RedirectionThrowable`](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/handle/RedirectionThrowable.java)
 
 <h2 id="downloads">Загрузки</h2>
 

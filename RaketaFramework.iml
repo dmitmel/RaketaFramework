@@ -16,5 +16,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="TEST" name="junit-4.12" level="project" />
+    <orderEntry type="library" name="Groovy 2.4.7" level="application" />
   </component>
 </module>

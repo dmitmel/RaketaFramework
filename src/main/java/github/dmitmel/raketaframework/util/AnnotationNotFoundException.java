@@ -1,10 +1,9 @@
 package github.dmitmel.raketaframework.util;
 
-/**
- * Exception can be thrown if protocol/class/variable/... isn't annotated with some annotation.
- */
+import java.lang.annotation.Annotation;
+
 public class AnnotationNotFoundException extends RuntimeException {
-    public AnnotationNotFoundException(String message) {
-        super(message);
+    public AnnotationNotFoundException(String what, Class<? extends Annotation> annotation) {
+        super(String.format("%s isn\'t annotated using %s", what, annotation.getName()));
     }
 }
