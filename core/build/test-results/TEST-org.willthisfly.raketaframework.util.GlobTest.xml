@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.willthisfly.raketaframework.util.GlobTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2016-08-06T09:12:23" hostname="dmitriys-mbp" time="0.011">
+  <properties/>
+  <testcase name="testCharClass" classname="org.willthisfly.raketaframework.util.GlobTest" time="0.002"/>
+  <testcase name="testBuiltInCharRangeInExcludedCharClass" classname="org.willthisfly.raketaframework.util.GlobTest" time="0.0"/>
+  <testcase name="testRangeInCharClass" classname="org.willthisfly.raketaframework.util.GlobTest" time="0.0"/>
+  <testcase name="testRangeCharAsFirstInCharClass" classname="org.willthisfly.raketaframework.util.GlobTest" time="0.001"/>
+  <testcase name="testPathSeparators" classname="org.willthisfly.raketaframework.util.GlobTest" time="0.0"/>
+  <testcase name="testZeroOrMoreCharSelector" classname="org.willthisfly.raketaframework.util.GlobTest" time="0.0"/>
+  <testcase name="testExcludedCharClass" classname="org.willthisfly.raketaframework.util.GlobTest" time="0.001"/>
+  <testcase name="testBuiltInCharRangeInCharClass" classname="org.willthisfly.raketaframework.util.GlobTest" time="0.001"/>
+  <testcase name="testAnyCharSelector" classname="org.willthisfly.raketaframework.util.GlobTest" time="0.0"/>
+  <testcase name="testGroups" classname="org.willthisfly.raketaframework.util.GlobTest" time="0.001"/>
+  <testcase name="testExplicitNameSeparatorInCharClass" classname="org.willthisfly.raketaframework.util.GlobTest" time="0.001"/>
+  <testcase name="testRangeCharAsLastInCharClass" classname="org.willthisfly.raketaframework.util.GlobTest" time="0.0"/>
+  <testcase name="testEmptyCharClass" classname="org.willthisfly.raketaframework.util.GlobTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

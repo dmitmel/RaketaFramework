@@ -4,14 +4,14 @@
 
 ## Содержание
 
-1. [Hello World!](#hello)
-2. [Чтение параметров URL'ов](#params)
-3. [Гибкие URL'ы](#urls)
-4. [Получение форм](#forms)
-5. [Загрузки](#downloads)
-6. [Лицензия](#license)
+1. [Hello World!](#hello-world)
+2. [Чтение параметров URL'ов](#url)
+3. [Гибкие URL'ы](#url-2)
+4. [Получение форм](#-3)
+5. [Загрузки](#-4)
+6. [Лицензия](#-5)
 
-<h2 id="hello">Hello World!</h2>
+## Hello World!
 
 Каждый знает, что туториалы обычно начинаются с "Hello World!". Я сделаю исключение. Наша первая программа на
 RaketaFramework'е будет показывать "Hello World!" дважды :). Итак, давайте напишем немного кода:
@@ -72,7 +72,7 @@ java -cp libs/RaketaFramework-1.0.jar Main
 3. Класс [`github.dmitmel.raketaframework.handle.RequestData`](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/handle/RequestData.java)
 хранит информацию о запросе.
 
-<h2 id="params">Чтение параметров URL'ов</h2>
+## Чтение параметров URL'ов
 
 Ну, это хорошо что мы можем отправлять информацию пользователю, но что если пользователь хочет поговорить с нами? 
 Давайте сделаем обработчик запросов который может возвращать несколько приветствий.
@@ -139,7 +139,7 @@ Hello, Dmitriy!
 Hello, Dmitriy!
 ```
 
-<h2 id="urls">Гибкие URL'ы</h2>
+## Гибкие URL'ы
 
 Как я сказал в первой части,
 
@@ -185,7 +185,7 @@ private static class FileLoader implements RequestHandler {
 и [`RequestData#getMatcherGroupOrElse`](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/handle/RequestData.java#L34)
 возвращают группы совпадения из Regexp'а URL'а.
 
-<h2 id="forms">Получение форм</h2>
+## Получение форм
 
 Много веб-приложений используют формы. Но как их можно получать используя RaketaFramework?
 
@@ -240,7 +240,7 @@ private static class FormGreeter implements RequestHandler {
 2. Чтобы перенаправить пользователя на другую страницу, ты должен вызвать исключение
 [`github.dmitmel.raketaframework.handle.RedirectionThrowable`](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/handle/RedirectionThrowable.java)
 
-<h2 id="downloads">Загрузки</h2>
+## Загрузки
 
 Бинарники - [`RaketaFramework-last.jar`](https://raw.githubusercontent.com/dmitmel/RaketaFramework/master/build/RaketaFramework-last.jar)
 
@@ -248,9 +248,9 @@ private static class FormGreeter implements RequestHandler {
 
 Исходники - [`RaketaFramework-last-src.jar`](https://raw.githubusercontent.com/dmitmel/RaketaFramework/master/build/RaketaFramework-last-src.zip)
 
-<h2 id="license">Лицензия</h2>
+## Лицензия
 
-Copyright (c) 2016 Meleshko Dmitriy
+Copyright (c) 2016 WillThisFly.org
 
 Лицензировано под Лицензией Apache, Версии 2.0. Ты можешь получить копию по ссылке
 

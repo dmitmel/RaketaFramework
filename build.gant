@@ -7,7 +7,7 @@ buildRoot = './build'
 sourcesRoot = './src'
 
 mainRoot = "$sourcesRoot/main"
-mainSources = "$mainRoot/java"
+mainJavaSources = "$mainRoot/java"
 mainResources = "$mainRoot/resources"
 mainGeneratedSources = "$sourcesRoot/gen/java"
 mainBinaries = "$buildRoot/main"
@@ -17,7 +17,7 @@ testSources = "$testRoot/java"
 testResources = "$testRoot/resources"
 testBinaries = "$buildRoot/test"
 
-projectAuthor = 'Dmitriy Meleshko'
+projectAuthor = 'WillThisFly'
 projectVersion = new File("./version.txt").text.trim()
 
 static String formatCurrentDate(String format) {
@@ -29,12 +29,12 @@ static String formatCurrentDate(String format) {
 // MMM    abbreviated name of month
 // d      number of day in month
 // yyyy   4-digit number of year
-// hh     hour, 12-hour format
+// HH     hour, 24-hour format
 // mm     minute
 // ss     second
 // a      PM or AM
 // z      abbreviated name of time-zone
-buildDate = formatCurrentDate("EEE, MMM d, yyyy hh:mm:ss a z")
+buildDate = formatCurrentDate("EEE, MMM d, yyyy HH:mm:ss a z")
 
 librariesDirectory = './libs'
 javadocDirectory = './javadoc'
@@ -54,7 +54,7 @@ void compileMainSources() {
     
     // Setting option "includeantruntime" to false is very important - it allows repeatable builds
     // Option "includejavaruntime" just adds default JRE-libraries to classpath
-    javac([srcdir            : mainSources, destdir: mainBinaries, debug: true, includeantruntime: false,
+    javac([srcdir            : mainJavaSources, destdir: mainBinaries, debug: true, includeantruntime: false,
            includejavaruntime: true, encoding: 'UTF-8']) {
         // Add your paths to libraries here using construction:
         // classpath(location: '/path/to/library.jar')
@@ -118,7 +118,7 @@ void putTestResourcesToTestBinaries() {
 }
 
 void createTestsJar() {
-    String jarFile = "$buildRoot/${ant.project.name}-${projectVersion}-tests.jar"
+    String jarFile = "$buildRoot/${ant.project.name}-${projectVersion}-org.willthisfly.raketaframework.org.willthisfly.raketaframework.tests.jar"
     
     jar([destfile: jarFile, basedir: testBinaries,
          encoding: 'UTF-8']) {
@@ -135,7 +135,7 @@ void createTestsJar() {
         }
     }
     
-    copy(tofile: "$buildRoot/${ant.project.name}-last-tests.jar") {
+    copy(tofile: "$buildRoot/${ant.project.name}-last-org.willthisfly.raketaframework.org.willthisfly.raketaframework.tests.jar") {
         file(file: jarFile)
     }
 }
@@ -188,7 +188,7 @@ target(name: 'test:jars') { createTestsJar() }
 target(name: 'sources') { createSourcesZip() }
 
 target(name: 'javadoc:compile') {
-    javadoc([sourcepath     : mainSources, destdir: javadocDirectory, access: 'private',
+    javadoc([sourcepath     : mainJavaSources, destdir: javadocDirectory, access: 'private',
              additionalparam: '-Xdoclint:none -splitindex'])
 }
 
@@ -210,15 +210,15 @@ void compileMarkdown(Map<String, String> options) {
 
 target(name: 'markdown:compile') {
     // Target requires Markdown compiler from my GitHub repo https://github.com/dmitmel/common-mark-gen
-    compileMarkdown([from: 'README.md', to: 'README.html'])
-    compileMarkdown([from: 'README.ru.md', to: 'README.ru.html'])
-    compileMarkdown([from: 'TESTING.md', to: 'TESTING.html'])
-    compileMarkdown([from: 'TESTING.ru.md', to: 'TESTING.ru.html'])
+    compileMarkdownFile([from: 'README.md', to: 'README.html'])
+    compileMarkdownFile([from: 'README.ru.md', to: 'README.ru.html'])
+    compileMarkdownFile([from: 'TESTING.md', to: 'TESTING.html'])
+    compileMarkdownFile([from: 'TESTING.ru.md', to: 'TESTING.ru.html'])
 }
 
 target(name: 'test-app:run') {
-    java(classname:'github.dmitmel.raketaframework.tests.TestApplication') {
-        classpath(location: "$buildRoot/RaketaFramework-last-tests.jar")
+    java(classname:'github.dmitmel.raketaframework.org.willthisfly.raketaframework.org.willthisfly.raketaframework.tests.TestApplication') {
+        classpath(location: "$buildRoot/RaketaFramework-last-org.willthisfly.raketaframework.org.willthisfly.raketaframework.tests.jar")
         classpath(location: "$buildRoot/RaketaFramework-last.jar")
     }
 }

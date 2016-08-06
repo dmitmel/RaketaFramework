@@ -1,0 +1,16 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="build-tasks-graph.sh" type="BashConfigurationType" factoryName="Bash">
+    <option name="INTERPRETER_OPTIONS" value="bash" />
+    <option name="INTERPRETER_PATH" value="/usr/bin/env" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    <option name="PARENT_ENVS" value="true" />
+    <option name="SCRIPT_NAME" value="$PROJECT_DIR$/build-tasks-graph.sh" />
+    <option name="PARAMETERS" value="" />
+    <module name="raketa-framework" />
+    <envs />
+    <method>
+      <option name="Make" enabled="false" />
+      <option name="Gradle.BeforeRunTask" enabled="true" tasks="clean" externalProjectPath="$PROJECT_DIR$" vmOptions="" scriptParameters="" />
+    </method>
+  </configuration>
+</component>

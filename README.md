@@ -4,14 +4,14 @@
 
 ## Contents
 
-1. [Hello World!](#hello)
-2. [Reading URL parameters](#params)
-3. [Flexible URLs](#urls)
-4. [Receiving forms](#forms)
+1. [Hello World!](#hello-world)
+2. [Reading URL parameters](#reading-url-parameters)
+3. [Flexible URLs](#flexible-urls)
+4. [Receiving forms](#receiving-forms)
 5. [Downloads](#downloads)
 6. [License](#license)
 
-<h2 id="hello">Hello World!</h2>
+## Hello World!
 
 Everyone knows, that tutorials usually start from "Hello World!". I'll make exception. Our first program using
 RaketaFramework will show "Hello World!" twice :). Well, let's write some code:
@@ -69,7 +69,7 @@ this method must return supported-methods.
 3. Class [`github.dmitmel.raketaframework.handle.RequestData`](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/handle/RequestData.java)
 stores data about request.
 
-<h2 id="params">Reading URL parameters</h2>
+## Reading URL parameters
 
 Well, this's nice that we can send data to user, but what if user wants to talk with us? Let's make request handler
 which will return some greetings.
@@ -136,7 +136,7 @@ Hello, Dmitriy!
 Hello, Dmitriy!
 ```
 
-<h2 id="urls">Flexible URLs</h2>
+## Flexible URLs
 
 As I said in the 1^st^ part,
 
@@ -182,7 +182,7 @@ Methods [`RequestData#getMatcherGroup`](https://github.com/dmitmel/RaketaFramewo
 and [`RequestData#getMatcherGroupOrElse`](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/handle/RequestData.java#L34)
 return match groups from URL Regexp.
 
-<h2 id="forms">Receiving forms</h2>
+## Receiving forms
 
 Many-applications use forms. But how to receive them using RaketaFramework?
 
@@ -237,7 +237,7 @@ That's all! But, some notes about code:
 2. To redirect user to other page, you must throw 
 [`github.dmitmel.raketaframework.handle.RedirectionThrowable`](https://github.com/dmitmel/RaketaFramework/blob/master/src/main/java/github/dmitmel/raketaframework/handle/RedirectionThrowable.java)
 
-<h2 id="downloads">Downloads</h2>
+## Downloads
 
 Binaries - [`RaketaFramework-last.jar`](https://raw.githubusercontent.com/dmitmel/RaketaFramework/master/build/RaketaFramework-last.jar)
 
@@ -245,8 +245,8 @@ Test binaries - [`RaketaFramework-last-test.jar`](https://raw.githubusercontent.
 
 Sources - [`RaketaFramework-last-src.jar`](https://raw.githubusercontent.com/dmitmel/RaketaFramework/master/build/RaketaFramework-last-src.zip)
 
-<h2 id="license">License</h2>
-Copyright (c) 2016 Meleshko Dmitriy
+## License
+Copyright (c) 2016 WillThisFly.org
 
 Licensed under the Apache License, Version 2.0. You can get a copy at
 

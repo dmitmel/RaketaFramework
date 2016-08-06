@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.willthisfly.raketaframework.URISerializingTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2016-08-06T09:12:23" hostname="dmitriys-mbp" time="0.004">
+  <properties/>
+  <testcase name="testFile" classname="org.willthisfly.raketaframework.URISerializingTest" time="0.0"/>
+  <testcase name="testFileAndMultipleParamsAndAnchor" classname="org.willthisfly.raketaframework.URISerializingTest" time="0.0"/>
+  <testcase name="testFileAndMultipleParams" classname="org.willthisfly.raketaframework.URISerializingTest" time="0.001"/>
+  <testcase name="testFileAndOneParamAndAnchor" classname="org.willthisfly.raketaframework.URISerializingTest" time="0.0"/>
+  <testcase name="testFileAndAnchor" classname="org.willthisfly.raketaframework.URISerializingTest" time="0.0"/>
+  <testcase name="testFileAndOneParam" classname="org.willthisfly.raketaframework.URISerializingTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

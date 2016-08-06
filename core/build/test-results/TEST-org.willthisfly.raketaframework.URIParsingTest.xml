@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.willthisfly.raketaframework.URIParsingTest" tests="15" skipped="0" failures="0" errors="0" timestamp="2016-08-06T09:12:23" hostname="dmitriys-mbp" time="0.007">
+  <properties/>
+  <testcase name="testOneParamDefinitionWithoutValue" classname="org.willthisfly.raketaframework.URIParsingTest" time="0.0"/>
+  <testcase name="testMultipleParamsDefinitionWithMultipleEqualsSigns" classname="org.willthisfly.raketaframework.URIParsingTest" time="0.001"/>
+  <testcase name="testPathToFileAndAnchor" classname="org.willthisfly.raketaframework.URIParsingTest" time="0.0"/>
+  <testcase name="testPathToFileAndOneParam" classname="org.willthisfly.raketaframework.URIParsingTest" time="0.002"/>
+  <testcase name="testOneParamDefinitionWithoutMultipleEqualsSigns" classname="org.willthisfly.raketaframework.URIParsingTest" time="0.0"/>
+  <testcase name="testPathToFileAndOneParamAndAnchor" classname="org.willthisfly.raketaframework.URIParsingTest" time="0.001"/>
+  <testcase name="testMultipleParamsDefinitionWithoutEqualsSign" classname="org.willthisfly.raketaframework.URIParsingTest" time="0.0"/>
+  <testcase name="testEmptyAnchorAndThenParams" classname="org.willthisfly.raketaframework.URIParsingTest" time="0.0"/>
+  <testcase name="testPathToFile" classname="org.willthisfly.raketaframework.URIParsingTest" time="0.0"/>
+  <testcase name="testOnlyParamsStarter" classname="org.willthisfly.raketaframework.URIParsingTest" time="0.0"/>
+  <testcase name="testPathToFileAndMultipleParamsAndAnchor" classname="org.willthisfly.raketaframework.URIParsingTest" time="0.001"/>
+  <testcase name="testOnlyAnchorStarter" classname="org.willthisfly.raketaframework.URIParsingTest" time="0.0"/>
+  <testcase name="testPathToFileAndMultipleParams" classname="org.willthisfly.raketaframework.URIParsingTest" time="0.0"/>
+  <testcase name="testMultipleParamsDefinitionWithoutValue" classname="org.willthisfly.raketaframework.URIParsingTest" time="0.001"/>
+  <testcase name="testOneParamDefinitionWithoutEqualsSign" classname="org.willthisfly.raketaframework.URIParsingTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

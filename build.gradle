@@ -1,0 +1,136 @@
+plugins {
+    id 'cz.malohlava' version '1.0.0'      // Plugin for tasks-graph building
+}
+
+
+// Configuring tasks-graph builder plugin
+visteg {
+    enabled        = true
+    colouredNodes  = true
+    colouredEdges  = true
+    destination    = 'build/reports/tasks-graph.dot'
+    exporter       = 'dot'
+    colorscheme    = 'spectral11'
+    nodeShape      = 'box'
+    startNodeShape = 'hexagon'
+    endNodeShape   = 'doubleoctagon'
+}
+
+
+project.ext {
+    gmtDateFormat = new java.text.SimpleDateFormat('EEE, MMM d, yyyy HH:mm:ss a z')
+    buildDateString = gmtDateFormat.format(new Date())
+    sharedGradleVersion = '2.14.1'
+}
+
+
+task wrapper(type: Wrapper) {
+    gradleVersion = sharedGradleVersion
+}
+
+// Function requires Markdown compiler from my GitHub repo 'https://github.com/dmitmel/common-mark-gen'
+void compileMarkdownFile(File inputFile) {
+    def userHome = System.getProperty('user.home')
+    def documentStyle = "file://$userHome/.common-mark-gen/github-markdown.css"
+    def codeStyle = "file://${userHome}/node_modules/highlight.js/styles/github.css"
+    def compilerExecutable = "${userHome}/.common-mark-gen/common-mark-gen"
+
+    exec {
+        workingDir     = projectDir
+        executable     = compilerExecutable
+        args           = ['--code-style', codeStyle, '--doc-style', documentStyle, '-1', inputFile.getName()]
+        standardOutput = System.out
+        errorOutput    = System.err
+    }
+}
+
+task compileMarkdown(description: 'Generate HTML versions of Markdown files') {
+    doFirst {
+        fileTree(dir: './', include: '*.md').each { compileMarkdownFile(it) }
+    }
+}
+
+task cleanCompiledMarkdown(description: 'Clean HTML versions of Markdown files') {
+    doFirst {
+        fileTree(dir: './', include: '*.md.html').each { project.delete(it) }
+    }
+}
+
+
+allprojects {
+    // Root project is being initialized before sub projects, so I'm using function 'afterEvaluate' to setup tasks
+    afterEvaluate {
+        // Setting group and versions
+        it.group = 'org.willthisfly.raketa-framework'
+        it.version = file("$rootDir/.version").text.trim()
+    }
+}
+
+
+subprojects {
+    // Root project is being initialized before sub projects, so I'm using function 'afterEvaluate'
+    afterEvaluate {
+        if ('subprojects' != it.name)
+            configureSubProject(it)
+    }
+}
+
+void configureSubProject(Project subProject) {
+    if ('core' != subProject.name) {
+        def assembleSubProjectTask = subProject.tasks.findByName('assemble')
+        if (assembleSubProjectTask)
+            assembleSubProjectTask.dependsOn(project(':core').tasks['assemble'])
+    }
+    
+    // Modifying output resource paths
+    subProject.sourceSets {
+        main {
+            output.resourcesDir = output.classesDir
+        }
+        
+        test {
+            output.resourcesDir = output.classesDir
+        }
+    }
+    
+    def additionalJavaCompilerOptions = ['-Xlint:unchecked']
+    
+    // Adding compiler options for all projects, which support compilation tasks
+    def compileJavaTask = subProject.tasks.findByName('compileJava')
+    if (compileJavaTask)
+        compileJavaTask.options.compilerArgs.addAll(additionalJavaCompilerOptions)
+    
+    def compileTestJavaTask = subProject.tasks.findByName('compileTestJavaTask')
+    if (compileTestJavaTask)
+        compileTestJavaTask.options.compilerArgs.addAll(additionalJavaCompilerOptions)
+    
+    def compileScalaTask = subProject.tasks.findByName('compileScala')
+    if (compileScalaTask)
+        compileScalaTask.options.compilerArgs.addAll(additionalJavaCompilerOptions)
+    
+    def compileTestScalaTask = subProject.tasks.findByName('compileTestScalaTask')
+    if (compileTestScalaTask)
+        compileTestScalaTask.options.compilerArgs.addAll(additionalJavaCompilerOptions)
+    
+    // Configuring JAR building
+    def jarTask = subProject.tasks.findByName('jar')
+    if (jarTask) {
+        jarTask.manifest = subProject.manifest {
+            attributes(
+                    'Gradle-Version'  : sharedGradleVersion,
+                    'Built-On'        : buildDateString,
+                    'Artifact-Version': rootProject.version,
+                    'Group-ID'        : rootProject.group,
+                    'Artifact-ID'     : subProject.name
+            )
+        }
+        
+        jarTask.appendix = subProject.name
+        jarTask.baseName = rootProject.name
+        
+        // Removing duplicate files in JARs. Somehow, 'jar' tasks uses input sources 2 times. To prevent this,
+        // I remove build location in first time, and
+        jarTask.doFirst { subProject.sourceSets['main'].output.classesDir = null }
+        jarTask.doLast  { subProject.sourceSets['main'].output.classesDir = subProject.sourceSets.main.output.classesDir }
+    }
+}

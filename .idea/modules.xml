@@ -2,8 +2,20 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/RaketaFramework.iml" filepath="$PROJECT_DIR$/RaketaFramework.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Sources-Generator/Sources-Generator.iml" filepath="$PROJECT_DIR$/Sources-Generator/Sources-Generator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/core.iml" filepath="$PROJECT_DIR$/.idea/modules/core/core.iml" group="core" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/core_main.iml" filepath="$PROJECT_DIR$/.idea/modules/core/core_main.iml" group="core" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/core_test.iml" filepath="$PROJECT_DIR$/.idea/modules/core/core_test.iml" group="core" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/raketa-framework.iml" filepath="$PROJECT_DIR$/.idea/modules/raketa-framework.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/raketa-framework_main.iml" filepath="$PROJECT_DIR$/.idea/modules/raketa-framework_main.iml" group="raketa-framework" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/raketa-framework_test.iml" filepath="$PROJECT_DIR$/.idea/modules/raketa-framework_test.iml" group="raketa-framework" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/subprojects/scala-extensions/scala-extensions.iml" filepath="$PROJECT_DIR$/.idea/modules/subprojects/scala-extensions/scala-extensions.iml" group="subprojects/scala-extensions" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/subprojects/scala-extensions/scala-extensions_main.iml" filepath="$PROJECT_DIR$/.idea/modules/subprojects/scala-extensions/scala-extensions_main.iml" group="subprojects/scala-extensions" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/subprojects/scala-extensions/scala-extensions_test.iml" filepath="$PROJECT_DIR$/.idea/modules/subprojects/scala-extensions/scala-extensions_test.iml" group="subprojects/scala-extensions" />
+      <module fileurl="file://$PROJECT_DIR$/subprojects/sources-generator/sources-generator.iml" filepath="$PROJECT_DIR$/subprojects/sources-generator/sources-generator.iml" group="subprojects" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/subprojects/subprojects.iml" filepath="$PROJECT_DIR$/.idea/modules/subprojects/subprojects.iml" group="subprojects" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/subprojects/testing-app/testing-app.iml" filepath="$PROJECT_DIR$/.idea/modules/subprojects/testing-app/testing-app.iml" group="subprojects/testing-app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/subprojects/testing-app/testing-app_main.iml" filepath="$PROJECT_DIR$/.idea/modules/subprojects/testing-app/testing-app_main.iml" group="subprojects/testing-app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/subprojects/testing-app/testing-app_test.iml" filepath="$PROJECT_DIR$/.idea/modules/subprojects/testing-app/testing-app_test.iml" group="subprojects/testing-app" />
     </modules>
   </component>
 </project>

@@ -14,10 +14,41 @@
       <entry name="!?*.aj" />
     </wildcardResourcePatterns>
     <annotationProcessing>
-      <profile default="true" name="Default" enabled="false">
+      <profile default="true" name="Default" enabled="true">
         <processorPath useClasspath="true" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="buildSrc_main" target="1.8" />
+      <module name="buildSrc_test" target="1.8" />
+      <module name="core_main" target="1.8" />
+      <module name="core_test" target="1.8" />
+      <module name="gradle-java-launcher_main" target="1.8" />
+      <module name="gradle-java-launcher_test" target="1.8" />
+      <module name="gradle-jvm-launcher_main" target="1.8" />
+      <module name="gradle-jvm-launcher_test" target="1.8" />
+      <module name="raketa-framework-core_main" target="1.8" />
+      <module name="raketa-framework-core_test" target="1.8" />
+      <module name="raketa-framework.testing-app_main" target="1.5" />
+      <module name="raketa-framework.testing-app_test" target="1.5" />
+      <module name="raketa-framework.tests.test-app_main" target="1.8" />
+      <module name="raketa-framework.tests.test-app_test" target="1.8" />
+      <module name="raketa-framework_generated" target="1.8" />
+      <module name="raketa-framework_main" target="1.8" />
+      <module name="raketa-framework_test" target="1.8" />
+      <module name="raketaframework.tests.test-app_main" target="1.5" />
+      <module name="raketaframework.tests.test-app_test" target="1.5" />
+      <module name="scala-extensions_main" target="1.8" />
+      <module name="scala-extensions_test" target="1.8" />
+      <module name="subprojects-raketa-framework.testing-app_main" target="1.5" />
+      <module name="subprojects-raketa-framework.testing-app_test" target="1.5" />
+      <module name="subprojects_main" target="1.5" />
+      <module name="subprojects_test" target="1.5" />
+      <module name="testing-app_main" target="1.8" />
+      <module name="testing-app_test" target="1.8" />
+      <module name="tests.test-app_main" target="1.5" />
+      <module name="tests.test-app_test" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
   <component name="HaskellBuildOptions">
     <ghcPath>/usr/local/bin/ghc</ghcPath>

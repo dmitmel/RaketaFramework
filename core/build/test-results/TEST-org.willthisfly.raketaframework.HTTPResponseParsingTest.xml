@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.willthisfly.raketaframework.HTTPResponseParsingTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2016-08-06T09:12:23" hostname="dmitriys-mbp" time="0.011">
+  <properties/>
+  <testcase name="testNoStatusCode" classname="org.willthisfly.raketaframework.HTTPResponseParsingTest" time="0.001"/>
+  <testcase name="testBody" classname="org.willthisfly.raketaframework.HTTPResponseParsingTest" time="0.001"/>
+  <testcase name="testNoProtocol" classname="org.willthisfly.raketaframework.HTTPResponseParsingTest" time="0.0"/>
+  <testcase name="testHeadersAndBody" classname="org.willthisfly.raketaframework.HTTPResponseParsingTest" time="0.001"/>
+  <testcase name="testHeaders" classname="org.willthisfly.raketaframework.HTTPResponseParsingTest" time="0.002"/>
+  <testcase name="testNothing" classname="org.willthisfly.raketaframework.HTTPResponseParsingTest" time="0.0"/>
+  <testcase name="testNoStatusDescription" classname="org.willthisfly.raketaframework.HTTPResponseParsingTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
