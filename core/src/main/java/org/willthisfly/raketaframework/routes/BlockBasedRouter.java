@@ -6,6 +6,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+/**
+ * Router for making <a href="http://www.sinatrarb.com/">Sinatra</a>-like applications.
+ *
+ * <h3>Example</h3>
+ *
+ * <pre><code>
+ * public class App {
+ *     public static void main(String[] args) {
+ *         BlockBasedRouter router = new BlockBasedRouter();
+ *         router.get("/hello", params -&gt; "Hello World!");
+ *
+ *         Server server = new Server(router);
+ *         server.start();
+ *     }
+ * }
+ * </code></pre>
+ */
 public class BlockBasedRouter extends Router {
     private final ArrayList<org.willthisfly.raketaframework.routes.Route> routes = new ArrayList<>();
     
@@ -56,27 +73,27 @@ public class BlockBasedRouter extends Router {
     ///////////////////////// ADDING ROUTES WITH GLOBS /////////////////////////
     
     public <T> BlockBasedRouter get(String glob, BlockRoute.Block<T> handlerBlock) {
-        return addRoute("GET", GlobParser.globToPatternWithCaching(glob), handlerBlock);
+        return addRoute("GET", GlobParser.toPatternWithCaching(glob), handlerBlock);
     }
     
     public <T> BlockBasedRouter post(String glob, BlockRoute.Block<T> handlerBlock) {
-        return addRoute("POST", GlobParser.globToPatternWithCaching(glob), handlerBlock);
+        return addRoute("POST", GlobParser.toPatternWithCaching(glob), handlerBlock);
     }
     
     public <T> BlockBasedRouter put(String glob, BlockRoute.Block<T> handlerBlock) {
-        return addRoute("PUT", GlobParser.globToPatternWithCaching(glob), handlerBlock);
+        return addRoute("PUT", GlobParser.toPatternWithCaching(glob), handlerBlock);
     }
     
     public <T> BlockBasedRouter patch(String glob, BlockRoute.Block<T> handlerBlock) {
-        return addRoute("PATCH", GlobParser.globToPatternWithCaching(glob), handlerBlock);
+        return addRoute("PATCH", GlobParser.toPatternWithCaching(glob), handlerBlock);
     }
     
     public <T> BlockBasedRouter update(String glob, BlockRoute.Block<T> handlerBlock) {
-        return addRoute("UPDATE", GlobParser.globToPatternWithCaching(glob), handlerBlock);
+        return addRoute("UPDATE", GlobParser.toPatternWithCaching(glob), handlerBlock);
     }
     
     public <T> BlockBasedRouter delete(String glob, BlockRoute.Block<T> handlerBlock) {
-        return addRoute("DELETE", GlobParser.globToPatternWithCaching(glob), handlerBlock);
+        return addRoute("DELETE", GlobParser.toPatternWithCaching(glob), handlerBlock);
     }
     
     

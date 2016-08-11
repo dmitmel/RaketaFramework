@@ -2,7 +2,7 @@ package org.willthisfly.raketaframework.util;
 
 public class Numbers {
     private Numbers() {
-        throw new RuntimeException("Can\'t create instance of Numbers");
+        throw new UnsupportedOperationException("Can\'t create instance of Numbers");
     }
     
     public static int length(int n) {

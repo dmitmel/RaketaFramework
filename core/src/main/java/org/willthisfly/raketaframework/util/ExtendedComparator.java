@@ -12,7 +12,7 @@ public class ExtendedComparator {
     
     
     private ExtendedComparator() {
-        throw new RuntimeException("Can\'t create instance of ExtendedComparator");
+        throw new UnsupportedOperationException("Can\'t create instance of ExtendedComparator");
     }
     
     
@@ -43,21 +43,21 @@ public class ExtendedComparator {
             T secondValue = b[i];
             
             int iterationResult = compareNullable(firstValue, secondValue);
-            if (iterationResult != 0)
+            if (iterationResult != EQUALS)
                 return secondLength;
         }
         
         return EQUALS;
     }
     
-    public static int compare(boolean[] a, boolean[] b) { return compare(Arrays.boxArray(a), Arrays.boxArray(b)); }
-    public static int compare(byte[] a, byte[] b) { return compare(Arrays.boxArray(a), Arrays.boxArray(b)); }
-    public static int compare(char[] a, char[] b) { return compare(Arrays.boxArray(a), Arrays.boxArray(b)); }
-    public static int compare(short[] a, short[] b) { return compare(Arrays.boxArray(a), Arrays.boxArray(b)); }
-    public static int compare(int[] a, int[] b) { return compare(Arrays.boxArray(a), Arrays.boxArray(b)); }
-    public static int compare(long[] a, long[] b) { return compare(Arrays.boxArray(a), Arrays.boxArray(b)); }
-    public static int compare(float[] a, float[] b) { return compare(Arrays.boxArray(a), Arrays.boxArray(b)); }
-    public static int compare(double[] a, double[] b) { return compare(Arrays.boxArray(a), Arrays.boxArray(b)); }
+    public static int compare(boolean[] a, boolean[] b) { return compare(Arrays.box(a), Arrays.box(b)); }
+    public static int compare(byte[] a, byte[] b) { return compare(Arrays.box(a), Arrays.box(b)); }
+    public static int compare(char[] a, char[] b) { return compare(Arrays.box(a), Arrays.box(b)); }
+    public static int compare(short[] a, short[] b) { return compare(Arrays.box(a), Arrays.box(b)); }
+    public static int compare(int[] a, int[] b) { return compare(Arrays.box(a), Arrays.box(b)); }
+    public static int compare(long[] a, long[] b) { return compare(Arrays.box(a), Arrays.box(b)); }
+    public static int compare(float[] a, float[] b) { return compare(Arrays.box(a), Arrays.box(b)); }
+    public static int compare(double[] a, double[] b) { return compare(Arrays.box(a), Arrays.box(b)); }
     
     public static int compare(ByteArrayOutputStream a, ByteArrayOutputStream b) {
         if (a == b)
@@ -106,7 +106,7 @@ public class ExtendedComparator {
             T secondValue = secondIterator.next();
         
             int iterationResult = compareNullable(firstValue, secondValue);
-            if (iterationResult != 0)
+            if (iterationResult != EQUALS)
                 return secondLength;
         }
     
@@ -115,10 +115,7 @@ public class ExtendedComparator {
     
     public static <K extends Comparable<K>, V extends Comparable<V>> int compare(Map<K, V> a, Map<K, V> b) {
         int i = compareByKeys(a, b);
-        if (i != ExtendedComparator.EQUALS)
-            return i;
-        
-        return compareByValues(a, b);
+        return i != 0 ? i : compareByValues(a, b);
     }
     
     public static <K extends Comparable<K>, V> int compareByKeys(Map<K, V> a, Map<K, V> b) {

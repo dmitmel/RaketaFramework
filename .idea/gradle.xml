@@ -12,6 +12,8 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/subprojects" />
+            <option value="$PROJECT_DIR$/subprojects/kotlin-extensions" />
+            <option value="$PROJECT_DIR$/subprojects/samples" />
             <option value="$PROJECT_DIR$/subprojects/scala-extensions" />
             <option value="$PROJECT_DIR$/subprojects/testing-app" />
           </set>

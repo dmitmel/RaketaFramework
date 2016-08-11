@@ -27,6 +27,8 @@
       <module name="gradle-java-launcher_test" target="1.8" />
       <module name="gradle-jvm-launcher_main" target="1.8" />
       <module name="gradle-jvm-launcher_test" target="1.8" />
+      <module name="kotlin-extensions_main" target="1.8" />
+      <module name="kotlin-extensions_test" target="1.8" />
       <module name="raketa-framework-core_main" target="1.8" />
       <module name="raketa-framework-core_test" target="1.8" />
       <module name="raketa-framework.testing-app_main" target="1.5" />
@@ -38,6 +40,8 @@
       <module name="raketa-framework_test" target="1.8" />
       <module name="raketaframework.tests.test-app_main" target="1.5" />
       <module name="raketaframework.tests.test-app_test" target="1.5" />
+      <module name="samples_main" target="1.8" />
+      <module name="samples_test" target="1.8" />
       <module name="scala-extensions_main" target="1.8" />
       <module name="scala-extensions_test" target="1.8" />
       <module name="subprojects-raketa-framework.testing-app_main" target="1.5" />

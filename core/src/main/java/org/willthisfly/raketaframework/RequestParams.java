@@ -5,6 +5,39 @@ import org.willthisfly.raketaframework.util.JSONJavaSerializer;
 
 import java.util.*;
 
+/**
+ * Stores data about request in tree-like format.
+ *
+ * <h3>Structure (I use JSON for examples)</h3>
+ *
+ * Normal request:
+ * <pre><code>
+ * {
+ *     "uriParam1": "uriValue1",
+ *     "uriParam2": "uriValue2",
+ *     ...
+ *     "request": &lt;HTTPRequest&gt;,
+ *     "captures": [
+ *         "uriPatternCapture1",
+ *         "uriPatternCapture2"
+ *     ],
+ *     "named-captures": {
+ *         "what": "Hello",
+ *         "who": "World"
+ *     }
+ * }
+ * </code></pre>
+ *
+ * If form was sent:
+ * <pre><code>
+ * {
+ *     "formParam1": "formValue1",
+ *     "formParam2": "formValue2"
+ *     ...
+ *     &lt;like normal request&gt;
+ * }
+ * </code></pre>
+ */
 public class RequestParams extends HashMap<String, Object> implements Comparable<RequestParams>, Cloneable {
     public RequestParams(int initialCapacity, float loadFactor) {
         super(initialCapacity, loadFactor);
@@ -25,9 +58,11 @@ public class RequestParams extends HashMap<String, Object> implements Comparable
         put("request", request);
     
         String contentType = request.headers.get("Content-Type");
-        if (MIMETypes.FORM.equals(contentType))
+        if (MIMETypes.FORM.equals(contentType)) {
+            String decodedForm = URI.decode(request.bodyToString());
             // Form's format is similar to URL's params format, so I use parsing method from URI
-            putAll(URI.parseParams(URI.decode(request.bodyToString())));
+            putAll(URI.parseURILikeParams(decodedForm));
+        }
     }
     
     

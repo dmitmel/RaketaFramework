@@ -17,52 +17,52 @@ public class GlobParser {
     private static final String BOX_DRAWING_CHARS_START = "\\u2500";
     private static final String BOX_DRAWING_CHARS_END = "\\u257F";
     
-    
-    private GlobParser() {
-        throw new RuntimeException("Can\'t create instance of GlobParser");
-    }
-    
-    
     private static final Map<String, String> BUILT_IN_CHAR_CLASSES = Maps.unmodifiableMap(
             // Alphanumeric characters
-            new SimpleEntry<>(":alnum:", "a-zA-Z0-9"),
+            new EntryImpl<>(":alnum:", "a-zA-Z0-9"),
             // Alphabetic characters
-            new SimpleEntry<>(":alpha:", "a-zA-Z"),
+            new EntryImpl<>(":alpha:", "a-zA-Z"),
             // Blank characters (don't confuse with space characters!)
-            new SimpleEntry<>(":blank:", "\\t "),
+            new EntryImpl<>(":blank:", "\\t "),
             // Control characters
-            new SimpleEntry<>(":cntrl:", "\\a\\f\\n\\r\\t"),
+            new EntryImpl<>(":cntrl:", "\\a\\f\\n\\r\\t"),
             // Decimal digits
-            new SimpleEntry<>(":digit:", "0-9"),
+            new EntryImpl<>(":digit:", "0-9"),
             // Graphic characters
-            new SimpleEntry<>(":graph:", String.format("%s-%s", BOX_DRAWING_CHARS_START, BOX_DRAWING_CHARS_END)),
+            new EntryImpl<>(":graph:", String.format("%s-%s", BOX_DRAWING_CHARS_START, BOX_DRAWING_CHARS_END)),
             // Lowercase letters
-            new SimpleEntry<>(":lower:", "a-z"),
+            new EntryImpl<>(":lower:", "a-z"),
             // Printing characters
-            new SimpleEntry<>(":print:", " !\"#$%&\'()*+,-./:;<=>?@\\[\\\\\\]^_`\\{|}~a-zA-Z"),
+            new EntryImpl<>(":print:", " !\"#$%&\'()*+,-./:;<=>?@\\[\\\\\\]^_`\\{|}~a-zA-Z"),
             // Punctuation characters
-            new SimpleEntry<>(":punct:", "!\"#$%&\'()*+,-./:;<=>?@\\[\\\\\\]^_`\\{|}~"),
+            new EntryImpl<>(":punct:", "!\"#$%&\'()*+,-./:;<=>?@\\[\\\\\\]^_`\\{|}~"),
             // Space characters (don't confuse with blank characters!)
-            new SimpleEntry<>(":space:", "\\f\\n\\r\\t\\v "),
+            new EntryImpl<>(":space:", "\\f\\n\\r\\t\\v "),
             // Uppercase letters
-            new SimpleEntry<>(":upper:", "A-Z"),
+            new EntryImpl<>(":upper:", "A-Z"),
             // Hexadecimal digits
-            new SimpleEntry<>(":xdigit:", "0-9a-fA-F")
+            new EntryImpl<>(":xdigit:", "0-9a-fA-F")
     );
     
     private static final HashMap<String, Pattern> GLOB_CACHE = new HashMap<>();
     
-    public static Pattern globToPatternWithCaching(String glob) {
+    
+    private GlobParser() {
+        throw new UnsupportedOperationException("Can\'t create instance of GlobParser");
+    }
+    
+    
+    public static Pattern toPatternWithCaching(String glob) {
         if (GLOB_CACHE.containsKey(glob)) {
             return GLOB_CACHE.get(glob);
         } else {
-            Pattern pattern = globToPattern(glob);
+            Pattern pattern = toPattern(glob);
             GLOB_CACHE.put(glob, pattern);
             return pattern;
         }
     }
     
-    public static Pattern globToPattern(String glob) {
+    public static Pattern toPattern(String glob) {
         boolean readingGroup = false;
         StringBuilder patternBuilder = new StringBuilder("^");
         
@@ -113,7 +113,7 @@ public class GlobParser {
                         offset++;
                     }
                     
-                    String charClass = Strings.takeBeforeRequired(']', offset, glob);
+                    String charClass = takeBeforeRequired(']', offset, glob);
                     
                     // Validation
                     if (charClass.isEmpty())
@@ -196,5 +196,25 @@ public class GlobParser {
         
         patternBuilder.append('$');
         return Pattern.compile(patternBuilder.toString());
+    }
+    
+    private static String takeBeforeRequired(char target, int offset, String string) {
+        StringBuilder result = new StringBuilder();
+        String searchedString = string.substring(offset);
+        boolean reachedTarget = false;
+    
+        for (char c : Strings.toIterable(searchedString)) {
+            if (c == target) {
+                reachedTarget = true;
+                break;
+            } else {
+                result.append(c);
+            }
+        }
+        
+        if (reachedTarget)
+            return result.toString();
+        else
+            throw new PatternSyntaxException("Expected character \'"+target+"\' wasn\'t found", string, offset);
     }
 }

@@ -105,7 +105,7 @@ class ClientHandler implements Runnable {
     
         server.logger.log(LoggingLevel.SUMMARY, "%s -> %s, got %d bytes, sent %d bytes",
                 inetSocketAddress.getHostString(),
-                incomingMessage.uri, requestLength, outgoingMessage.length());
+                 incomingMessage.uri, requestLength, outgoingMessage.length());
         server.logger.log(LoggingLevel.SUMMARY, "%s - - [%s] \"%s %s %s\" - %s %s",
                 inetSocketAddress.getHostString(),
                 HTTPDateFormatter.currentDateInServerLogFormat(),

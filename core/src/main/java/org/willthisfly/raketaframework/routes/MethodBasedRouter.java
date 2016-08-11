@@ -2,17 +2,57 @@ package org.willthisfly.raketaframework.routes;
 
 import org.willthisfly.raketaframework.RequestParams;
 import org.willthisfly.raketaframework.exceptions.InstantiationException;
+import org.willthisfly.raketaframework.exceptions.InvocationTargetException;
 import org.willthisfly.raketaframework.exceptions.NoSuchMethodException;
 import org.willthisfly.raketaframework.util.AnnotationNotFoundException;
 import org.willthisfly.raketaframework.util.Reflection;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.regex.Pattern;
 
+/**
+ * Router for making <a href="http://flask.pocoo.org/">Flask</a>-like applications.
+ *
+ * <h3>Example</h3>
+ *
+ * <pre><code>
+ * public class App {
+ *     public static void main(String[] args) {
+ *         MethodBasedRouter router = new MethodBasedRouter();
+ *         router.addMethod(App.class, "helloWorld");
+ *         router.addMethod(App.class, "serveFile");
+ *         router.addMethod(App.class, "echo");
+ *
+ *         Server server = new Server(router);
+ *         server.start();
+ *     }
+ *
+ *     &#64;AddMethodRoute("/hello")
+ *     public static String helloWorld(RequestParams params) {
+ *         return "Hello World!";
+ *     }
+ *
+ *     // Named captures can be passed as parameters, if function has more than 1 parameter
+ *     &#64;AddMethodRoute("/file/(?&lt;file&gt;.+)")
+ *     public static byte[] serveFile(RequestParams params, String file) {
+ *         String fullPath = "/" + file;
+ *         InputStream inputStream = App.class.getResourceAsStream(fullPath);
+ *
+ *         if (inputStream == null)
+ *             throw new Error404();
+ *         else
+ *             return Streams.readAllWithClosing(inputStream);
+ *     }
+ *
+ *     &#64;AddMethodRoute(value = "/echo", methods = {"POST"})
+ *     public static byte[] echo(RequestParams params) {
+ *         HTTPRequest request = params.getRequest();
+ *         return request.body;
+ *     }
+ * }
+ * </code></pre>
+ */
 public class MethodBasedRouter extends Router {
     private final ArrayList<org.willthisfly.raketaframework.routes.Route> routes = new ArrayList<>();
     
@@ -70,19 +110,26 @@ public class MethodBasedRouter extends Router {
     
         @Override
         public Object handleRequest(RequestParams params) {
-            if (handlerMethod.getParameterCount() == 1) {
-                return Reflection.invokeMethodInAnyCase(handlerMethod, handlerInstance, params);
-            } else {
-                Map<String, String> namedGroups = params.getNamedCaptures();
-                String[] namedGroupsValues = namedGroups.values().toArray(new String[0]);
+            try {
+                if (handlerMethod.getParameterCount() == 1) {
+                    return Reflection.invokeMethodInAnyCase(handlerMethod, handlerInstance, params);
+                } else {
+                    Map<String, String> namedCaptures = params.getNamedCaptures();
+        
+                    ArrayList<Object> args = new ArrayList<>();
+                    args.add(params);
+                    args.addAll(namedCaptures.values());
+                    Object[] argsArray = args.toArray();
+        
+                    return Reflection.invokeMethodInAnyCase(handlerMethod, handlerInstance, argsArray);
+                }
+            } catch (InvocationTargetException e) {
+                Throwable cause = e.getCause();
                 
-                Object[] methodInvokeArgs = new Object[1 + namedGroupsValues.length];
-                methodInvokeArgs[0] = params;
-                // Detailed method signature:
-                // public static void arraycopy(Object[] input, int inputOffset, Object[] dest, int destOffset, int inputLength)
-                System.arraycopy(namedGroupsValues, 0, methodInvokeArgs, 1, namedGroupsValues.length);
-                
-                return Reflection.invokeMethodInAnyCase(handlerMethod, handlerInstance, methodInvokeArgs);
+                if (cause instanceof RuntimeException)
+                    throw (RuntimeException) cause;
+                else
+                    throw e;
             }
         }
     

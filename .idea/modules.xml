@@ -5,9 +5,11 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/core.iml" filepath="$PROJECT_DIR$/.idea/modules/core/core.iml" group="core" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/core_main.iml" filepath="$PROJECT_DIR$/.idea/modules/core/core_main.iml" group="core" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/core_test.iml" filepath="$PROJECT_DIR$/.idea/modules/core/core_test.iml" group="core" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/subprojects/kotlin-extensions/kotlin-extensions.iml" filepath="$PROJECT_DIR$/.idea/modules/subprojects/kotlin-extensions/kotlin-extensions.iml" group="subprojects/kotlin-extensions" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/subprojects/kotlin-extensions/kotlin-extensions_main.iml" filepath="$PROJECT_DIR$/.idea/modules/subprojects/kotlin-extensions/kotlin-extensions_main.iml" group="subprojects/kotlin-extensions" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/raketa-framework.iml" filepath="$PROJECT_DIR$/.idea/modules/raketa-framework.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/raketa-framework_main.iml" filepath="$PROJECT_DIR$/.idea/modules/raketa-framework_main.iml" group="raketa-framework" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/raketa-framework_test.iml" filepath="$PROJECT_DIR$/.idea/modules/raketa-framework_test.iml" group="raketa-framework" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/subprojects/samples/samples_main.iml" filepath="$PROJECT_DIR$/.idea/modules/subprojects/samples/samples_main.iml" group="subprojects/samples" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/subprojects/samples/samples_test.iml" filepath="$PROJECT_DIR$/.idea/modules/subprojects/samples/samples_test.iml" group="subprojects/samples" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/subprojects/scala-extensions/scala-extensions.iml" filepath="$PROJECT_DIR$/.idea/modules/subprojects/scala-extensions/scala-extensions.iml" group="subprojects/scala-extensions" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/subprojects/scala-extensions/scala-extensions_main.iml" filepath="$PROJECT_DIR$/.idea/modules/subprojects/scala-extensions/scala-extensions_main.iml" group="subprojects/scala-extensions" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/subprojects/scala-extensions/scala-extensions_test.iml" filepath="$PROJECT_DIR$/.idea/modules/subprojects/scala-extensions/scala-extensions_test.iml" group="subprojects/scala-extensions" />

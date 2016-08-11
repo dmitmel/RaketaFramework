@@ -1,10 +1,11 @@
 package org.willthisfly.raketaframework;
 
-import org.willthisfly.raketaframework.exceptions.IOException;
-
 import java.io.ByteArrayInputStream;
 import java.net.URLConnection;
 
+/**
+ * Class MIME detection using byte content. Uses only JDK, no external libraries.
+ */
 public class MIMETypes {
     public static final String PLAIN_TEXT = "text/plain";
     public static final String BYTE_STREAM = "application/octet-stream";
@@ -12,14 +13,10 @@ public class MIMETypes {
     
     
     private MIMETypes() {
-        throw new RuntimeException("Can\'t create instance of MIMETypes");
+        throw new UnsupportedOperationException("Can\'t create instance of MIMETypes");
     }
     
-
-    public static String getContentTypeOrElse(byte[] content) {
-        return getContentTypeOrElse(content, BYTE_STREAM);
-    }
-
+    
     public static String getContentTypeOrElse(byte[] content, String orElse) {
         String mime = getContentType(content);
         return mime == null ? orElse : mime;
@@ -30,7 +27,7 @@ public class MIMETypes {
             ByteArrayInputStream inputStream = new ByteArrayInputStream(content);
             return URLConnection.guessContentTypeFromStream(inputStream);
         } catch (java.io.IOException e) {
-            throw IOException.extractFrom(e);
+            throw org.willthisfly.raketaframework.exceptions.IOException.extractFrom(e);
         }
     }
 }

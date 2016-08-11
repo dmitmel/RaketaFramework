@@ -16,75 +16,82 @@ public class Files {
     
     
     /**
-     * Function makes real path to file. But,
-     * <span color="#A52500"><b>YOU HAVE TO USE SINGLE SLASHES
-     * AS FILE SEPARATORS!</b></span>
+     * Function makes real path to file. But, <b>YOU HAVE TO USE
+     * SINGLE SLASHES AS FILE SEPARATORS!</b>
      */
     public static String realPath(String relative) {
-        try {
-            List<String> relativePathParts = splitPath(relative);
+        List<String> relativePathParts = splitPath(relative);
+    
+        List<String> callerDirectoryParts = splitPath(getCallerClassDirectory());
+    
+        List<String> realPathParts = new ArrayList<>();
+    
+        for (int i = 0; i < relativePathParts.size(); i++) {
+            String part = relativePathParts.get(i);
 
-            // Caller class is on third stack trace element, on second is this function, and on first -
-            // "Thread#getStackTrace()".
-            Class<?> callerClass = Class.forName(Thread.currentThread().getStackTrace()[2].getClassName());
-            List<String> callerClassPathParts = splitPath(Reflection.getPathToClass(callerClass));
-
-            List<String> realPathParts = new ArrayList<>();
-            for (int i = 0; i < relativePathParts.size(); i++) {
-                String part = relativePathParts.get(i);
-
-                if ((".".equals(part) || "./".equals(part)) && i == 0) {
-                    // If current directory marker is first item
-                    realPathParts.addAll(callerClassPathParts);
-                } else if ("..".equals(part) || "../".equals(part)) {
-                    if (i == 0)
-                        // If upper directory marker is first item
-                        realPathParts.addAll(callerClassPathParts);
-                    realPathParts.remove(realPathParts.size() - 1);
-                } else {
-                    realPathParts.add(part);
-                }
+            if ((".".equals(part) || "./".equals(part)) && i == 0) {
+                // If current directory marker is first item
+                realPathParts.addAll(callerDirectoryParts);
+            } else if ("..".equals(part) || "../".equals(part)) {
+                if (i == 0)
+                    // If upper directory marker is first item
+                    realPathParts.addAll(callerDirectoryParts);
+                realPathParts.remove(realPathParts.size() - 1);
+            } else {
+                realPathParts.add(part);
             }
-
-            return String.join(Strings.EMPTY_STRING, realPathParts);
+        }
+    
+        String result = String.join(Strings.EMPTY_STRING, realPathParts);
+        return Strings.removeTerminator('/', result);
+    }
+    
+    /**
+     * Gets caller class directory with terminating slash.
+     */
+    private static String getCallerClassDirectory() {
+        try {
+            // First elements in the stack trace:
+            // [0] = Thread#currentThread
+            // [1] = Files#getCallerClass
+            // [2] = Files#realPath
+            // [3] = <callerClass>#<callerMethod>
+            StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
+            StackTraceElement callerElement = stackTrace[3];
+            Class<?> callerLocation = Class.forName(callerElement.getClassName());
+            return Reflection.getClassDirectory(callerLocation) + '/';
         } catch (ClassNotFoundException e) {
-            // Isn't reachable in this case
-            throw new RuntimeException();
+            System.err.println("[WARNING]: Can\'t get caller class location. Current working directory will be used " +
+                    "instead.");
+            return System.getProperty("user.dir") + '/';
         }
     }
     
     /**
-     * Splits path fragments. For example, path
-     * <pre><code>/usr/lib/jvm/java-8-oracle/jre/lib/ext/</code></pre>
-     * will be split to list
-     * <pre><code>["/", "usr/", "lib/", "jvm/", "java-8-oracle/", "jre/", "lib/", "ext/"]</code></pre>
+     * Splits path to fragments.
      *
-     * And Windows-Style path
-     * <pre><code>C:/gcc/gcc-4.8.0/libjava/javax/xml/parsers</code></pre>
-     * will be split to list
-     * <pre><code>["C:/", "gcc/", "gcc-4.8.0/", "libjava/", "javax/", "xml/", "parsers"]</code></pre>
-     *
-     * Function also supports file names and you don't have to add slash at the end of string to say that the last
-     * element is a directory.
-     *
-     * @param path path to process
-     * @return list of path parts.
+     * <table>
+     *     <caption>Examples</caption>
+     *     <tr> <th>Input</th>                      <th>Result</th>                               </tr>
+     *     <tr> <td>/home/user/docs/Letter.txt</td> <th>[/, home/, user/, docs/, Letter.txt]</th> </tr>
+     *     <tr> <td>C:/home/user/docs/</td>         <td>[C:/, home/, user/, docs/]</td>           </tr>
+     * </table>
      */
     private static List<String> splitPath(String path) {
-        List<String> out = new ArrayList<>();
+        List<String> result = new ArrayList<>();
         
-        StringBuilder buffer = new StringBuilder();
+        StringBuilder builder = new StringBuilder();
         for (int i = 0; i < path.length(); i++) {
             char c = path.charAt(i);
-            buffer.append(c);
-            
+            builder.append(c);
+    
             if (c == '/' || i + 1 == path.length()) {
-                out.add(buffer.toString());
-                buffer = new StringBuilder();
+                result.add(builder.toString());
+                builder = new StringBuilder();
             }
         }
         
-        return out;
+        return result;
     }
 
     public static String read(String path) { return new String(readBytes(path)); }

@@ -14,6 +14,7 @@ public class ByteString implements CharSequence, Iterable<Byte>, Comparable<Byte
     
     public final byte[] bytes;
     
+    
     public ByteString() {
         this(EMPTY_BYTES);
     }
@@ -30,7 +31,6 @@ public class ByteString implements CharSequence, Iterable<Byte>, Comparable<Byte
         this(string.getBytes());
     }
     
-    
     public ByteString(CharSequence charSequence) {
         IntStream charsStream = charSequence.chars();
         int[] charsArray = charsStream.toArray();
@@ -39,6 +39,7 @@ public class ByteString implements CharSequence, Iterable<Byte>, Comparable<Byte
         for (int i = 0; i < charsArray.length; i++)
             this.bytes[i] = (byte) charsArray[i];
     }
+    
     
     @Override
     public int length() {
@@ -75,20 +76,7 @@ public class ByteString implements CharSequence, Iterable<Byte>, Comparable<Byte
     
     @Override
     public Iterator<Byte> iterator() {
-        return new Iterator<Byte>() {
-            int cursor = 0;
-            
-            @Override
-            public boolean hasNext() {
-                return cursor < length();
-            }
-    
-            @Override
-            public Byte next() {
-                cursor++;
-                return byteAt(cursor);
-            }
-        };
+        return Arrays.toIterator(Arrays.box(bytes));
     }
     
     @Override

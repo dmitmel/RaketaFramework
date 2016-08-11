@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Lists {
     private Lists() {
-        throw new RuntimeException("Can\'t create instance of Lists");
+        throw new UnsupportedOperationException("Can\'t create instance of Lists");
     }
     
     
@@ -26,6 +26,15 @@ public class Lists {
         }
         
         return -1;
+    }
+    
+    @SuppressWarnings("unchecked")
+    public static <T> List<T> join(List<T> head, List<T>... tails) {
+        ArrayList<T> result = new ArrayList<>();
+        result.addAll(head);
+        java.util.Arrays.stream(tails)
+                .forEach(result::addAll);
+        return result;
     }
     
     public static <T> List<T> fromIterable(Iterable<T> iterable) {

@@ -5,7 +5,29 @@ import org.willthisfly.raketaframework.util.ExtendedComparator;
 import java.util.Objects;
 
 /**
- * You can return instance of this class to redirect to another page.
+ * You can return instance of this class in handler to redirect to
+ * another page.
+ *
+ * <h3>Example</h3>
+ *
+ * <pre><code>
+ * public class App {
+ *     public static void main(String[] args) {
+ *         BlockBasedRouter router = new BlockBasedRouter();
+ *
+ *         router.get("/fake", params -&gt; {
+ *             return new Redirect("/real");
+ *         });
+ *
+ *         router.get("/real", params -&gt; {
+ *             return "Hello World!";
+ *         });
+ *
+ *         Server server = new Server(router);
+ *         server.start();
+ *     }
+ * }
+ * </code></pre>
  */
 public class Redirect implements Comparable<Redirect>, Cloneable {
     public final String targetUrl;

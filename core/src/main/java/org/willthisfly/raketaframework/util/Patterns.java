@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 public class Patterns {
     private Patterns() {
-        throw new RuntimeException("Can\'t create instance of Patterns");
+        throw new UnsupportedOperationException("Can\'t create instance of Patterns");
     }
     
     

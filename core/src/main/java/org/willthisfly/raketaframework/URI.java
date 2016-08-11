@@ -9,15 +9,6 @@ import java.util.*;
 import java.util.regex.Pattern;
 
 public class URI implements Comparable<URI>, Cloneable {
-    private static final Pattern URI_PATTERN = Pattern.compile(
-            "(?:^([^#?]+))" +   // Parsing path (all chars from start of string until '#' or '?')
-            "(?:#([^?]*))?" +   // Parsing optional anchor (all chars from '#' until '?')
-            "(?:\\?(.*)$)?"     // Parsing optional params (all chars from '?' until end of string)
-    );
-    private static final int URI_PATTERN_PATH_GROUP = 1;
-    private static final int URI_PATTERN_ANCHOR_GROUP = 2;
-    private static final int URI_PATTERN_PARAMS_GROUP = 3;
-    
     public static final String EMPTY_PATH = "/";
     public static final Map<String, String> EMPTY_PARAMS = Collections.emptyMap();
     public static final String EMPTY_ANCHOR = Strings.EMPTY_STRING;
@@ -58,32 +49,12 @@ public class URI implements Comparable<URI>, Cloneable {
     }
     
     
-    public static URI fromString(String string) {
-        return URIParser.parse(string);
+    public static URI parse(CharSequence charSequence) {
+        return URIParser.parse(charSequence);
     }
     
-    public static Map<String, String> parseParams(String paramsString) {
-        Map<String, String> paramsMap = new HashMap<>();
-        
-        String[] pairs;
-        if (paramsString.isEmpty())
-            pairs = new String[] {};
-        else
-            pairs = paramsString.split("&");
-    
-        for (String pair : pairs) {
-            int equalsSignIndex = pair.indexOf('=');
-            
-            if (equalsSignIndex >= 0) {
-                String key = pair.substring(0, equalsSignIndex);
-                String value = pair.substring(equalsSignIndex + 1);
-                paramsMap.put(decode(key), decode(value));
-            } else {
-                paramsMap.put(decode(pair), EMPTY_PARAM_VALUE);
-            }
-        }
-        
-        return paramsMap;
+    public static Map<String, String> parseURILikeParams(String paramsString) {
+        return URIParser.parseURILikeParams(paramsString);
     }
     
     /**

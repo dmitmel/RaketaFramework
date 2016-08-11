@@ -2,7 +2,7 @@ package org.willthisfly.raketaframework.errors;
 
 public class DefaultErrorResponderFactory {
     private DefaultErrorResponderFactory() {
-        throw new RuntimeException("Can\'t create instance of DefaultErrorResponderFactory");
+        throw new UnsupportedOperationException("Can\'t create instance of DefaultErrorResponderFactory");
     }
     
 

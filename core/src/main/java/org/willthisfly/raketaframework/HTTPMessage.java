@@ -33,7 +33,7 @@ public abstract class HTTPMessage implements Cloneable {
     
     public abstract int length();
     
-    protected byte[] toByteArrayWithMainLine(byte[] mainLine) {
+    protected byte[] toByteArrayWithMainRequestLine(byte[] mainLine) {
         try {
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
 
@@ -41,7 +41,7 @@ public abstract class HTTPMessage implements Cloneable {
             stream.write(Strings.CRLF.getBytes());
             
             for (Map.Entry<String, String> entry : headers.entrySet()) {
-                String line = String.format("%s: %s%s", entry.getKey(), entry.getValue(), Strings.CRLF);
+                String line = entry.getKey() + ": " + entry.getValue() + Strings.CRLF;
                 stream.write(line.getBytes());
             }
             
@@ -52,7 +52,7 @@ public abstract class HTTPMessage implements Cloneable {
         } catch (IOException e) {
             // This code is unreachable, because java.io.ByteArrayOutputStream doesn't throw IOException, but this
             // exception is declared in the method signatures in the java.io.OutputStream
-            throw new RuntimeException("unreachable code");
+            throw new RuntimeException("unreachable code", e);
         }
     }
     

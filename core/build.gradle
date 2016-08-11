@@ -2,12 +2,13 @@ apply plugin: 'java'
 
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.+'
-    testCompile group: 'junit', name: 'junit', version: '4.+', classifier: 'sources'
+    testCompile group: 'junit', name: 'junit', version: rootProject.junitVersion
+    testCompile group: 'junit', name: 'junit', version: rootProject.junitVersion, classifier: 'sources'
 }
 
 

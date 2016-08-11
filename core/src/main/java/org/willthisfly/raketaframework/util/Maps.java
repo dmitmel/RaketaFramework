@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class Maps {
     private Maps() {
-        throw new RuntimeException("Can\'t create instance of Maps");
+        throw new UnsupportedOperationException("Can\'t create instance of Maps");
     }
     
     

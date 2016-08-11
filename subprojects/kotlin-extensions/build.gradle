@@ -1,0 +1,42 @@
+buildscript {
+    ext {
+        kotlinVersion = '1.0.3'
+        dokkaVersion = '0.9.9'
+    }
+    
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+    }
+    
+    dependencies {
+        classpath group: 'org.jetbrains.kotlin', name: 'kotlin-gradle-plugin', version: kotlinVersion
+        classpath group: 'org.jetbrains.dokka', name: 'dokka-gradle-plugin', version: dokkaVersion
+    }
+}
+
+
+apply plugin: 'org.jetbrains.dokka'
+apply plugin: 'kotlin'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven { url 'http://repository.jetbrains.com/all' }
+}
+
+dependencies {
+    compile group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: kotlinVersion
+    compile group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: kotlinVersion, classifier: 'sources'
+    
+    testCompile group: 'junit', name: 'junit', version: rootProject.junitVersion
+    testCompile group: 'junit', name: 'junit', version: rootProject.junitVersion, classifier: 'sources'
+    
+    compile project(':core')
+}
+
+
+dokka {
+    sourceDirs = files("$projectDir/src/main/kotlin")
+}

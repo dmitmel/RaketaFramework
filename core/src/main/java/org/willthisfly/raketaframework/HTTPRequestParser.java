@@ -23,7 +23,7 @@ public class HTTPRequestParser {
     
     
     private HTTPRequestParser() {
-        throw new RuntimeException("Can\'t create instance of HTTPRequestParser");
+        throw new UnsupportedOperationException("Can\'t create instance of HTTPRequestParser");
     }
     
     
@@ -32,11 +32,11 @@ public class HTTPRequestParser {
      * HTTP request:
      *
      * <pre><code>
-     * METHOD /a/b/c.d#anchor?arg=val&other=something HTTP/1.1
+     * POST /create-post HTTP/1.1
      * Header1: Value1
      * Header2: Value2
      *
-     * Message's body
+     * This is really cool post about really cool things.
      * </code></pre>
      */
     public static HTTPRequest parseRequest(byte[] requestBytes) {
@@ -44,7 +44,8 @@ public class HTTPRequestParser {
         
         ByteString mainRequestLine = takeBytesBeforeOptional(CRLF_BYTE_STRING, 0, requestString);
         
-        String method = takeBytesBeforeOptional(SPACE_BYTE_STRING, 0, mainRequestLine).toString();
+        String method = takeBytesBeforeOptional(SPACE_BYTE_STRING, 0, mainRequestLine)
+                .toString();
         if (method.isEmpty())
             throw new SyntaxException("Missing method", mainRequestLine, 0);
     
@@ -54,7 +55,7 @@ public class HTTPRequestParser {
         ByteString uriString = takeBytesBeforeOptional(SPACE_BYTE_STRING, uriOffset, mainRequestLine);
         if (uriString.isEmpty())
             throw new SyntaxException("Missing URI", mainRequestLine, uriOffset - SPACE_BYTE_STRING.length());
-        URI uri = URI.fromString(uriString.toString().trim());
+        URI uri = URI.parse(uriString.toString().trim());
     
         // 'uriOffset + uriString.length()' - make offset point to spacer after URI
         // '+ SPACE_BYTE_STRING.length()' - skip spacer
@@ -101,7 +102,7 @@ public class HTTPRequestParser {
         if (matcher.matches()) {
             String name = matcher.group("name");
             String value = matcher.group("value");
-            return new SimpleEntry<>(name, value);
+            return new EntryImpl<>(name, value);
         } else {
             throw new SyntaxException("No header", line, 0);
         }

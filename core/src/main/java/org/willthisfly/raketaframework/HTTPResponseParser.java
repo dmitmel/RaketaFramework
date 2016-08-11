@@ -18,7 +18,7 @@ public class HTTPResponseParser {
     
     
     private HTTPResponseParser() {
-        throw new RuntimeException("Can\'t create instance of HTTPResponseParser");
+        throw new UnsupportedOperationException("Can\'t create instance of HTTPResponseParser");
     }
     
     
@@ -37,7 +37,7 @@ public class HTTPResponseParser {
      * Header1: Value1
      * Header2: Value2
      *
-     * Message's body
+     * Post created successfully!
      * </code></pre>
      */
     public static HTTPResponse parseResponse(byte[] responseBytes) {
@@ -102,7 +102,7 @@ public class HTTPResponseParser {
         if (matcher.matches()) {
             String name = matcher.group("name");
             String value = matcher.group("value");
-            return new SimpleEntry<>(name, value);
+            return new EntryImpl<>(name, value);
         } else {
             throw new SyntaxException("No header", line, 0);
         }

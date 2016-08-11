@@ -1,30 +1,28 @@
 package org.willthisfly.raketaframework;
 
 public class URLEncoder {
+    private static final String DEFAULT_SAFE_CHARS = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" +
+            "!$%&()*+,-./:;=?@\\[]^_\\{|}~";
+    private static boolean isSafe(char ch) { return DEFAULT_SAFE_CHARS.indexOf(ch) >= 0; }
+    
+    
     private URLEncoder() {
-        throw new RuntimeException("Can\'t create instance of URLEncoder");
+        throw new UnsupportedOperationException("Can\'t create instance of URLEncoder");
     }
     
     
     public static String encodeWithUnsafeChars(String input, String unsafeChars) {
         StringBuilder resultStr = new StringBuilder();
+        
         for (char ch : input.toCharArray()) {
-            if (isUnsafe(ch) || unsafeChars.indexOf(ch) >= 0) {
+            if (!isSafe(ch) || unsafeChars.indexOf(ch) >= 0) {
                 resultStr.append('%');
-                resultStr.append(toHex(ch / 16));
-                resultStr.append(toHex(ch % 16));
+                resultStr.append(Integer.toHexString(ch));
             } else {
                 resultStr.append(ch);
             }
         }
+        
         return resultStr.toString();
-    }
-
-    private static char toHex(int ch) {
-        return (char) (ch < 10 ? '0' + ch : 'A' + ch - 10);
-    }
-
-    private static boolean isUnsafe(char ch) {
-        return ch > 128;
     }
 }

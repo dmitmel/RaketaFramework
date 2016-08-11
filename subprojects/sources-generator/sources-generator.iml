@@ -6,7 +6,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/ruby" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
     </content>
-    <orderEntry type="jdk" jdkName="ruby-2.0.0-p648" jdkType="RUBY_SDK" />
+    <orderEntry type="jdk" jdkName="Oracle Java 1.8 JDK" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="PROVIDED" name="json (v1.8.3, ruby-2.0.0-p648) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="test-unit (v2.0.0.0, ruby-2.0.0-p648) [gem]" level="application" />

@@ -4,6 +4,33 @@ import org.willthisfly.raketaframework.util.ExtendedComparator;
 
 import java.util.Objects;
 
+/**
+ * You can throw subclass of this class (<code>ErrorXXX</code>) in handler to send HTTP
+ * error as result.
+ *
+ * <h3>Example</h3>
+ *
+ * <pre><code>
+ * public class App {
+ *     public static void main(String[] args) {
+ *         BlockBasedRouter router = new BlockBasedRouter();
+ *         router.get("/:path", params -&gt; {
+ *             // Adding slash to load resource from classpath
+ *             String path = "/" + params.get("path");
+ *             InputStream inputStream = App.class.getResourceAsStream(path);
+ *
+ *             if (inputStream == null)
+ *                 throw new Error404();
+ *             else
+ *                 return Streams.readAllWithClosing(inputStream);
+ *         });
+ *
+ *         Server server = new Server(router);
+ *         server.start();
+ *     }
+ * }
+ * </code></pre>
+ */
 public abstract class HTTPError extends RuntimeException implements Comparable<HTTPError>, Cloneable {
     public HTTPError() {
         super();

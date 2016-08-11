@@ -1,18 +1,19 @@
 package org.willthisfly.raketaframework;
 
+import org.willthisfly.raketaframework.util.Arrays;
 import org.willthisfly.raketaframework.util.ExtendedComparator;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.util.Arrays;
+import java.util.Iterator;
 import java.util.Objects;
 
 /**
  * Class for storing binary content with MIME.
  */
-public class Document extends PrintStream implements Comparable<Document>, Cloneable {
-    public final ByteArrayOutputStream outputStream;
+public class Document extends PrintStream implements Iterable<Byte>, Comparable<Document>, Cloneable {
+    private ByteArrayOutputStream outputStream;
     public String mimeType = MIMETypes.BYTE_STREAM;
     
     
@@ -22,12 +23,7 @@ public class Document extends PrintStream implements Comparable<Document>, Clone
     
     public Document(byte[] bytes) {
         this();
-        
-        try {
-            write(bytes);
-        } catch (IOException e) {
-            throw new RuntimeException("unreachable code");
-        }
+        write(bytes);
     }
     
     public Document() {
@@ -35,6 +31,23 @@ public class Document extends PrintStream implements Comparable<Document>, Clone
         outputStream = (ByteArrayOutputStream) out;
     }
     
+    
+    @Override
+    public void write(byte[] bytes) {
+        try {
+            super.write(bytes);
+        } catch (IOException e) {
+            throw new RuntimeException("unreachable code", e);
+        }
+    }
+    
+    public void writeAll(Document document) {
+        write(document.getBytes());
+    }
+    
+    public void write(byte b) {
+        super.write((int) b);
+    }
     
     public int length() {
         return outputStream.size();
@@ -55,14 +68,16 @@ public class Document extends PrintStream implements Comparable<Document>, Clone
             return true;
         if (!(o instanceof Document))
             return false;
-        Document document = (Document) o;
-        return Arrays.equals(this.outputStream.toByteArray(), document.outputStream.toByteArray()) &&
-                Objects.equals(this.mimeType, document.mimeType);
+        Document that = (Document) o;
+        return java.util.Arrays.equals(this.getBytes(), that.getBytes()) &&
+                Objects.equals(this.mimeType, that.mimeType);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(outputStream, mimeType);
+        int i = java.util.Arrays.hashCode(getBytes());
+        i = 31 * i + (mimeType == null ? 0 : mimeType.hashCode());
+        return i;
     }
     
     @Override
@@ -80,5 +95,12 @@ public class Document extends PrintStream implements Comparable<Document>, Clone
                 ExtendedComparator.compare(this.outputStream, that.outputStream),
                 ExtendedComparator.compareNullable(this.mimeType, that.mimeType)
         );
+    }
+    
+    @Override
+    public Iterator<Byte> iterator() {
+        byte[] clonedBytes = getBytes().clone();
+        Byte[] boxedBytes = Arrays.box(clonedBytes);
+        return Arrays.toIterator(boxedBytes);
     }
 }

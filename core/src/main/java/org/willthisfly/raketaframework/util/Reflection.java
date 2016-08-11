@@ -11,11 +11,11 @@ import java.util.Optional;
 
 public class Reflection {
     private Reflection() {
-        throw new RuntimeException("Can\'t create instance of Reflection");
+        throw new UnsupportedOperationException("Can\'t create instance of Reflection");
     }
     
     
-    public static <T> String getPathToClass(Class<T> clazz) {
+    public static <T> String getClassDirectory(Class<T> clazz) {
         return clazz.getProtectionDomain().getCodeSource().getLocation().getPath();
     }
 
@@ -34,7 +34,7 @@ public class Reflection {
         } catch (IllegalAccessException e) {
             // This's unreachable code because java.lang.IllegalAccessException can be thrown only if accessible object
             // is locked
-            throw new RuntimeException("unreachable code");
+            throw new RuntimeException("unreachable code", e);
         }
     }
     
@@ -55,7 +55,7 @@ public class Reflection {
         } catch (IllegalAccessException e) {
             // This's unreachable code because java.lang.IllegalAccessException can be thrown only if accessible object
             // is locked
-            throw new RuntimeException("unreachable code");
+            throw new RuntimeException("unreachable code", e);
         }
     }
     
@@ -95,7 +95,7 @@ public class Reflection {
         } catch (IllegalAccessException e) {
             // This's unreachable code because java.lang.IllegalAccessException can be thrown only if accessible object
             // is locked
-            throw new RuntimeException("unreachable code");
+            throw new RuntimeException("unreachable code", e);
         }
     }
 }

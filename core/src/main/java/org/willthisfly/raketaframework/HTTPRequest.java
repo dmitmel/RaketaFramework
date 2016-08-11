@@ -45,7 +45,8 @@ public class HTTPRequest extends HTTPMessage implements Comparable<HTTPRequest> 
     
     @Override
     public byte[] getBytes() {
-        return super.toByteArrayWithMainLine(String.format("%s %s %s", method, uri, super.protocol).getBytes());
+        String mainRequestLine = method + ' ' + uri + ' ' + super.protocol;
+        return super.toByteArrayWithMainRequestLine(mainRequestLine.getBytes());
     }
     
     @Override

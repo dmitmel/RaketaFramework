@@ -4,7 +4,7 @@ import java.io.*;
 
 public class Streams {
     private Streams() {
-        throw new RuntimeException("Can\'t create instance of Streams");
+        throw new UnsupportedOperationException("Can\'t create instance of Streams");
     }
     
     

@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 public class JSONJavaDSL {
     private JSONJavaDSL() {
-        throw new RuntimeException("Can\'t create instance of JSONJavaDSL");
+        throw new UnsupportedOperationException("Can\'t create instance of JSONJavaDSL");
     }
     
     
@@ -41,7 +41,7 @@ public class JSONJavaDSL {
         public JSONMap(Map<? extends String, ?> m) { super(m); }
     }
     
-    public static class JSONEntry extends SimpleEntry<String, Object> {
+    public static class JSONEntry extends EntryImpl<String, Object> {
         public JSONEntry(String key, Object value) { super(key, value); }
     }
     

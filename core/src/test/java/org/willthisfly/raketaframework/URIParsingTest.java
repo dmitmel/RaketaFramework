@@ -37,7 +37,7 @@ public class URIParsingTest {
 
 
     private void doClassicTest(String expected) {
-        URI actual = URI.fromString(expected);
+        URI actual = URI.parse(expected);
         assertEquals(expected, actual.toString());
         assertEquals(expected.length(), actual.length());
     }
@@ -45,58 +45,58 @@ public class URIParsingTest {
     
     @Test
     public void testEmptyAnchorAndThenParams() {
-        URI uri = URI.fromString("/#?");
+        URI uri = URI.parse("/#?");
         assertEquals(uri.anchor, URI.EMPTY_ANCHOR);
         assertEquals(uri.params, URI.EMPTY_PARAMS);
     }
 
     @Test
     public void testOnlyAnchorStarter() {
-        URI uri = URI.fromString("/a/b/c.d#");
+        URI uri = URI.parse("/a/b/c.d#");
         assertEquals(uri.anchor, URI.EMPTY_ANCHOR);
     }
 
     @Test
     public void testOnlyParamsStarter() {
-        URI uri = URI.fromString("/a/b/c.d?");
+        URI uri = URI.parse("/a/b/c.d?");
         assertEquals(uri.params.size(), 0);
     }
 
     @Test
     public void testOneParamDefinitionWithoutValue() {
-        URI uri = URI.fromString("/a/b/c.d?key=");
+        URI uri = URI.parse("/a/b/c.d?key=");
         assertEquals(uri.params.get("key"), URI.EMPTY_PARAM_VALUE);
     }
     
     @Test
     public void testOneParamDefinitionWithoutEqualsSign() {
-        URI uri = URI.fromString("/a/b/c.d?key");
+        URI uri = URI.parse("/a/b/c.d?key");
         assertEquals(uri.params.get("key"), URI.EMPTY_PARAM_VALUE);
     }
     
     @Test
     public void testOneParamDefinitionWithoutMultipleEqualsSigns() {
-        URI uri = URI.fromString("/a/b/c.d?key=a=b");
+        URI uri = URI.parse("/a/b/c.d?key=a=b");
         assertEquals(uri.params.get("key"), "a=b");
     }
 
     @Test
     public void testMultipleParamsDefinitionWithoutValue() {
-        URI uri = URI.fromString("/a/b/c.d?key1=&key2=");
+        URI uri = URI.parse("/a/b/c.d?key1=&key2=");
         assertEquals(uri.params.get("key1"), URI.EMPTY_PARAM_VALUE);
         assertEquals(uri.params.get("key2"), URI.EMPTY_PARAM_VALUE);
     }
     
     @Test
     public void testMultipleParamsDefinitionWithoutEqualsSign() {
-        URI uri = URI.fromString("/a/b/c.d?key1&key2");
+        URI uri = URI.parse("/a/b/c.d?key1&key2");
         assertEquals(uri.params.get("key1"), URI.EMPTY_PARAM_VALUE);
         assertEquals(uri.params.get("key2"), URI.EMPTY_PARAM_VALUE);
     }
     
     @Test
     public void testMultipleParamsDefinitionWithMultipleEqualsSigns() {
-        URI uri = URI.fromString("/a/b/c.d?key1=a=b&key2=c=d");
+        URI uri = URI.parse("/a/b/c.d?key1=a=b&key2=c=d");
         assertEquals(uri.params.get("key1"), "a=b");
         assertEquals(uri.params.get("key2"), "c=d");
     }

@@ -11,9 +11,11 @@
       </compiler-classpath>
     </properties>
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.scala-lang/scala-library/2.12.0-M5/c24c40a71ff615877e28867030bf3bcc49704990/scala-library-2.12.0-M5.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/scala-lang/scala-library/2.12.0-M5/scala-library-2.12.0-M5.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/scala-lang/scala-library/2.12.0-M5/scala-library-2.12.0-M5-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

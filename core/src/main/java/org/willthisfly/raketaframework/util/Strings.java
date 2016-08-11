@@ -1,5 +1,7 @@
 package org.willthisfly.raketaframework.util;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.regex.PatternSyntaxException;
 
 public class Strings {
@@ -12,14 +14,14 @@ public class Strings {
     
     
     private Strings() {
-        throw new RuntimeException("Can\'t create instance of Strings");
+        throw new UnsupportedOperationException("Can\'t create instance of Strings");
     }
     
     
-    public static String copyString(String string, int times) {
-        StringBuilder indent = new StringBuilder(string.length() * times);
+    public static String copy(CharSequence charSequence, int times) {
+        StringBuilder indent = new StringBuilder(charSequence.length() * times);
         for (int i = 0; i < times; i++)
-            indent.append(string);
+            indent.append(charSequence);
         return indent.toString();
     }
     
@@ -27,35 +29,11 @@ public class Strings {
         return i + 1 < s.length() ? s.charAt(i + 1) : NULL;
     }
     
-    public static String takeBeforeOptional(char target, int offset, String string) {
+    public static String takeWhileAllowed(String allowed, int offset, CharSequence charSequence) {
         StringBuilder result = new StringBuilder();
-        String searchingString = string.substring(offset);
+        CharSequence searchingSequence = charSequence.subSequence(offset, charSequence.length());
         
-        for (char c : searchingString.toCharArray()) {
-            if (c == target)
-                break;
-            else
-                result.append(c);
-        }
-        
-        return result.toString();
-    }
-    
-    public static String takeBeforeRequired(char target, int offset, String string) {
-        String result = takeBeforeOptional(target, offset, string);
-        String searchingString = string.substring(offset);
-        
-        if (result.equals(searchingString))
-            throw new PatternSyntaxException("Missing \'"+target+"\'", string, offset);
-        
-        return result;
-    }
-    
-    public static String takeWhileAllowed(String allowed, int offset, String string) {
-        StringBuilder result = new StringBuilder();
-        String searchingString = string.substring(offset);
-        
-        for (char c : searchingString.toCharArray()) {
+        for (char c : toIterable(searchingSequence)) {
             if (allowed.indexOf(c) >= 0)
                 result.append(c);
             else
@@ -63,5 +41,65 @@ public class Strings {
         }
         
         return result.toString();
+    }
+    
+    public static char last(CharSequence charSequence) {
+        int length = charSequence.length();
+        if (length == 0)
+            return NULL;
+        else
+            return charSequence.charAt(length - 1);
+    }
+    
+    public static String withoutLastChar(CharSequence charSequence) {
+        return toString(charSequence.subSequence(0, charSequence.length() - 1));
+    }
+    
+    public static String removeTerminator(char terminator, CharSequence charSequence) {
+        char last = last(charSequence);
+        if (last == terminator)
+            return withoutLastChar(charSequence);
+        else
+            return toString(charSequence);
+    }
+    
+    public static String toString(CharSequence charSequence) {
+        StringBuilder builder = new StringBuilder();
+        CharSequence subSequence = charSequence.subSequence(0, charSequence.length() - 1);
+        for (char c : toIterable(subSequence))
+            builder.append(c);
+        return builder.toString();
+    }
+    
+    public static Iterable<Character> toIterable(CharSequence charSequence) {
+        return () -> new CharacterIterator(charSequence);
+    }
+    
+    
+    private static class CharacterIterator implements Iterator<Character> {
+        private CharSequence charSequence;
+        private int cursor = 0;
+        
+        
+        public CharacterIterator(CharSequence charSequence) {
+            this.charSequence = charSequence;
+        }
+        
+    
+        @Override
+        public boolean hasNext() {
+            return cursor < charSequence.length();
+        }
+    
+        @Override
+        public Character next() {
+            if (hasNext()) {
+                Character result = charSequence.charAt(cursor);
+                cursor++;
+                return result;
+            } else {
+                throw new NoSuchElementException();
+            }
+        }
     }
 }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.willthisfly.raketaframework.util.ArraySplittingTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2016-08-06T09:12:23" hostname="dmitriys-mbp" time="0.003">
+<testsuite name="org.willthisfly.raketaframework.util.ArraySplittingTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2016-08-11T18:49:06" hostname="Dmitriys-MacBook-Pro.local" time="0.005">
   <properties/>
-  <testcase name="testNoContent" classname="org.willthisfly.raketaframework.util.ArraySplittingTest" time="0.001"/>
-  <testcase name="testOneElementDelimiter" classname="org.willthisfly.raketaframework.util.ArraySplittingTest" time="0.0"/>
+  <testcase name="testNoContent" classname="org.willthisfly.raketaframework.util.ArraySplittingTest" time="0.002"/>
+  <testcase name="testOneElementDelimiter" classname="org.willthisfly.raketaframework.util.ArraySplittingTest" time="0.001"/>
   <testcase name="testMultilineDelimiterDelimiterAsLastItem" classname="org.willthisfly.raketaframework.util.ArraySplittingTest" time="0.0"/>
   <testcase name="testDelimiterAsLastItem" classname="org.willthisfly.raketaframework.util.ArraySplittingTest" time="0.0"/>
   <testcase name="testDelimiterAsFirstItem" classname="org.willthisfly.raketaframework.util.ArraySplittingTest" time="0.0"/>

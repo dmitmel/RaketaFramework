@@ -10,7 +10,7 @@ public class JSONJavaSerializer {
     
     
     private JSONJavaSerializer() {
-        throw new RuntimeException("Can\'t create instance of JSONJavaSerializer");
+        throw new UnsupportedOperationException("Can\'t create instance of JSONJavaSerializer");
     }
     
     
@@ -44,7 +44,7 @@ public class JSONJavaSerializer {
         boolean useIndent = !indentBase.isEmpty();
     
         int nextDepth = depth + 1;
-        String nextIndent = Strings.copyString(indentBase, nextDepth);
+        String nextIndent = Strings.copy(indentBase, nextDepth);
         
         json.append('{');
         
@@ -59,7 +59,7 @@ public class JSONJavaSerializer {
                 json.append(String.join(",\n", lines));
                 
                 json.append('\n');
-                json.append(Strings.copyString(indentBase, depth));
+                json.append(Strings.copy(indentBase, depth));
             }
         } else {
             List<String> stringEntries = map.entrySet().stream()
@@ -80,7 +80,7 @@ public class JSONJavaSerializer {
         List<T> list = Lists.fromIterable(value);
     
         int nextDepth = depth + 1;
-        String nextIndent = Strings.copyString(indentBase, nextDepth);
+        String nextIndent = Strings.copy(indentBase, nextDepth);
     
         json.append('[');
     
@@ -95,7 +95,7 @@ public class JSONJavaSerializer {
                 json.append(String.join(",\n", lines));
             
                 json.append('\n');
-                json.append(Strings.copyString(indentBase, depth));
+                json.append(Strings.copy(indentBase, depth));
             }
         } else {
             List<String> stringList = list.stream()

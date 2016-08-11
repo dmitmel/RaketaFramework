@@ -86,7 +86,7 @@ public class HTTPResponse extends HTTPMessage implements Comparable<HTTPResponse
     
     @Override
     public byte[] getBytes() {
-        return super.toByteArrayWithMainLine(
+        return super.toByteArrayWithMainRequestLine(
                 String.format("%s %s %s", super.protocol, statusCode, statusDescription).getBytes());
     }
     

@@ -5,42 +5,30 @@ import java.util.Date;
 import java.util.TimeZone;
 
 public class HTTPDateFormatter {
-    /**
-     * Server log date format string. Description for formatting
-     * pattern:
-     *
-     * <table>
-     *     <tr><th>Tag</th>  <th>Description</th></tr>
-     *     <tr><td>dd</td>   <td>number of day in month</td></tr>
-     *     <tr><td>MMM</td>  <td>abbreviated name of month</td></tr>
-     *     <tr><td>yyyy</td> <td>4-digit number of year</td></tr>
-     *     <tr><td>HH</td>   <td>hour, 24-hour format</td></tr>
-     *     <tr><td>mm</td>   <td>minute</td></tr>
-     *     <tr><td>ss</td>   <td>second</td></tr>
-     * </table>
-     */
-    private static final String SERVER_LOG_DATE_FORMAT = "dd/MMM/yyyy HH:mm:ss";
-    /**
-     * GTM date format string. Description for formatting pattern:
-     *
-     * <table>
-     *     <tr><th>Tag</th>  <th>Description</th></tr>
-     *     <tr><td>EEE</td>  <td>abbreviated name of weekday</td></tr>
-     *     <tr><td>MMM</td>  <td>abbreviated name of month</td></tr>
-     *     <tr><td>d</td>    <td>number of day in month</td></tr>
-     *     <tr><td>yyyy</td> <td>4-digit number of year</td></tr>
-     *     <tr><td>hh</td>   <td>hour, 12-hour format</td></tr>
-     *     <tr><td>mm</td>   <td>minute</td></tr>
-     *     <tr><td>ss</td>   <td>second</td></tr>
-     *     <tr><td>a</td>    <td>PM or AM</td></tr>
-     *     <tr><td>z</td>    <td>abbreviated name of time-zone.</td></tr>
-     * </table>
-     */
-    private static final String GMT_DATE_FORMAT = "EEE, MMM d, yyyy hh:mm:ss a z";
+    private static final String ABBREVIATED_DAY_OF_WEEK = "EEE";
+    private static final String ABBREVIATED_MONTH = "MMM";
+    private static final String TWO_DIGIT_DAY_IN_MONTH = "dd";
+    private static final String DAY_IN_MONTH = "d";
+    private static final String FOUR_DIGIT_YEAR = "yyyy";
+    private static final String HOUR_24 = "HH";
+    private static final String HOUR_12 = "hh";
+    private static final String MINUTE = "mm";
+    private static final String SECOND = "ss";
+    private static final String AM_OR_PM = "a";
+    private static final String ABBREVIATED_TIMEZONE = "z";
+    
+    private static final String SERVER_LOG_DATE_FORMAT = String.format("%s/%s/%s %s:%s:%s",
+            TWO_DIGIT_DAY_IN_MONTH, ABBREVIATED_MONTH, FOUR_DIGIT_YEAR,
+            HOUR_24, MINUTE, SECOND);
+    
+    private static final String GMT_DATE_FORMAT = String.format("%s, %s %s, %s %s:%s:%s %s %s",
+            ABBREVIATED_DAY_OF_WEEK, ABBREVIATED_MONTH, DAY_IN_MONTH, FOUR_DIGIT_YEAR,
+            HOUR_12, MINUTE, SECOND,
+            AM_OR_PM, ABBREVIATED_TIMEZONE);
     
     
     private HTTPDateFormatter() {
-        throw new RuntimeException("Can\'t create instance of HTTPDateFormatter");
+        throw new UnsupportedOperationException("Can\'t create instance of HTTPDateFormatter");
     }
     
     
@@ -59,7 +47,6 @@ public class HTTPDateFormatter {
 
     public static String dateInGMTFormat(Date date) {
         SimpleDateFormat df = new SimpleDateFormat(GMT_DATE_FORMAT);
-        df.setTimeZone(TimeZone.getTimeZone("GMT"));
         return df.format(date);
     }
 }
